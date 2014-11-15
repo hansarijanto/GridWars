@@ -14,7 +14,7 @@
 @property(nonatomic, readonly) int row;
 @property(nonatomic, readonly) int col;
 
-- (void)moveTo:(CGPoint)dest;
+- (void)moveTo:(GWGridCoordinate *)coordinate;
 - (instancetype)initWithRow:(int)row withCol:(int)col;
 
 @end

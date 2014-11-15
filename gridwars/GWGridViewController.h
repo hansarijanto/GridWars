@@ -12,6 +12,7 @@
 @class GWGridTile;
 @class GWGridPiece;
 @class GWGridPieceCharacter;
+@class GWGridCoordinate;
 
 typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 
@@ -23,9 +24,9 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (GWGridTile *)tileForLocation:(CGPoint)location; // Return grid tile based on location on screen
 
 // Summoning
-- (void)initiateSummoningAtCoordinates:(CGPoint)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; // When a character wants to start summoning
+- (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; // When a character wants to start summoning
 - (void)cancelSummoning; // When a character wants to stop summoning
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(CGPoint)coordinates; // Summon a character on a coordinate
+- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates; // Summon a character on a coordinate
 
 // Moving
 - (void)initiateMovingForTile:(GWGridTile *)tile; // When a character wants to start moving on the grid

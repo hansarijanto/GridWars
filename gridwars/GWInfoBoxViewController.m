@@ -50,6 +50,10 @@
         GWGridPieceCharacter *strongCharacterPiece = weakCharacterPiece;
         
         [_characterPiece rotate];
+        for (GWGridCoordinate *coor in strongCharacterPiece.summoningTileCoordinatesForAreaView) {
+            NSLog(@"%i, %i",coor.row, coor.col);
+        }
+
         ((GWInfoBoxCharacterView *)strong.view).areaView.coordinates = strongCharacterPiece.summoningTileCoordinatesForAreaView;
     };
     [characterInfoBoxView.rotateButton addTarget:self withBlock:rotateBlock forControlEvents:UIControlEventTouchUpInside];

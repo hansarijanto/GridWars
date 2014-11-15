@@ -11,6 +11,7 @@
 @class GWGridTile;
 @class GWGridPiece;
 @class GWGridPieceCharacter;
+@class GWGridCoordinate;
 
 @interface GWGrid : NSObject
 
@@ -33,16 +34,13 @@ typedef enum{
 
 // Moving
 - (void)initiateMovingForTile:(GWGridTile *)origin;
-- (void)moveToTile:(GWGridTile *)dest;
+- (void)moveToTile:(GWGridTile *)tile;
 - (void)cancelMoving;
 
 // Summoning
-- (void)initiateSummoningAtCoordinates:(CGPoint)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece;
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(CGPoint)coordinates;
+- (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece;
+- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates;
 - (void)cancelSummoning;
 
 - (void)addPiece:(GWGridPiece *)piece;
-
-// Helpers
-+ (NSArray *)formatCoordinatesForAreaView:(NSArray *)tileCoordinates; // Converts a set of coordinates to a 3 x 3 grid set of coordinates
 @end

@@ -12,6 +12,6 @@
 
 @property(nonatomic, strong)NSArray *cellViews;
 - (instancetype)initWithCellViews:(NSArray *)cellViews;
-- (CGPoint)converToOnScreenLocation:(CGPoint)location;
+- (CGPoint)convertToOnScreenLocation:(CGPoint)location;
 
 @end

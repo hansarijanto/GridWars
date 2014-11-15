@@ -11,6 +11,7 @@
 
 @class GWTileContent;
 @class GWGridPiece;
+@class GWGridCoordinate;
 
 typedef enum{
     kGWTileStateIdle,
@@ -28,7 +29,7 @@ typedef enum{
 
 @property(nonatomic, readwrite)GWTileState state;
 
-- (instancetype)initWithSize:(CGSize)size withCoordinates:(CGPoint)coordinates;
+- (instancetype)initWithSize:(CGSize)size withCoordinates:(GWGridCoordinate *)coordinates;
 - (BOOL)hasCharacter;
 
 @end

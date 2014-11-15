@@ -9,10 +9,11 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
+#import "GWGridCoordinate.h"
 
 @implementation GWGridTile
 
-- (instancetype)initWithSize:(CGSize)size withCoordinates:(CGPoint)coordinates {
+- (instancetype)initWithSize:(CGSize)size withCoordinates:(GWGridCoordinate *)coordinates {
     self = [super init];
     if (!self) return nil;
     

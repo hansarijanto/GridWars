@@ -7,6 +7,7 @@
 //
 
 #import "GWAreaView.h"
+#import "GWGridCoordinate.h"
 #import "UIView+Shapes.h"
 
 @implementation GWAreaView
@@ -33,9 +34,8 @@
     CGFloat tileWidth = self.frame.size.width / 3;
     CGFloat tileHeight = self.frame.size.height / 3;
     
-    for (NSValue *value in _coordinates) {
-        CGPoint coordinate = value.CGPointValue;
-        CGRect tileRect = CGRectMake(coordinate.x * tileWidth, coordinate.y * tileHeight, tileWidth, tileHeight);
+    for (GWGridCoordinate *coordinate in _coordinates) {
+        CGRect tileRect = CGRectMake((coordinate.col + 1) * tileWidth, (coordinate.row + 1) * tileHeight, tileWidth, tileHeight);
         [self drawRectangle:tileRect withFillColor:[UIColor redColor] withStrokeColor:[UIColor blackColor]];
     }
 }

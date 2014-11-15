@@ -127,7 +127,7 @@
             GWGameViewController *strong = weak;
             
             // Convert to point on screen
-            point = [strong.deckController converToOnScreenLocation:point];
+            point = [strong.deckController convertToOnScreenLocation:point];
             
             // Pannig a character
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
@@ -141,7 +141,7 @@
                 }
                 
                 GWGridPieceCharacter *characterPiece = strongCellView.cellData.characterPiece;
-                [strong.gridController initiateSummoningAtCoordinates:CGPointMake(tile.row, tile.col) forCharacterPiece:characterPiece];
+                [strong.gridController initiateSummoningAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] forCharacterPiece:characterPiece];
             }
         };
         
@@ -155,14 +155,14 @@
                 if (strong.gridController.grid.state == kGWGridStateSummoning) {
                     
                     // Convert to point on screen
-                    point = [strong.deckController converToOnScreenLocation:point];
+                    point = [strong.deckController convertToOnScreenLocation:point];
                     
                     GWGridTile *tile = [strong.gridController tileForLocation:point];
                     
                     assert(tile);
                     
                     // Successfully ended drag and summoned a character on grid
-                    [strong.gridController summonCharacter:strongCellView.cellData.characterPiece atCoordinates:CGPointMake(tile.row, tile.col)];
+                    [strong.gridController summonCharacter:strongCellView.cellData.characterPiece atCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
                     [strongCellView removeFromSuperview];
                     [strong.infoBoxController clearView];
                     return;

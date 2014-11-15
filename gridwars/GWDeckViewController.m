@@ -69,7 +69,7 @@
     return self;
 }
 
-- (CGPoint)converToOnScreenLocation:(CGPoint)location {
+- (CGPoint)convertToOnScreenLocation:(CGPoint)location {
     UIScrollView *scrollView = (UIScrollView *)self.view;
     return CGPointMake(location.x + scrollView.frame.origin.x - scrollView.contentOffset.x, location.y + scrollView.frame.origin.y);
 }

@@ -19,9 +19,9 @@
     return self;
 }
 
-- (void)moveTo:(CGPoint)dest {
-    _row = dest.x;
-    _col = dest.y;
+- (void)moveTo:(GWGridCoordinate *)coordinate {
+    _row = coordinate.row;
+    _col = coordinate.col;
 }
 
 @end

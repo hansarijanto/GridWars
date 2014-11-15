@@ -13,6 +13,7 @@
 #import "GWGridView.h"
 #import "GWGridTile.h"
 #import "GWGridPieceCharacter.h"
+#import "GWGridCoordinate.h"
 #import "UIButton+Block.h"
 
 @interface GWGridViewController ()
@@ -31,8 +32,8 @@
     _grid = grid;
     _pos = pos;
     
-    float width = _grid.tileSize.width * _grid.numHorTiles;
-    float height = _grid.tileSize.height * _grid.numVertTiles;
+    float width = _grid.tileSize.width * _grid.numVertTiles;
+    float height = _grid.tileSize.height * _grid.numHorTiles;
     
     self.view = [[GWGridView alloc] initWithFrame:CGRectMake(_pos.x, _pos.y, width, height) withGrid:_grid];
     
@@ -43,7 +44,7 @@
         NSMutableArray *tileButtonsCol = [[NSMutableArray alloc] init];
         for (int col = 0; col < _grid.numVertTiles; col++) {
             GWGridTile *tile = _grid.tiles[row][col];
-            CGRect tileButtonRect = CGRectMake(tile.row * tile.size.width, tile.col * tile.size.height, tile.size.width, tile.size.height);
+            CGRect tileButtonRect = CGRectMake(tile.col * tile.size.width, tile.row * tile.size.height, tile.size.width, tile.size.height);
             UIButton *tileButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [tileButton setFrame:tileButtonRect];
             void (^block)(id sender, UIEvent *event) = ^(id sender, UIEvent *event) {
@@ -61,12 +62,11 @@
 }
 
 - (GWGridTile *)tileForLocation:(CGPoint)location {
-    
+
     if (location.x < _pos.x || location.x > _pos.x + self.view.frame.size.width) return nil;
     if (location.y < _pos.y || location.y > _pos.y + self.view.frame.size.height) return nil;
-    
-    int row = (location.x - _pos.x) / (int)_grid.tileSize.width;
-    int col = (location.y - _pos.y) / (int)_grid.tileSize.height;
+    int col = (location.x - _pos.x) / (int)_grid.tileSize.width;
+    int row = (location.y - _pos.y) / (int)_grid.tileSize.height;
     return [_grid tileForRow:row forCol:col];
 }
 
@@ -94,12 +94,12 @@
 
 #pragma mark - summoning
 
-- (void)initiateSummoningAtCoordinates:(CGPoint)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece {
+- (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; {
     [_grid initiateSummoningAtCoordinates:coordinates forCharacterPiece:characterPiece];
     [self.view setNeedsDisplay];
 }
 
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(CGPoint)coordinates {
+- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates {
     [_grid summonCharacter:characterPiece atCoordinates:coordinates];
     [self addPiece:characterPiece];
     [self.view setNeedsDisplay];

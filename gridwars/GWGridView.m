@@ -34,7 +34,7 @@
         for (int col = 0; col < _grid.numVertTiles; col++) {
             // Add tile ui
             GWGridTile *tile = _grid.tiles[row][col];
-            CGRect tileRect = CGRectMake(tile.row * tile.size.width,tile.col * tile.size.height, tile.size.width, tile.size.height);
+            CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
             
             GWGridTileView *tileView = [[GWGridTileView alloc] initWithFrame:tileRect withTile:tile];
             [self addSubview:tileView];
@@ -54,7 +54,7 @@
 - (void)addPiece:(GWGridPiece *)piece {
     NSMutableArray *pieces = [_pieceViews mutableCopy];
     GWGridTile *tile = _grid.tiles[piece.row][piece.col];
-    CGRect tileRect = CGRectMake(tile.row * tile.size.width,tile.col * tile.size.height, tile.size.width, tile.size.height);
+    CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
     
     if ([piece isCharacter]) {
         GWGridPieceCharacterView *pieceView = [[GWGridPieceCharacterView alloc] initWithFrame:tileRect withCharacterPiece:(GWGridPieceCharacter *)piece];
@@ -70,7 +70,7 @@
 - (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile {
     GWGridPieceView *pieceView = _pieceViews[piece.row][piece.col];
 
-    CGRect tileRect = CGRectMake(tile.row * tile.size.width,tile.col * tile.size.height, tile.size.width, tile.size.height);
+    CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
     [UIView animateWithDuration:1.0f animations:^(void){
         pieceView.frame = tileRect;
     }];

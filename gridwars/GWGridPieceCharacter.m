@@ -30,117 +30,118 @@
 }
 
 // Rotate clockwise
-- (CGPoint)rotate:(CGPoint)coordinates angle:(CGFloat)angle {
-    CGPoint offsetFromCenter = CGPointMake(coordinates.y - self.col, coordinates.x - self.row);
-    CGPoint rotatedOffset = CGPointApplyAffineTransform(offsetFromCenter, CGAffineTransformMakeRotation(-angle));
-    return CGPointMake(self.row + rotatedOffset.y, self.col + rotatedOffset.x);
+- (GWGridCoordinate *)rotate:(GWGridCoordinate *)coordinate withCenterCoordinate:(GWGridCoordinate *)center angle:(CGFloat)angle {
+    CGPoint offsetFromCenter = CGPointMake(coordinate.col - center.col, coordinate.row - center.row);
+    CGPoint rotatedOffset = CGPointApplyAffineTransform(offsetFromCenter, CGAffineTransformMakeRotation(angle));
+    return [[GWGridCoordinate alloc] initWithRow:(center.row + rotatedOffset.y) withCol:(center.col + rotatedOffset.x)];
 }
 
 - (NSArray *)movingTileCoordinates {
-    return [self areaTileCoordinates:_character.moveType withOriginCoordinate:CGPointMake(self.row, self.col)];
+    return [self areaTileCoordinates:_character.moveType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
 }
 
 - (NSArray *)summoningTileCoordinates {
-    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:CGPointMake(self.row, self.col)];
+    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
 }
 
 - (NSArray *)summoningTileCoordinatesForAreaView {
-    return [GWGrid formatCoordinatesForAreaView:[self areaTileCoordinates:_character.summonType withOriginCoordinate:CGPointZero]];
+    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:0 withCol:0]];
 }
 
 // Return coordinates of tiles given an area type and a character's current position
-- (NSArray *)areaTileCoordinates:(GWAreaType)type withOriginCoordinate:(CGPoint)origin {
+- (NSArray *)areaTileCoordinates:(GWAreaType)type withOriginCoordinate:(GWGridCoordinate *)origin {
     
     NSMutableArray *tileCoordinates = [[NSMutableArray alloc] init];
     
     switch (type) {
         case kGWAreaType3x3Square:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col - 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col - 1]];
             break;
         case kGWAreaTypeCross:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 1]];
             break;
         case kGWAreaTypeLargeCross:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 2, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 2, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 2)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 2)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 2 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 2 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 2]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 2]];
             break;
         case kGWAreaTypeSquareCross:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 2, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 2, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 2)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 2)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 2 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 2 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 2]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 2]];
             break;
         case kGWAreaTypeLine1:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
             break;
         case kGWAreaTypeLine2:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
             break;
         case kGWAreaTypeLine3:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
             break;
         case kGWAreaTypeDiagonal:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col + 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col + 1]];
             break;
         case kGWAreaTypeLeftSquigly:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col - 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 1]];
             break;
         case kGWAreaTypeRightSquigly:
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row + 1, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row, self.col + 1)]];
-            [tileCoordinates addObject:[NSValue valueWithCGPoint:CGPointMake(self.row - 1, self.col + 1)]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row - 1 withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
             break;
         default:
             break;
     }
     
     // Rotating coordinates
-    for (int i=0; i<[tileCoordinates count]; i++) {
-        NSValue *tileCoordinateValue = tileCoordinates[i];
-        CGPoint tileCoordinate = tileCoordinateValue.CGPointValue;
-        
-        // Rotate accordingly
-        tileCoordinate = [self rotate:tileCoordinate angle:_rotation * M_PI / 2];
-        
-        // Set new rotated value
-        tileCoordinates[i] = [NSValue valueWithCGPoint:tileCoordinate];
+    if (_rotation > 0) {
+        for (int i=0; i<[tileCoordinates count]; i++) {
+            GWGridCoordinate *tileCoordinate = tileCoordinates[i];
+            
+            // Rotate accordingly
+            tileCoordinate = [self rotate:tileCoordinate withCenterCoordinate:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col] angle:_rotation * M_PI / 2];
+            
+            // Set new rotated value
+            tileCoordinates[i] = tileCoordinate;
+        }
     }
     
     return (NSArray *)tileCoordinates;
