@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class GWGridPieceCharacter;
+
 @interface GWAreaView : UIView
 
 @property(nonatomic, strong)NSArray *coordinates;
+@property(nonatomic, strong)GWGridPieceCharacter *characterPiece;
 
 @end

@@ -40,6 +40,7 @@
     _characterPiece = characterPiece;
     GWInfoBoxCharacterView *characterInfoBoxView = [[GWInfoBoxCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];
     characterInfoBoxView.areaView.coordinates = _characterPiece.summoningTileCoordinatesForAreaView;
+    characterInfoBoxView.areaView.characterPiece = _characterPiece;
     
     __weak GWInfoBoxViewController *weak = self;
     __weak GWGridPieceCharacter *weakCharacterPiece = _characterPiece;
@@ -53,8 +54,8 @@
         for (GWGridCoordinate *coor in strongCharacterPiece.summoningTileCoordinatesForAreaView) {
             NSLog(@"%i, %i",coor.row, coor.col);
         }
-
-        ((GWInfoBoxCharacterView *)strong.view).areaView.coordinates = strongCharacterPiece.summoningTileCoordinatesForAreaView;
+        GWAreaView *areaView = ((GWInfoBoxCharacterView *)strong.view).areaView;
+        areaView.coordinates = strongCharacterPiece.summoningTileCoordinatesForAreaView;
     };
     [characterInfoBoxView.rotateButton addTarget:self withBlock:rotateBlock forControlEvents:UIControlEventTouchUpInside];
     self.view = characterInfoBoxView;
