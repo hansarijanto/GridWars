@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GWGridResponse.h"
 
 @class GWGridTile;
 @class GWGridPiece;
@@ -33,7 +34,7 @@ typedef enum{
 - (void)gridWithNumHorTiles:(NSUInteger)numHorTiles withNumVertTile:(NSUInteger)numVertTiles;
 
 // Moving
-- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate;
+- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate;
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 - (void)cancelMoving;
 

@@ -85,8 +85,8 @@
     [_grid moveToCoordinate:coordinate];
 }
 
-- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
-    [_grid initiateMovingAtCoordinates:coordinate];
+- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
+    return [_grid initiateMovingAtCoordinates:coordinate];
 }
 
 - (void)cancelMoving {

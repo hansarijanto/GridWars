@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class GWGrid;
+@class GWGridResponse;
 @class GWGridTile;
 @class GWGridPiece;
 @class GWGridPieceCharacter;
@@ -29,7 +30,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates; // Summon a character on a coordinate
 
 // Moving
-- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate; // When a character wants to start moving on the grid
+- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate; // When a character wants to start moving on the grid
 - (void)cancelMoving; // When a character wants to stop moving on the grid
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 

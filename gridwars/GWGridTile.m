@@ -30,6 +30,10 @@
     return [_piece isCharacter];
 }
 
+- (GWGridPieceCharacter *)getCharacterPiece {
+    if (![self hasCharacter]) return nil;
+    return (GWGridPieceCharacter *)_piece;
+}
 
 #pragma mark - GWGridCell
 

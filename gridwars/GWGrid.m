@@ -10,6 +10,7 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
+#import "GWCharacter.h"
 
 @implementation GWGrid {
 }
@@ -58,12 +59,18 @@
 
 #pragma mark - moving
 
-- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
+- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
     
     GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
+    GWGridPieceCharacter *characterPiece = [tile getCharacterPiece];
     
-    // Check if tile has character
-    assert(tile && [tile hasCharacter]);
+    // Check if tile exist and has character
+    assert(tile && characterPiece);
+    
+    // Check to see if character has any moves left
+    if (characterPiece.character.moves <= 0) {
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character has no moves left"];
+    }
     
     // Set grid state
     _state = kGWGridStateMoving;
@@ -82,6 +89,7 @@
     }
     
     _currentMovingTile.state = kGWTileStateSelectableForCancel;
+    return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Successfully initiated move for character"];
 }
 
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate {
@@ -91,10 +99,13 @@
     // make sure destination tile exist
     assert(destTile);
     
-    // Break if no active tile to move
-    assert(_currentMovingTile);
-    // Break if current active tile is not a character type
-    assert([_currentMovingTile hasCharacter]);
+    GWGridPieceCharacter *characterPiece = [_currentMovingTile getCharacterPiece];
+
+    // Break if no active tile to move or tile has no character
+    assert(_currentMovingTile && characterPiece);
+
+    // Decrement character move count
+    [characterPiece.character moved];
     
     // Reset grid and tile states
     _state = kGWGridStateIdle;
@@ -104,7 +115,6 @@
     [destTile.piece moveTo:[[GWGridCoordinate alloc] initWithRow:destTile.row withCol:destTile.col]];
     _currentMovingTile.piece = nil;
     _currentMovingTile = nil;
-    
 }
 
 - (void)cancelMoving {

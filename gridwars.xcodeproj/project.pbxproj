@@ -44,6 +44,7 @@
 		B8B86A5B1A158AE5002B85F0 /* GWDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A561A158AE5002B85F0 /* GWDeckViewController.m */; };
 		B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A581A158AE5002B85F0 /* GWDragableView.m */; };
 		B8B86A601A17020F002B85F0 /* GWAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A5F1A17020F002B85F0 /* GWAreaView.m */; };
+		B8B86A631A193AF5002B85F0 /* GWGridResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A621A193AF5002B85F0 /* GWGridResponse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,8 @@
 		B8B86A581A158AE5002B85F0 /* GWDragableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWDragableView.m; sourceTree = "<group>"; };
 		B8B86A5E1A17020F002B85F0 /* GWAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWAreaView.h; sourceTree = "<group>"; };
 		B8B86A5F1A17020F002B85F0 /* GWAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWAreaView.m; sourceTree = "<group>"; };
+		B8B86A611A193AF5002B85F0 /* GWGridResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGridResponse.h; sourceTree = "<group>"; };
+		B8B86A621A193AF5002B85F0 /* GWGridResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGridResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +236,8 @@
 				B8B86A101A131EE8002B85F0 /* GWGridViewController.m */,
 				B8B869F01A0FF8AD002B85F0 /* GWGrid.h */,
 				B8B869F11A0FF8AD002B85F0 /* GWGrid.m */,
+				B8B86A611A193AF5002B85F0 /* GWGridResponse.h */,
+				B8B86A621A193AF5002B85F0 /* GWGridResponse.m */,
 				B8B86A121A143A89002B85F0 /* GWGridCoordinate.h */,
 				B8B86A131A143A89002B85F0 /* GWGridCoordinate.m */,
 				B8B869F31A0FFA17002B85F0 /* GWGridTile.h */,
@@ -438,6 +443,7 @@
 				B8B86A181A143E42002B85F0 /* GWCharacter.m in Sources */,
 				B8B86A251A1450A5002B85F0 /* GWInfoBoxViewController.m in Sources */,
 				B8B86A3B1A1464EA002B85F0 /* UIView+Shapes.m in Sources */,
+				B8B86A631A193AF5002B85F0 /* GWGridResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
