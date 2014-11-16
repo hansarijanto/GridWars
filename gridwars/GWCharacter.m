@@ -36,7 +36,7 @@
             break;
         case kGWCharacterTypeMage:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaTypeDiagonal;
+            _summonType = kGWAreaTypeT;
             _maxMoves   = 1;
             _moves      = 1;
             _health     = 50;

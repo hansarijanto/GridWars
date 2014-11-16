@@ -127,6 +127,12 @@
             [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
             [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
             break;
+        case kGWAreaTypeT:
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col + 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
+            break;
         default:
             break;
     }

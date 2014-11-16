@@ -18,7 +18,8 @@ typedef enum {
     kGWAreaType3x3Square,
     kGWAreaTypeSquareCross,
     kGWAreaTypeLeftSquigly,
-    kGWAreaTypeRightSquigly
+    kGWAreaTypeRightSquigly,
+    kGWAreaTypeT,
 } GWAreaType;
 
 typedef enum {
