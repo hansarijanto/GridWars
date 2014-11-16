@@ -76,6 +76,7 @@
                 if (!characterPiece) return;
                 
                 [strong.infoBoxController setViewForCharacterPiece:characterPiece];
+                [strong.infoBoxController setRotateButtonHidden:YES];
             }
         }
     };
@@ -118,6 +119,7 @@
             // Pannig a character
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
                 [strong.infoBoxController setViewForCharacterPiece:strongCellView.cellData.characterPiece];
+                [strong.infoBoxController setRotateButtonHidden:YES];
              }
         };
         
@@ -171,6 +173,7 @@
             
             // When summoning a tile and cancels by moving of the grid
             // [strong.infoBoxController clearView];
+            [strong.infoBoxController setRotateButtonHidden:NO];
             [strongCellView resetPosition];
         };
         
@@ -180,9 +183,10 @@
             GWGameViewController *strong = weak;
             NSLog(@"Tapped");
             
-            // Pannig a character
+            // When character is tapped on the deck
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
                 [strong.infoBoxController setViewForCharacterPiece:strongCellView.cellData.characterPiece];
+                [strong.infoBoxController setRotateButtonHidden:NO];
             }
         };
         

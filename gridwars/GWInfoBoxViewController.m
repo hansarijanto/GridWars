@@ -36,6 +36,12 @@
     }
 }
 
+- (void)setRotateButtonHidden:(BOOL)hidden {
+    if ([self.view isMemberOfClass:[GWInfoBoxCharacterView class]]) {
+        ((GWInfoBoxCharacterView *)self.view).rotateButton.hidden = hidden;
+    }
+}
+
 - (void)setViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     _characterPiece = characterPiece;
     GWInfoBoxCharacterView *characterInfoBoxView = [[GWInfoBoxCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];

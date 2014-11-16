@@ -15,5 +15,6 @@
 - (void)setViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece;
 - (void)clearView;
 - (void)reloadData;
+- (void)setRotateButtonHidden:(BOOL)hidden;
 
 @end
