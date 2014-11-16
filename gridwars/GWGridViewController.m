@@ -80,7 +80,7 @@
     
     GWGridTile *tile = [_grid tileForRow:coordinate.row forCol:coordinate.col];
     
-    [((GWGridView *)self.view) movePice:_grid.currentMovingTile.piece to:tile];
+    [((GWGridView *)self.view) movePice:_grid.currentMovingTile.piece to:tile fadeOut:NO];
     // Move tile on grid
     [_grid moveToCoordinate:coordinate];
 }

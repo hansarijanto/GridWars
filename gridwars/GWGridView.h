@@ -20,6 +20,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame withGrid:(GWGrid *)grid;
 - (void)addPiece:(GWGridPiece *)piece;
-- (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile;
+- (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut;
 
 @end

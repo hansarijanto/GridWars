@@ -67,13 +67,23 @@
     _pieceViews = (NSArray *)pieces;
 }
 
-- (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile {
+- (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut {
     GWGridPieceView *pieceView = _pieceViews[piece.row][piece.col];
+    
+    void (^completion)(BOOL finished) = ^(BOOL finished) {
+        if (finished) {
+            [UIView animateWithDuration:0.5f animations:^(void){
+                pieceView.alpha = 0.5f;
+            }];
+        }
+    };
+    
+    if (!fadeOut) completion = nil;
 
     CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
     [UIView animateWithDuration:1.0f animations:^(void){
         pieceView.frame = tileRect;
-    }];
+    } completion:completion];
     
     _pieceViews[tile.row][tile.col] = pieceView;
     _pieceViews[piece.row][piece.col] = [NSNull null];
