@@ -85,6 +85,12 @@
             [tileView setNeedsDisplay];
         }
     }
+    
+    for (NSArray *pieceViews in _pieceViews) {
+        for (GWGridPieceView *pieceView in pieceViews) {
+            if(![pieceView isEqual:[NSNull null]]) [pieceView setNeedsDisplay];
+        }
+    }
 }
 
 @end

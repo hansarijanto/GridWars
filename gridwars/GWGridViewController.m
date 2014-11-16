@@ -116,6 +116,7 @@
 - (void)endTurn {
     NSLog(@"End Turn");
     [_grid endTurn];
+    [self.view setNeedsDisplay];
 }
 
 - (void)setTileOnClickBlock:(GWGridTileOnClick)block {

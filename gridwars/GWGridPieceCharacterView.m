@@ -55,6 +55,12 @@
             break;
     }
     
+    if (_characterPiece.character.moves <= 0) {
+        self.alpha = 0.5f;
+    } else {
+        self.alpha = 1.0f;
+    }
+    
     [self drawCircle:CGRectMake(rect.origin.x + 1.0f, rect.origin.y + 1.0f, rect.size.width - 2.0f, rect.size.height - 2.0f) withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
     
     // Drawing class
