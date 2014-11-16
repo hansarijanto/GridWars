@@ -29,9 +29,9 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates; // Summon a character on a coordinate
 
 // Moving
-- (void)initiateMovingForTile:(GWGridTile *)tile; // When a character wants to start moving on the grid
+- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate; // When a character wants to start moving on the grid
 - (void)cancelMoving; // When a character wants to stop moving on the grid
-- (void)moveToTile:(GWGridTile *)destTile;
+- (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 
 @property(nonatomic, strong)NSArray *tileButtons;
 @property(nonatomic, strong, readonly)GWGrid *grid;

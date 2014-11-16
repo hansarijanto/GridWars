@@ -55,7 +55,7 @@
                     // Move destination
                 case kGWTileStateSelectableAsMovingDestination:
                     // Update tile ui
-                    [strong.gridController moveToTile:tile];
+                    [strong.gridController moveToCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
                     break;
                     // Cancel moving
                 case kGWTileStateSelectableForCancel:
@@ -69,8 +69,7 @@
         } else {
             // Initiate moving if tile can do so and if tile is not busy
             if ([tile hasCharacter]) {
-                
-                if (tile.state == kGWTileStateIdle) [strong.gridController initiateMovingForTile:tile];
+                if (tile.state == kGWTileStateIdle) [strong.gridController initiateMovingAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
                 
                 GWGridPieceCharacter *characterPiece = (GWGridPieceCharacter *)tile.piece;
                 if (!characterPiece) return;

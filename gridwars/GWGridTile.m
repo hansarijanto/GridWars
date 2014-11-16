@@ -9,7 +9,6 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
-#import "GWGridCoordinate.h"
 
 @implementation GWGridTile
 

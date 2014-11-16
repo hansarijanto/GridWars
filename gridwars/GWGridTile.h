@@ -11,7 +11,6 @@
 
 @class GWTileContent;
 @class GWGridPiece;
-@class GWGridCoordinate;
 
 typedef enum{
     kGWTileStateIdle,

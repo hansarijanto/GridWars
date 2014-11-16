@@ -33,8 +33,8 @@ typedef enum{
 - (void)gridWithNumHorTiles:(NSUInteger)numHorTiles withNumVertTile:(NSUInteger)numVertTiles;
 
 // Moving
-- (void)initiateMovingForTile:(GWGridTile *)origin;
-- (void)moveToTile:(GWGridTile *)tile;
+- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate;
+- (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 - (void)cancelMoving;
 
 // Summoning

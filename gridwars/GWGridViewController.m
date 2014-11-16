@@ -13,7 +13,6 @@
 #import "GWGridView.h"
 #import "GWGridTile.h"
 #import "GWGridPieceCharacter.h"
-#import "GWGridCoordinate.h"
 #import "UIButton+Block.h"
 
 @interface GWGridViewController ()
@@ -77,15 +76,17 @@
 
 # pragma mark - moving
 
-- (void)moveToTile:(GWGridTile *)destTile {
+- (void)moveToCoordinate:(GWGridCoordinate *)coordinate {
     
-    [((GWGridView *)self.view) movePice:_grid.currentMovingTile.piece to:destTile];
+    GWGridTile *tile = [_grid tileForRow:coordinate.row forCol:coordinate.col];
+    
+    [((GWGridView *)self.view) movePice:_grid.currentMovingTile.piece to:tile];
     // Move tile on grid
-    [_grid moveToTile:destTile];
+    [_grid moveToCoordinate:coordinate];
 }
 
-- (void)initiateMovingForTile:(GWGridTile *)tile {
-    [_grid initiateMovingForTile:tile];
+- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
+    [_grid initiateMovingAtCoordinates:coordinate];
 }
 
 - (void)cancelMoving {

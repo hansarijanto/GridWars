@@ -10,7 +10,6 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
-#import "GWGridCoordinate.h"
 
 @implementation GWGrid {
 }
@@ -59,15 +58,18 @@
 
 #pragma mark - moving
 
-- (void)initiateMovingForTile:(GWGridTile *)origin {
+- (void)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
+    
+    GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
+    
+    // Check if tile has character
+    assert(tile && [tile hasCharacter]);
+    
     // Set grid state
     _state = kGWGridStateMoving;
     
     // Set current active tile
-    _currentMovingTile = origin;
-    
-    // Set all surrounding tiles as moveable destination
-    assert([_currentMovingTile hasCharacter]);
+    _currentMovingTile = tile;
     
     // Set tile states
     NSArray *movingTileCoordinates = ((GWGridPieceCharacter *)_currentMovingTile.piece).movingTileCoordinates;
@@ -82,7 +84,13 @@
     _currentMovingTile.state = kGWTileStateSelectableForCancel;
 }
 
-- (void)moveToTile:(GWGridTile *)tile {
+- (void)moveToCoordinate:(GWGridCoordinate *)coordinate {
+    
+    GWGridTile *destTile = [self tileForRow:coordinate.row forCol:coordinate.col];
+    
+    // make sure destination tile exist
+    assert(destTile);
+    
     // Break if no active tile to move
     assert(_currentMovingTile);
     // Break if current active tile is not a character type
@@ -92,8 +100,8 @@
     _state = kGWGridStateIdle;
     [self resetAllTileStates];
     
-    tile.piece = _currentMovingTile.piece;
-    [tile.piece moveTo:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+    destTile.piece = _currentMovingTile.piece;
+    [destTile.piece moveTo:[[GWGridCoordinate alloc] initWithRow:destTile.row withCol:destTile.col]];
     _currentMovingTile.piece = nil;
     _currentMovingTile = nil;
     
