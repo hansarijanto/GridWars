@@ -60,7 +60,10 @@
 - (void)endTurn {
     for (GWGridPieceCharacter *characterPiece in self.allCharacterPieces) {
         [characterPiece.character resetMoves];
+    
     }
+    [self resetAllTileStates];
+    _state = kGWGridStateIdle;
 }
 
 #pragma mark - moving
