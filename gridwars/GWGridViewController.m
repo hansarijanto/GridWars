@@ -113,6 +113,11 @@
 
 # pragma mark - callbacks
 
+- (void)endTurn {
+    NSLog(@"End Turn");
+    [_grid endTurn];
+}
+
 - (void)setTileOnClickBlock:(GWGridTileOnClick)block {
     _tileOnClickBlock = block;
 }

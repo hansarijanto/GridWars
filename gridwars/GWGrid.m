@@ -57,6 +57,12 @@
     }
 }
 
+- (void)endTurn {
+    for (GWGridPieceCharacter *characterPiece in self.allCharacterPieces) {
+        [characterPiece.character resetMoves];
+    }
+}
+
 #pragma mark - moving
 
 - (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
@@ -202,6 +208,16 @@
 }
 
 #pragma mark - setter/getter
+
+- (NSArray *)allCharacterPieces {
+    NSMutableArray *characterPieces = [[NSMutableArray alloc] init];
+    for (NSArray *tiles in _tiles) {
+        for (GWGridTile *tile in tiles) {
+            if ([tile hasCharacter]) [characterPieces addObject:[tile getCharacterPiece]];
+        }
+    }
+    return characterPieces;
+}
 
 - (GWGridTile *)tileForRow:(int)row forCol:(int)col {
     if (row < 0 || row >= [self numHorTiles]

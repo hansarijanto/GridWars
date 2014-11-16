@@ -34,6 +34,9 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (void)cancelMoving; // When a character wants to stop moving on the grid
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 
+// End
+- (void)endTurn;
+
 @property(nonatomic, strong)NSArray *tileButtons;
 @property(nonatomic, strong, readonly)GWGrid *grid;
 

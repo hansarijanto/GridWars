@@ -38,7 +38,7 @@
     
     
     // Create info box controller
-    _infoBoxController = [[GWInfoBoxViewController alloc] init];
+    _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
     
     // Set tile on click for grid
     __weak GWGameViewController *weak = self;
@@ -200,6 +200,15 @@
     
     // Create deck controller
     _deckController = [[GWDeckViewController alloc] initWithCellViews:cellViews];
+    
+    // Set end turn block
+    UIButtonBlock endTurnBlock = ^(id sender, UIEvent *event) {
+        GWGameViewController *strong = weak;
+        [strong.gridController endTurn];
+        [strong.infoBoxController clearView];
+    };
+    
+    [_infoBoxController setEndTurnBlock:endTurnBlock];
     
     // Add child controllers
     [self addChildViewController:_gridController];

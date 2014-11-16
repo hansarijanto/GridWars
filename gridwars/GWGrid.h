@@ -43,5 +43,7 @@ typedef enum{
 - (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates;
 - (void)cancelSummoning;
 
+- (NSArray *)allCharacterPieces;
+- (void)endTurn;
 - (void)addPiece:(GWGridPiece *)piece;
 @end

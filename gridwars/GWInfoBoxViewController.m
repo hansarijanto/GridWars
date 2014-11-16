@@ -11,7 +11,6 @@
 #import "GWInfoBoxGridCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWAreaView.h"
-#import "UIButton+Block.h"
 
 @interface GWInfoBoxViewController ()
 
@@ -20,13 +19,26 @@
 @implementation GWInfoBoxViewController {
     float _sidePadding;
     GWGridPieceCharacter *_characterPiece;
+    UIButtonBlock _endTurnBlock;
+    UIButton *_endTurnButton;
 }
 
-- (instancetype)init {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super init];
     if (!self) return nil;
     
-    [self clearView];
+    self.view = [[UIView alloc] initWithFrame:frame];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    _endTurnButton = [[UIButton alloc] initWithFrame:CGRectMake(215.0f - 50.0f - 35.0f, 50.0f, 50.0f, 30.0f)];
+    [_endTurnButton setBackgroundColor:[UIColor whiteColor]];
+    [_endTurnButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_endTurnButton setTitle:@"End Turn" forState:UIControlStateNormal];
+    _endTurnButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    _endTurnButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_endTurnButton];
+    
+    self.infoBoxView = [[GWInfoBoxView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];
     
     return self;
 }
@@ -35,7 +47,7 @@
 
 - (void)setDeckViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     _characterPiece = characterPiece;
-    GWInfoBoxDeckCharacterView *characterInfoBoxView = [[GWInfoBoxDeckCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];
+    GWInfoBoxDeckCharacterView *characterInfoBoxView = [[GWInfoBoxDeckCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacterPiece:characterPiece];
     characterInfoBoxView.areaView.coordinates = _characterPiece.summoningTileCoordinatesForAreaView;
     characterInfoBoxView.areaView.characterPiece = _characterPiece;
     
@@ -48,19 +60,18 @@
         GWGridPieceCharacter *strongCharacterPiece = weakCharacterPiece;
         
         [_characterPiece rotate];
-        for (GWGridCoordinate *coor in strongCharacterPiece.summoningTileCoordinatesForAreaView) {
-            NSLog(@"%i, %i",coor.row, coor.col);
-        }
-        GWAreaView *areaView = ((GWInfoBoxDeckCharacterView *)strong.view).areaView;
+        GWAreaView *areaView = ((GWInfoBoxDeckCharacterView *)strong.infoBoxView).areaView;
         areaView.coordinates = strongCharacterPiece.summoningTileCoordinatesForAreaView;
     };
     [characterInfoBoxView.rotateButton addTarget:self withBlock:rotateBlock forControlEvents:UIControlEventTouchUpInside];
-    self.view = characterInfoBoxView;
+    
+    if (_infoBoxView) [_infoBoxView removeFromSuperview];
+    self.infoBoxView = characterInfoBoxView;
 }
 
 - (void)setRotateButtonHidden:(BOOL)hidden {
-    if ([self.view isMemberOfClass:[GWInfoBoxDeckCharacterView class]]) {
-        ((GWInfoBoxDeckCharacterView *)self.view).rotateButton.hidden = hidden;
+    if ([_infoBoxView isMemberOfClass:[GWInfoBoxDeckCharacterView class]]) {
+        ((GWInfoBoxDeckCharacterView *)_infoBoxView).rotateButton.hidden = hidden;
     }
 }
 
@@ -68,19 +79,33 @@
 
 - (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     _characterPiece = characterPiece;
-    GWInfoBoxGridCharacterView *characterInfoBoxView = [[GWInfoBoxGridCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];
-    self.view = characterInfoBoxView;
+    GWInfoBoxGridCharacterView *characterInfoBoxView = [[GWInfoBoxGridCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacterPiece:characterPiece];
+
+    if (_infoBoxView) [_infoBoxView removeFromSuperview];
+    self.infoBoxView = characterInfoBoxView;
 }
 
 - (void)setErrorMessage:(NSString *)errorMessage {
-    if ([self.view isMemberOfClass:[GWInfoBoxGridCharacterView class]]) {
-        ((GWInfoBoxGridCharacterView *)self.view).errorMessage.text = errorMessage;
+    if ([_infoBoxView isMemberOfClass:[GWInfoBoxGridCharacterView class]]) {
+        ((GWInfoBoxGridCharacterView *)_infoBoxView).errorMessage.text = errorMessage;
     }
 }
 
 - (void)clearView {
-    self.view = [[GWInfoBoxView alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
+    if (_infoBoxView) [_infoBoxView removeFromSuperview];
+    self.infoBoxView = [[GWInfoBoxView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
+#pragma mark - setter/getter
+
+- (void)setEndTurnBlock:(UIButtonBlock)block {
+    _endTurnBlock = block;
+    [_endTurnButton addTarget:self withBlock:_endTurnBlock forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setInfoBoxView:(GWInfoBoxView *)infoBoxView {
+    _infoBoxView = infoBoxView;
+    [self.view insertSubview:_infoBoxView belowSubview:_endTurnButton];
+}
 
 @end

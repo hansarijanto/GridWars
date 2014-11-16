@@ -10,4 +10,6 @@
 
 @interface GWInfoBoxView : UIView
 
+@property(nonatomic, strong)UIButton *endTurnButton;
+
 @end

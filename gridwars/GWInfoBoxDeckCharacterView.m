@@ -69,7 +69,7 @@
         _areaView = [[GWAreaView alloc] initWithFrame:CGRectMake(self.frame.size.width - _leftPadding - areaWidth, 5.0f, areaWidth, areaWidth)];
         [self addSubview:_areaView];
         
-        _rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(_areaView.frame.origin.x - 40.0f - 35.0f, 35.0f, 40.0f, 20.0f)];
+        _rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 40.0f - 35.0f, 10.0f, 40.0f, 30.0f)];
         [_rotateButton setBackgroundColor:[UIColor whiteColor]];
         [_rotateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_rotateButton setTitle:@"Rotate" forState:UIControlStateNormal];
