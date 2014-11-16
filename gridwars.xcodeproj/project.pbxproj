@@ -33,7 +33,7 @@
 		B8B86A181A143E42002B85F0 /* GWCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A171A143E42002B85F0 /* GWCharacter.m */; };
 		B8B86A1F1A144759002B85F0 /* GWGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A1E1A144759002B85F0 /* GWGameViewController.m */; };
 		B8B86A251A1450A5002B85F0 /* GWInfoBoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A241A1450A5002B85F0 /* GWInfoBoxViewController.m */; };
-		B8B86A281A145140002B85F0 /* GWInfoBoxCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A271A145140002B85F0 /* GWInfoBoxCharacterView.m */; };
+		B8B86A281A145140002B85F0 /* GWInfoBoxDeckCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A271A145140002B85F0 /* GWInfoBoxDeckCharacterView.m */; };
 		B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A2A1A145277002B85F0 /* GWInfoBoxView.m */; };
 		B8B86A3B1A1464EA002B85F0 /* UIView+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A3A1A1464EA002B85F0 /* UIView+Shapes.m */; };
 		B8B86A411A147FF7002B85F0 /* GWGridTileView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A401A147FF7002B85F0 /* GWGridTileView.m */; };
@@ -45,6 +45,7 @@
 		B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A581A158AE5002B85F0 /* GWDragableView.m */; };
 		B8B86A601A17020F002B85F0 /* GWAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A5F1A17020F002B85F0 /* GWAreaView.m */; };
 		B8B86A631A193AF5002B85F0 /* GWGridResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A621A193AF5002B85F0 /* GWGridResponse.m */; };
+		B8B86A661A193E28002B85F0 /* GWInfoBoxGridCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,8 +102,8 @@
 		B8B86A1E1A144759002B85F0 /* GWGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGameViewController.m; sourceTree = "<group>"; };
 		B8B86A231A1450A5002B85F0 /* GWInfoBoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxViewController.h; sourceTree = "<group>"; };
 		B8B86A241A1450A5002B85F0 /* GWInfoBoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxViewController.m; sourceTree = "<group>"; };
-		B8B86A261A145140002B85F0 /* GWInfoBoxCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxCharacterView.h; sourceTree = "<group>"; };
-		B8B86A271A145140002B85F0 /* GWInfoBoxCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxCharacterView.m; sourceTree = "<group>"; };
+		B8B86A261A145140002B85F0 /* GWInfoBoxDeckCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxDeckCharacterView.h; sourceTree = "<group>"; };
+		B8B86A271A145140002B85F0 /* GWInfoBoxDeckCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxDeckCharacterView.m; sourceTree = "<group>"; };
 		B8B86A291A145277002B85F0 /* GWInfoBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxView.h; sourceTree = "<group>"; };
 		B8B86A2A1A145277002B85F0 /* GWInfoBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxView.m; sourceTree = "<group>"; };
 		B8B86A391A1464EA002B85F0 /* UIView+Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shapes.h"; sourceTree = "<group>"; };
@@ -125,6 +126,8 @@
 		B8B86A5F1A17020F002B85F0 /* GWAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWAreaView.m; sourceTree = "<group>"; };
 		B8B86A611A193AF5002B85F0 /* GWGridResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGridResponse.h; sourceTree = "<group>"; };
 		B8B86A621A193AF5002B85F0 /* GWGridResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGridResponse.m; sourceTree = "<group>"; };
+		B8B86A641A193E28002B85F0 /* GWInfoBoxGridCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxGridCharacterView.h; sourceTree = "<group>"; };
+		B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxGridCharacterView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,8 +300,10 @@
 				B8B86A5F1A17020F002B85F0 /* GWAreaView.m */,
 				B8B86A291A145277002B85F0 /* GWInfoBoxView.h */,
 				B8B86A2A1A145277002B85F0 /* GWInfoBoxView.m */,
-				B8B86A261A145140002B85F0 /* GWInfoBoxCharacterView.h */,
-				B8B86A271A145140002B85F0 /* GWInfoBoxCharacterView.m */,
+				B8B86A641A193E28002B85F0 /* GWInfoBoxGridCharacterView.h */,
+				B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */,
+				B8B86A261A145140002B85F0 /* GWInfoBoxDeckCharacterView.h */,
+				B8B86A271A145140002B85F0 /* GWInfoBoxDeckCharacterView.m */,
 				B8B86A231A1450A5002B85F0 /* GWInfoBoxViewController.h */,
 				B8B86A241A1450A5002B85F0 /* GWInfoBoxViewController.m */,
 			);
@@ -421,6 +426,7 @@
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
 				B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */,
 				B8B869F21A0FF8AD002B85F0 /* GWGrid.m in Sources */,
+				B8B86A661A193E28002B85F0 /* GWInfoBoxGridCharacterView.m in Sources */,
 				B8B86A4D1A1484FA002B85F0 /* GWGridPieceCharacterView.m in Sources */,
 				B8B86A071A100E0D002B85F0 /* UIButton+Block.m in Sources */,
 				B8B86A5B1A158AE5002B85F0 /* GWDeckViewController.m in Sources */,
@@ -434,7 +440,7 @@
 				B8B869F51A0FFA17002B85F0 /* GWGridTile.m in Sources */,
 				B8B869EF1A0FF60B002B85F0 /* GWGridView.m in Sources */,
 				B8B86A591A158AE5002B85F0 /* GWDeckCell.m in Sources */,
-				B8B86A281A145140002B85F0 /* GWInfoBoxCharacterView.m in Sources */,
+				B8B86A281A145140002B85F0 /* GWInfoBoxDeckCharacterView.m in Sources */,
 				B8B86A111A131EE8002B85F0 /* GWGridViewController.m in Sources */,
 				B8B869C51A0FF59A002B85F0 /* main.m in Sources */,
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,

@@ -7,7 +7,8 @@
 //
 
 #import "GWInfoBoxViewController.h"
-#import "GWInfoBoxCharacterView.h"
+#import "GWInfoBoxDeckCharacterView.h"
+#import "GWInfoBoxGridCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWAreaView.h"
 #import "UIButton+Block.h"
@@ -30,21 +31,11 @@
     return self;
 }
 
-- (void)reloadData {
-    if ([self.view isMemberOfClass:[GWInfoBoxCharacterView class]]) {
-        [self setViewForCharacterPiece:_characterPiece];
-    }
-}
+#pragma mark - GWInfoDeckViewForCharacterPiece
 
-- (void)setRotateButtonHidden:(BOOL)hidden {
-    if ([self.view isMemberOfClass:[GWInfoBoxCharacterView class]]) {
-        ((GWInfoBoxCharacterView *)self.view).rotateButton.hidden = hidden;
-    }
-}
-
-- (void)setViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
+- (void)setDeckViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     _characterPiece = characterPiece;
-    GWInfoBoxCharacterView *characterInfoBoxView = [[GWInfoBoxCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];
+    GWInfoBoxDeckCharacterView *characterInfoBoxView = [[GWInfoBoxDeckCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];
     characterInfoBoxView.areaView.coordinates = _characterPiece.summoningTileCoordinatesForAreaView;
     characterInfoBoxView.areaView.characterPiece = _characterPiece;
     
@@ -60,11 +51,31 @@
         for (GWGridCoordinate *coor in strongCharacterPiece.summoningTileCoordinatesForAreaView) {
             NSLog(@"%i, %i",coor.row, coor.col);
         }
-        GWAreaView *areaView = ((GWInfoBoxCharacterView *)strong.view).areaView;
+        GWAreaView *areaView = ((GWInfoBoxDeckCharacterView *)strong.view).areaView;
         areaView.coordinates = strongCharacterPiece.summoningTileCoordinatesForAreaView;
     };
     [characterInfoBoxView.rotateButton addTarget:self withBlock:rotateBlock forControlEvents:UIControlEventTouchUpInside];
     self.view = characterInfoBoxView;
+}
+
+- (void)setRotateButtonHidden:(BOOL)hidden {
+    if ([self.view isMemberOfClass:[GWInfoBoxDeckCharacterView class]]) {
+        ((GWInfoBoxDeckCharacterView *)self.view).rotateButton.hidden = hidden;
+    }
+}
+
+#pragma mark - GWInfoGridViewForCharacterPiece
+
+- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
+    _characterPiece = characterPiece;
+    GWInfoBoxGridCharacterView *characterInfoBoxView = [[GWInfoBoxGridCharacterView alloc] initWithFrame:self.view.frame withCharacterPiece:characterPiece];
+    self.view = characterInfoBoxView;
+}
+
+- (void)setErrorMessage:(NSString *)errorMessage {
+    if ([self.view isMemberOfClass:[GWInfoBoxGridCharacterView class]]) {
+        ((GWInfoBoxGridCharacterView *)self.view).errorMessage.text = errorMessage;
+    }
 }
 
 - (void)clearView {

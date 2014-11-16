@@ -68,14 +68,16 @@
             [strong.infoBoxController clearView];
         } else {
             // Initiate moving if tile can do so and if tile is not busy
-            if ([tile hasCharacter]) {
-                if (tile.state == kGWTileStateIdle) [strong.gridController initiateMovingAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+            GWGridPieceCharacter *characterPiece = [tile getCharacterPiece];
+            if (characterPiece) {
                 
-                GWGridPieceCharacter *characterPiece = (GWGridPieceCharacter *)tile.piece;
-                if (!characterPiece) return;
-                
-                [strong.infoBoxController setViewForCharacterPiece:characterPiece];
+                [strong.infoBoxController setGridViewForCharacterPiece:characterPiece];
                 [strong.infoBoxController setRotateButtonHidden:YES];
+                
+                if (tile.state == kGWTileStateIdle) {
+                    GWGridResponse *response = [strong.gridController initiateMovingAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+                    if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
+                }
             }
         }
     };
@@ -117,7 +119,7 @@
             
             // Pannig a character
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
-                [strong.infoBoxController setViewForCharacterPiece:strongCellView.cellData.characterPiece];
+                [strong.infoBoxController setDeckViewForCharacterPiece:strongCellView.cellData.characterPiece];
                 [strong.infoBoxController setRotateButtonHidden:YES];
              }
         };
@@ -184,8 +186,7 @@
             
             // When character is tapped on the deck
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
-                [strong.infoBoxController setViewForCharacterPiece:strongCellView.cellData.characterPiece];
-                [strong.infoBoxController setRotateButtonHidden:NO];
+                [strong.infoBoxController setDeckViewForCharacterPiece:strongCellView.cellData.characterPiece];
             }
         };
         

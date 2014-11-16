@@ -12,9 +12,12 @@
 
 @interface GWInfoBoxViewController : UIViewController
 
-- (void)setViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece;
 - (void)clearView;
-- (void)reloadData;
+
+- (void)setDeckViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece; // Set view for characters in the deck
 - (void)setRotateButtonHidden:(BOOL)hidden;
+
+- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece; // Set view for characters on the grid
+- (void)setErrorMessage:(NSString *)errorMessage;
 
 @end

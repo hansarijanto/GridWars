@@ -1,8 +1,8 @@
 //
-//  GWGridInfoBoxCharacterView.h
+//  GWInfoBoxGridCharacterView.h
 //  gridwars
 //
-//  Created by Hans Arijanto on 2014-11-12.
+//  Created by Hans Arijanto on 2014-11-16.
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
@@ -12,10 +12,9 @@
 @class GWGridPieceCharacter;
 @class GWAreaView;
 
-@interface GWInfoBoxCharacterView : GWInfoBoxView
+@interface GWInfoBoxGridCharacterView : GWInfoBoxView
 
-@property(nonatomic, strong)GWAreaView *areaView;
-@property(nonatomic, strong)UIButton *rotateButton;
+@property(nonatomic, strong)UITextView *errorMessage;
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece;
 
