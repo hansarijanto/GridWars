@@ -17,7 +17,6 @@
     if (!self) return nil;
     
     _tile = tile;
-    
     return self;
 }
 

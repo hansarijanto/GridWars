@@ -25,6 +25,7 @@
             _moves      = 1;
             _health     = 150;
             _mana       = 50;
+            _image      = @"warrior";
             break;
         case kGWCharacterTypeArcher:
             _moveType   = kGWAreaTypeCross;
@@ -33,6 +34,7 @@
             _moves      = 1;
             _health     = 50;
             _mana       = 70;
+            _image      = @"archer";
             break;
         case kGWCharacterTypeMage:
             _moveType   = kGWAreaTypeCross;
@@ -41,6 +43,7 @@
             _moves      = 1;
             _health     = 50;
             _mana       = 100;
+            _image      = @"mage";
             break;
         case kGWCharacterTypeThief:
             _moveType   = kGWAreaTypeCross;
@@ -49,6 +52,7 @@
             _moves      = 2;
             _health     = 100;
             _mana       = 50;
+            _image      = @"thief";
             break;
         case kGWCharacterTypePriest:
             _moveType   = kGWAreaTypeCross;
@@ -57,6 +61,7 @@
             _moves      = 1;
             _health     = 70;
             _mana       = 80;
+            _image      = @"priest";
             break;
         default:
             _moveType   = kGWAreaTypeCross;
@@ -65,6 +70,7 @@
             _moves      = 1;
             _health     = 100;
             _mana       = 100;
+            _image      = @"warrior";
             break;
     }
     

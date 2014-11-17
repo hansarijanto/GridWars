@@ -13,6 +13,7 @@
 
 @implementation GWGridPieceCharacterView {
     UIFont *_classFont;
+    UIImageView *_characterImage;
 }
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece
@@ -25,6 +26,10 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     [self setUserInteractionEnabled:NO];
+    
+    _characterImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:characterPiece.character.image]];
+    [self addSubview:_characterImage];
+    
     return self;
 }
 
@@ -64,15 +69,15 @@
     [self drawCircle:CGRectMake(rect.origin.x + 1.0f, rect.origin.y + 1.0f, rect.size.width - 2.0f, rect.size.height - 2.0f) withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
     
     // Drawing class
-    CGRect classRect = CGRectMake(0.0f, rect.size.height / 2 - _classFont.pointSize / 2, rect.size.width, rect.size.height);
-    UIColor *white = [UIColor whiteColor];
-    NSDictionary *stringAttrs = @{ NSFontAttributeName : _classFont, NSForegroundColorAttributeName : white };
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[_characterPiece.character.characterClass substringToIndex:1] attributes:stringAttrs];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setAlignment:NSTextAlignmentCenter];
-    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attrStr.length)];
-    [attrStr drawInRect:classRect];
+//    CGRect classRect = CGRectMake(0.0f, rect.size.height / 2 - _classFont.pointSize / 2, rect.size.width, rect.size.height);
+//    UIColor *white = [UIColor whiteColor];
+//    NSDictionary *stringAttrs = @{ NSFontAttributeName : _classFont, NSForegroundColorAttributeName : white };
+//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[_characterPiece.character.characterClass substringToIndex:1] attributes:stringAttrs];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    [paragraphStyle setAlignment:NSTextAlignmentCenter];
+//    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attrStr.length)];
+//    [attrStr drawInRect:classRect];
 }
 
 

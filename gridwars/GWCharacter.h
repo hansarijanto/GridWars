@@ -47,6 +47,7 @@ typedef enum {
 @property(nonatomic, readonly) NSInteger health;
 @property(nonatomic, readonly) NSInteger mana;
 @property(nonatomic, readonly) NSString *characterClass;
+@property(nonatomic, readonly) NSString *image;
 @property(nonatomic, strong) NSUUID *uuid;
 
 @end
