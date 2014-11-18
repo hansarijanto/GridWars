@@ -18,7 +18,7 @@
 
 typedef enum{
     kGWGridStateIdle, // When nothing is happening
-    kGWGridStateMoving, // When a character is moving
+    kGWGridStateAction, // When a character is selected for action (moving, attacking)
     kGWGridStateSummoning, // When summoning a character
 } GWGridState;
 
@@ -27,16 +27,17 @@ typedef enum{
 @property(nonatomic, readwrite)GWGridState state; // Size of each tile
 @property(nonatomic, readonly)NSUInteger numHorTiles;
 @property(nonatomic, readonly)NSUInteger numVertTiles;
-@property(nonatomic, strong, readonly)GWGridTile *currentMovingTile;
+@property(nonatomic, strong, readonly)GWGridTile *currentActionTile;
 @property(nonatomic, strong, readonly)GWGridTile *currentSummoningTile;
 
 - (GWGridTile *)tileForRow:(int)row forCol:(int)col;
 - (void)gridWithNumHorTiles:(NSUInteger)numHorTiles withNumVertTile:(NSUInteger)numVertTiles;
 
-// Moving
-- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate;
+// Actions
+- (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate;
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate;
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
-- (void)cancelMoving;
+- (void)cancelAction;
 
 // Summoning
 - (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece;

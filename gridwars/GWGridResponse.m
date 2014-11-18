@@ -10,10 +10,15 @@
 
 @implementation GWGridResponse
 
-- (instancetype)initWithSuccess:(BOOL)success withMessage:(NSString *)message {
+- (instancetype)initWithSuccess:(BOOL)success withMessage:(NSString *)message withStatus:(kGWGridResponseType)type {
     self = [super init];
     if (!self) return nil;
     
+    if (type) {
+        _type = type;
+    } else {
+        _type = kGWGridResponseTypeUknown;
+    }
     _success = success;
     _message = message;
     

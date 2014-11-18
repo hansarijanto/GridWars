@@ -29,10 +29,11 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (void)cancelSummoning; // When a character wants to stop summoning
 - (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates; // Summon a character on a coordinate
 
-// Moving
-- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate; // When a character wants to start moving on the grid
-- (void)cancelMoving; // When a character wants to stop moving on the grid
+// Action
+- (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate;
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate; // When a character wants to start moving on the grid
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
+- (void)cancelAction; // When a character wants to stop moving on the grid
 
 // End
 - (void)endTurn;

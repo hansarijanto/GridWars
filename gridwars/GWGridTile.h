@@ -16,6 +16,7 @@
 typedef enum{
     kGWTileStateIdle,
     kGWTileStateSelectableAsMovingDestination,
+    kGWTileStateSelectableAsAttack,
     kGWTileStateSelectableForCancel,
     kGWTileStateSummoning,
 } GWTileState;

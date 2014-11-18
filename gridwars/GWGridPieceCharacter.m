@@ -40,6 +40,10 @@
     return [self areaTileCoordinates:_character.moveType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
 }
 
+- (NSArray *)attackingTileCoordinates {
+    return [self areaTileCoordinates:_character.attackType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
+}
+
 - (NSArray *)summoningTileCoordinates {
     return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
 }

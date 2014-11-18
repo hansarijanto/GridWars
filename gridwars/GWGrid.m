@@ -66,9 +66,40 @@
     _state = kGWGridStateIdle;
 }
 
+#pragma mark - attacking
+
+- (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate {
+    assert(_state == kGWGridStateAction && _currentActionTile);
+    
+    GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
+    
+    // Make sure attacked tile exist
+    assert(tile);
+    
+    GWGridPieceCharacter *damagedPiece = [tile getCharacterPiece];
+    GWGridPieceCharacter *attackingPiece = [_currentActionTile getCharacterPiece];
+    
+    // Make sure both characters in the battle exist
+    assert(attackingPiece && damagedPiece);
+    
+    [damagedPiece.character damagedBy:attackingPiece.character];
+    
+    // Reset grid and tile states
+    _state = kGWGridStateIdle;
+    [self resetAllTileStates];
+    _currentActionTile = nil;
+    
+    //Check if damaged piece died
+    if (damagedPiece.character.health <= 0) {
+        return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Character Died" withStatus:kGWGridResponseTypeCharacterDied];
+    } else {
+        return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Successfully attacked character" withStatus:kGWGridResponseTypeUknown];
+    }
+}
+
 #pragma mark - moving
 
-- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate {
     
     GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
     GWGridPieceCharacter *characterPiece = [tile getCharacterPiece];
@@ -78,40 +109,43 @@
     
     // Check to see if character has any moves left
     if (characterPiece.character.moves <= 0) {
-        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character has no moves left"];
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character has no moves left to intiate action" withStatus:kGWGridResponseTypeUknown];
     }
     
     // Set grid state
-    _state = kGWGridStateMoving;
+    _state = kGWGridStateAction;
     
     // Set current active tile
-    _currentMovingTile = tile;
+    _currentActionTile = tile;
     
     // Set tile states
-    NSArray *movingTileCoordinates = ((GWGridPieceCharacter *)_currentMovingTile.piece).movingTileCoordinates;
+    NSArray *movingTileCoordinates = ((GWGridPieceCharacter *)_currentActionTile.piece).movingTileCoordinates;
     for (GWGridCoordinate *coordinate in movingTileCoordinates) {
         GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
         if (tile) {
             // If tile is empty and is walkable
-            if (!tile.piece && tile.walkable) tile.state = kGWTileStateSelectableAsMovingDestination;
+            if ([tile hasCharacter]) tile.state = kGWTileStateSelectableAsAttack;
+            else if (!tile.piece && tile.walkable) tile.state = kGWTileStateSelectableAsMovingDestination;
         }
     }
     
-    _currentMovingTile.state = kGWTileStateSelectableForCancel;
-    return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Successfully initiated move for character"];
+    _currentActionTile.state = kGWTileStateSelectableForCancel;
+    return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Successfully initiated action for character" withStatus:kGWGridResponseTypeUknown];
 }
 
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate {
+    
+    assert(_state == kGWGridStateAction && _currentActionTile);
     
     GWGridTile *destTile = [self tileForRow:coordinate.row forCol:coordinate.col];
     
     // make sure destination tile exist
     assert(destTile);
     
-    GWGridPieceCharacter *characterPiece = [_currentMovingTile getCharacterPiece];
+    GWGridPieceCharacter *characterPiece = [_currentActionTile getCharacterPiece];
 
-    // Break if no active tile to move or tile has no character
-    assert(_currentMovingTile && characterPiece);
+    // Break if tile has no character
+    assert(characterPiece);
 
     // Decrement character move count
     [characterPiece.character moved];
@@ -120,20 +154,20 @@
     _state = kGWGridStateIdle;
     [self resetAllTileStates];
     
-    destTile.piece = _currentMovingTile.piece;
+    destTile.piece = _currentActionTile.piece;
     [destTile.piece moveTo:[[GWGridCoordinate alloc] initWithRow:destTile.row withCol:destTile.col]];
-    _currentMovingTile.piece = nil;
-    _currentMovingTile = nil;
+    _currentActionTile.piece = nil;
+    _currentActionTile = nil;
 }
 
-- (void)cancelMoving {
+- (void)cancelAction {
     // Break if no active tile to cancel
-    assert(_currentMovingTile);
+    assert(_currentActionTile);
     // Reset grid and tile states
     _state = kGWGridStateIdle;
     [self resetAllTileStates];
     
-    _currentMovingTile = nil;
+    _currentActionTile = nil;
 }
 
 #pragma mark - summoning

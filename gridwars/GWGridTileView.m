@@ -45,6 +45,10 @@
             case kGWTileStateSelectableAsMovingDestination:
                 _overlay.layer.borderColor = [UIColor colorWithRed:2.0f/255.0f green:127.0f/255.0f blue:60.0f/255.0f alpha:1.0f].CGColor;
                 break;
+            
+            case kGWTileStateSelectableAsAttack:
+                _overlay.layer.borderColor = [UIColor colorWithRed:163.0f/255.0f green:54.0f/255.0f blue:54.0f/255.0f alpha:1.0f].CGColor;
+                break;
                 
             case kGWTileStateSelectableForCancel:
                 break;

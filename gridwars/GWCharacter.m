@@ -21,54 +21,66 @@
         case kGWCharacterTypeWarrior:
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeLine2;
+            _attackType = kGWAreaType3x3Square;
             _maxMoves   = 1;
             _moves      = 1;
             _health     = 150;
             _mana       = 50;
+            _attack     = 50;
             _image      = @"warrior";
             break;
         case kGWCharacterTypeArcher:
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeRightSquigly;
+            _attackType = kGWAreaType3x3Square;
             _maxMoves   = 1;
             _moves      = 1;
             _health     = 50;
             _mana       = 70;
+            _attack     = 30;
             _image      = @"archer";
             break;
         case kGWCharacterTypeMage:
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeT;
+            _attackType = kGWAreaType3x3Square;
             _maxMoves   = 1;
             _moves      = 1;
             _health     = 50;
+            _attack     = 50;
             _mana       = 100;
             _image      = @"mage";
             break;
         case kGWCharacterTypeThief:
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeLine3;
+            _attackType = kGWAreaType3x3Square;
             _maxMoves   = 2;
             _moves      = 2;
             _health     = 100;
+            _attack     = 30;
             _mana       = 50;
             _image      = @"thief";
             break;
         case kGWCharacterTypePriest:
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeLeftSquigly;
+            _attackType = kGWAreaType3x3Square;
             _maxMoves   = 1;
             _moves      = 1;
             _health     = 70;
+            _attack     = 10;
             _mana       = 80;
             _image      = @"priest";
             break;
         default:
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaType3x3Square;
+            _attackType = kGWAreaType3x3Square;
             _maxMoves   = 1;
             _moves      = 1;
             _health     = 100;
+            _attack     = 50;
             _mana       = 100;
             _image      = @"warrior";
             break;
@@ -77,9 +89,9 @@
     return self;
 }
 
-- (void)damage:(NSUInteger)dmg {
-    if ((int)_health - (int)dmg >= 0) {
-        _health -= dmg;
+- (void)damagedBy:(GWCharacter *)attacker {
+    if (_health - attacker.attack >= 0) {
+        _health -= attacker.attack;
     } else {
         _health = 0;
         [self died];

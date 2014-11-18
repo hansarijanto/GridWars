@@ -74,23 +74,30 @@
     [((GWGridView *)self.view) addPiece:piece];
 }
 
+#pragma mark - attacking
+
+- (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate {
+    GWGridResponse *response = [_grid attackCoordinate:coordinate];
+    return response;
+}
+
 # pragma mark - moving
 
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate {
     
     GWGridTile *tile = [_grid tileForRow:coordinate.row forCol:coordinate.col];
     
-    [((GWGridView *)self.view) movePice:_grid.currentMovingTile.piece to:tile fadeOut:NO];
+    [((GWGridView *)self.view) movePice:_grid.currentActionTile.piece to:tile fadeOut:NO];
     // Move tile on grid
     [_grid moveToCoordinate:coordinate];
 }
 
-- (GWGridResponse *)initiateMovingAtCoordinates:(GWGridCoordinate *)coordinate {
-    return [_grid initiateMovingAtCoordinates:coordinate];
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate {
+    return [_grid initiateActionAtCoordinates:coordinate];
 }
 
-- (void)cancelMoving {
-    [_grid cancelMoving];
+- (void)cancelAction {
+    [_grid cancelAction];
 }
 
 #pragma mark - summoning

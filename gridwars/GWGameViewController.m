@@ -50,7 +50,7 @@
         
         GWGrid *grid = strong.gridController.grid;
         
-        if (grid.state == kGWGridStateMoving) {
+        if (grid.state == kGWGridStateAction) {
             switch (tile.state) {
                     // Move destination
                 case kGWTileStateSelectableAsMovingDestination:
@@ -59,9 +59,11 @@
                     break;
                     // Cancel moving
                 case kGWTileStateSelectableForCancel:
-                    [strong.gridController cancelMoving];
+                    [strong.gridController cancelAction];
                     break;
-                    
+                case kGWTileStateSelectableAsAttack:
+                    [strong.gridController attackCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+                    break;
                 default:
                     break;
             }
@@ -75,7 +77,7 @@
                 [strong.infoBoxController setRotateButtonHidden:YES];
                 
                 if (tile.state == kGWTileStateIdle) {
-                    GWGridResponse *response = [strong.gridController initiateMovingAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+                    GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
                     if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
                 }
             }

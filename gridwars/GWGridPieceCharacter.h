@@ -20,5 +20,6 @@
 - (NSArray *)movingTileCoordinates; // Coordinates of this characters moving tiles given its current position
 - (NSArray *)summoningTileCoordinates; // Coordinates of this characters summoning tiles given its current position
 - (NSArray *)summoningTileCoordinatesForAreaView; // Summoning coordinates for GW area view
+- (NSArray *)attackingTileCoordinates; // Coordinate of this character's attack range when it tries to attack
 
 @end
