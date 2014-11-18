@@ -26,8 +26,9 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     [self setUserInteractionEnabled:NO];
-    
+
     _characterImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:characterPiece.character.image]];
+    _characterImage.frame = CGRectMake(self.frame.size.width / 2 - _characterImage.bounds.size.width / 2, self.frame.size.height - _characterImage.bounds.size.height - 3.0f, CGRectGetWidth(_characterImage.frame), CGRectGetHeight(_characterImage.frame));
     [self addSubview:_characterImage];
     
     return self;
@@ -37,28 +38,28 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing circle
-    UIColor *fillColor = [UIColor whiteColor];
+    UIColor *fillColor = [UIColor redColor];
     
-    switch (_characterPiece.character.type) {
-        case kGWCharacterTypeWarrior:
-            fillColor = [UIColor redColor];
-            break;
-        case kGWCharacterTypeArcher:
-            fillColor = [UIColor greenColor];
-            break;
-        case kGWCharacterTypeMage:
-            fillColor = [UIColor blueColor];
-            break;
-        case kGWCharacterTypePriest:
-            fillColor = [UIColor purpleColor];
-            break;
-        case kGWCharacterTypeThief:
-            fillColor = [UIColor blackColor];
-            break;
-            
-        default:
-            break;
-    }
+//    switch (_characterPiece.character.type) {
+//        case kGWCharacterTypeWarrior:
+//            fillColor = [UIColor redColor];
+//            break;
+//        case kGWCharacterTypeArcher:
+//            fillColor = [UIColor greenColor];
+//            break;
+//        case kGWCharacterTypeMage:
+//            fillColor = [UIColor blueColor];
+//            break;
+//        case kGWCharacterTypePriest:
+//            fillColor = [UIColor purpleColor];
+//            break;
+//        case kGWCharacterTypeThief:
+//            fillColor = [UIColor blackColor];
+//            break;
+//            
+//        default:
+//            break;
+//    }
     
     if (_characterPiece.character.actions <= 0) {
         self.alpha = 0.5f;
