@@ -51,6 +51,12 @@
     return self;
 }
 
+- (void)removePieceAtCoordinate:(GWGridCoordinate *)coordinate {
+    GWGridPieceView *pieceView = _pieceViews[coordinate.row][coordinate.col];
+    [pieceView removeFromSuperview];
+    _pieceViews[coordinate.row][coordinate.col] = [NSNull null];
+}
+
 - (void)addPiece:(GWGridPiece *)piece {
     NSMutableArray *pieces = [_pieceViews mutableCopy];
     GWGridTile *tile = _grid.tiles[piece.row][piece.col];

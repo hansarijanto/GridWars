@@ -59,7 +59,7 @@
         [self addSubview:_manaLabel];
         
         _movesLabel = [[UILabel alloc] initWithFrame:CGRectMake(_leftPadding, 65.0f, 0.0f, 0.0f)];
-        _movesLabel.text = [NSString stringWithFormat:@"Moves Left: %lu", (long)characterPiece.character.moves];
+        _movesLabel.text = [NSString stringWithFormat:@"Moves Left: %lu", (long)characterPiece.character.actions];
         _movesLabel.textColor = [UIColor whiteColor];
         _movesLabel.font = systemFont;
         [_movesLabel sizeToFit];

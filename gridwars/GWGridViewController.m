@@ -78,6 +78,10 @@
 
 - (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate {
     GWGridResponse *response = [_grid attackCoordinate:coordinate];
+    if (response.type == kGWGridResponseTypeCharacterDied) {
+        [(GWGridView *)self.view removePieceAtCoordinate:coordinate];
+        [self.view setNeedsDisplay];
+    }
     return response;
 }
 

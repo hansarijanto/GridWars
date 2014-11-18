@@ -22,8 +22,8 @@
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeLine2;
             _attackType = kGWAreaType3x3Square;
-            _maxMoves   = 1;
-            _moves      = 1;
+            _maxActions   = 1;
+            _actions      = 1;
             _health     = 150;
             _mana       = 50;
             _attack     = 50;
@@ -33,8 +33,8 @@
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeRightSquigly;
             _attackType = kGWAreaType3x3Square;
-            _maxMoves   = 1;
-            _moves      = 1;
+            _maxActions   = 1;
+            _actions      = 1;
             _health     = 50;
             _mana       = 70;
             _attack     = 30;
@@ -44,8 +44,8 @@
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeT;
             _attackType = kGWAreaType3x3Square;
-            _maxMoves   = 1;
-            _moves      = 1;
+            _maxActions   = 1;
+            _actions      = 1;
             _health     = 50;
             _attack     = 50;
             _mana       = 100;
@@ -55,8 +55,8 @@
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeLine3;
             _attackType = kGWAreaType3x3Square;
-            _maxMoves   = 2;
-            _moves      = 2;
+            _maxActions   = 2;
+            _actions      = 2;
             _health     = 100;
             _attack     = 30;
             _mana       = 50;
@@ -66,8 +66,8 @@
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaTypeLeftSquigly;
             _attackType = kGWAreaType3x3Square;
-            _maxMoves   = 1;
-            _moves      = 1;
+            _maxActions   = 1;
+            _actions      = 1;
             _health     = 70;
             _attack     = 10;
             _mana       = 80;
@@ -77,8 +77,8 @@
             _moveType   = kGWAreaTypeCross;
             _summonType = kGWAreaType3x3Square;
             _attackType = kGWAreaType3x3Square;
-            _maxMoves   = 1;
-            _moves      = 1;
+            _maxActions   = 1;
+            _actions      = 1;
             _health     = 100;
             _attack     = 50;
             _mana       = 100;
@@ -103,11 +103,11 @@
 }
 
 - (void)resetMoves {
-    _moves = _maxMoves;
+    _actions = _maxActions;
 }
 
-- (void)moved {
-    --_moves;
+- (void)decrementActions {
+    --_actions;
 }
 
 - (NSString *)characterClass {

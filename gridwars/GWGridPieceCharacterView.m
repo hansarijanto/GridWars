@@ -60,7 +60,7 @@
             break;
     }
     
-    if (_characterPiece.character.moves <= 0) {
+    if (_characterPiece.character.actions <= 0) {
         self.alpha = 0.5f;
     } else {
         self.alpha = 1.0f;

@@ -14,11 +14,7 @@
     self = [super init];
     if (!self) return nil;
     
-    if (type) {
-        _type = type;
-    } else {
-        _type = kGWGridResponseTypeUknown;
-    }
+    _type = type;
     _success = success;
     _message = message;
     

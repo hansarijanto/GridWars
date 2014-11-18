@@ -11,6 +11,7 @@
 @class GWGrid;
 @class GWGridPiece;
 @class GWGridTile;
+@class GWGridCoordinate;
 
 @interface GWGridView : UIView
 
@@ -19,6 +20,7 @@
 @property(nonatomic, strong)NSArray *pieceViews; // 2d pieceViews[row][col]
 
 - (instancetype)initWithFrame:(CGRect)frame withGrid:(GWGrid *)grid;
+- (void)removePieceAtCoordinate:(GWGridCoordinate *)coordinate;
 - (void)addPiece:(GWGridPiece *)piece;
 - (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut;
 

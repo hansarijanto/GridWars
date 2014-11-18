@@ -34,7 +34,7 @@ typedef enum {
 
 - (instancetype)initWithType:(GWCharacterType)type;
 
-- (void)moved; // Call after a character moves (decrements move count)
+- (void)decrementActions; // Call after a character moves (decrements move count)
 - (void)resetMoves; // Resets number of moves to maxMoves
 - (void)damagedBy:(GWCharacter *)attacker; // When attacked by another character
 - (NSString *)characterClass;
@@ -43,8 +43,8 @@ typedef enum {
 @property(nonatomic, readonly) GWAreaType moveType;
 @property(nonatomic, readonly) GWAreaType summonType;
 @property(nonatomic, readonly) GWAreaType attackType;
-@property(nonatomic, readonly) NSUInteger moves; // Number of moves left
-@property(nonatomic, readonly) NSUInteger maxMoves; // Number of moves (for moving and attacking)
+@property(nonatomic, readonly) NSUInteger actions; // Number of moves left
+@property(nonatomic, readonly) NSUInteger maxActions; // Number of moves (for moving and attacking)
 @property(nonatomic, readonly) NSInteger health;
 @property(nonatomic, readonly) NSInteger attack;
 @property(nonatomic, readonly) NSInteger mana;

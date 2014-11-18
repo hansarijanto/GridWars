@@ -84,6 +84,9 @@
     
     [damagedPiece.character damagedBy:attackingPiece.character];
     
+    // Decrement character move count
+    [attackingPiece.character decrementActions];
+    
     // Reset grid and tile states
     _state = kGWGridStateIdle;
     [self resetAllTileStates];
@@ -91,6 +94,7 @@
     
     //Check if damaged piece died
     if (damagedPiece.character.health <= 0) {
+        tile.piece = nil;
         return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Character Died" withStatus:kGWGridResponseTypeCharacterDied];
     } else {
         return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Successfully attacked character" withStatus:kGWGridResponseTypeUknown];
@@ -108,7 +112,7 @@
     assert(tile && characterPiece);
     
     // Check to see if character has any moves left
-    if (characterPiece.character.moves <= 0) {
+    if (characterPiece.character.actions <= 0) {
         return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character has no moves left to intiate action" withStatus:kGWGridResponseTypeUknown];
     }
     
@@ -118,14 +122,23 @@
     // Set current active tile
     _currentActionTile = tile;
     
-    // Set tile states
+    // Set tile states for moving
     NSArray *movingTileCoordinates = ((GWGridPieceCharacter *)_currentActionTile.piece).movingTileCoordinates;
     for (GWGridCoordinate *coordinate in movingTileCoordinates) {
         GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
         if (tile) {
             // If tile is empty and is walkable
+            if (!tile.piece && tile.walkable) tile.state = kGWTileStateSelectableAsMovingDestination;
+        }
+    }
+    
+    // Set tile states for attacking
+    NSArray *attackingTileCoordinates = ((GWGridPieceCharacter *)_currentActionTile.piece).attackingTileCoordinates;
+    for (GWGridCoordinate *coordinate in attackingTileCoordinates) {
+        GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
+        if (tile) {
+            // If tile is has a character
             if ([tile hasCharacter]) tile.state = kGWTileStateSelectableAsAttack;
-            else if (!tile.piece && tile.walkable) tile.state = kGWTileStateSelectableAsMovingDestination;
         }
     }
     
@@ -148,7 +161,7 @@
     assert(characterPiece);
 
     // Decrement character move count
-    [characterPiece.character moved];
+    [characterPiece.character decrementActions];
     
     // Reset grid and tile states
     _state = kGWGridStateIdle;
