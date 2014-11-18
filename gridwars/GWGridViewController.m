@@ -78,6 +78,7 @@
 
 - (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate {
     GWGridResponse *response = [_grid attackCoordinate:coordinate];
+    [(GWGridView *)self.view updateHealthBarAtCoordinate:coordinate];
     if (response.type == kGWGridResponseTypeCharacterDied) {
         [(GWGridView *)self.view removePieceAtCoordinate:coordinate];
         [self.view setNeedsDisplay];

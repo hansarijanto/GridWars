@@ -23,5 +23,6 @@
 - (void)removePieceAtCoordinate:(GWGridCoordinate *)coordinate;
 - (void)addPiece:(GWGridPiece *)piece;
 - (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut;
+- (void)updateHealthBarAtCoordinate:(GWGridCoordinate *)coordinate; // updates the health bar ui of pieceView if it is a characterPieceView
 
 @end

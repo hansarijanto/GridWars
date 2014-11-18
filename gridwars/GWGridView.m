@@ -73,6 +73,14 @@
     _pieceViews = (NSArray *)pieces;
 }
 
+#pragma mark - GWGridPieceCharacterView
+
+- (void)updateHealthBarAtCoordinate:(GWGridCoordinate *)coordinate {
+    GWGridPieceView *pieceView = _pieceViews[coordinate.row][coordinate.col];
+    assert([pieceView isMemberOfClass:[GWGridPieceCharacterView class]]);
+    [((GWGridPieceCharacterView *)pieceView) updateHealthBarUI];
+}
+
 - (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut {
     GWGridPieceView *pieceView = _pieceViews[piece.row][piece.col];
     

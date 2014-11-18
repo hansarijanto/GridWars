@@ -9,11 +9,13 @@
 #import "GWGridPieceCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWCharacter.h"
+#import "GWHealthBar.h"
 #import "UIView+Shapes.h"
+#import "NSObject+KVOBlocks.h"
 
 @implementation GWGridPieceCharacterView {
-    UIFont *_classFont;
     UIImageView *_characterImage;
+    GWHealthBar *_healthBar;
 }
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece
@@ -22,7 +24,6 @@
     if (!self) return nil;
     
     _characterPiece = characterPiece;
-    _classFont = [UIFont systemFontOfSize:10.0f];
     
     [self setBackgroundColor:[UIColor clearColor]];
     [self setUserInteractionEnabled:NO];
@@ -31,7 +32,14 @@
     _characterImage.frame = CGRectMake(self.frame.size.width / 2 - _characterImage.bounds.size.width / 2, self.frame.size.height - _characterImage.bounds.size.height - 3.0f, CGRectGetWidth(_characterImage.frame), CGRectGetHeight(_characterImage.frame));
     [self addSubview:_characterImage];
     
+    _healthBar = [[GWHealthBar alloc] initWithFrame:CGRectMake(0.0f, self.frame.size.height - 8.0f, self.frame.size.width, 8.0f)];
+    [self addSubview:_healthBar];
+    
     return self;
+}
+
+- (void)updateHealthBarUI {
+    [_healthBar setPercentage:(float)_characterPiece.character.health / _characterPiece.character.maxHealth];
 }
 
 
@@ -68,17 +76,6 @@
     }
     
     [self drawCircle:CGRectMake(rect.origin.x + 1.0f, rect.origin.y + 1.0f, rect.size.width - 2.0f, rect.size.height - 2.0f) withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
-    
-    // Drawing class
-//    CGRect classRect = CGRectMake(0.0f, rect.size.height / 2 - _classFont.pointSize / 2, rect.size.width, rect.size.height);
-//    UIColor *white = [UIColor whiteColor];
-//    NSDictionary *stringAttrs = @{ NSFontAttributeName : _classFont, NSForegroundColorAttributeName : white };
-//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[_characterPiece.character.characterClass substringToIndex:1] attributes:stringAttrs];
-//    
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    [paragraphStyle setAlignment:NSTextAlignmentCenter];
-//    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attrStr.length)];
-//    [attrStr drawInRect:classRect];
 }
 
 

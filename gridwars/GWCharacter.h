@@ -46,8 +46,8 @@ typedef enum {
 @property(nonatomic, readonly) NSUInteger actions; // Number of moves left
 @property(nonatomic, readonly) NSUInteger maxActions; // Number of moves (for moving and attacking)
 @property(nonatomic, readonly) NSInteger health;
+@property(nonatomic, readonly) NSInteger maxHealth;
 @property(nonatomic, readonly) NSInteger attack;
-@property(nonatomic, readonly) NSInteger mana;
 @property(nonatomic, readonly) NSString *characterClass;
 @property(nonatomic, readonly) NSString *image;
 @property(nonatomic, strong) NSUUID *uuid;

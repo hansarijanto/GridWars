@@ -51,14 +51,7 @@
         [_healthLabel sizeToFit];
         [self addSubview:_healthLabel];
         
-        _manaLabel = [[UILabel alloc] initWithFrame:CGRectMake(_leftPadding, 50.0f, 0.0f, 0.0f)];
-        _manaLabel.text = [NSString stringWithFormat:@"Mana: %li", (long)characterPiece.character.mana];
-        _manaLabel.textColor = [UIColor whiteColor];
-        _manaLabel.font = systemFont;
-        [_manaLabel sizeToFit];
-        [self addSubview:_manaLabel];
-        
-        _movesLabel = [[UILabel alloc] initWithFrame:CGRectMake(_leftPadding, 65.0f, 0.0f, 0.0f)];
+        _movesLabel = [[UILabel alloc] initWithFrame:CGRectMake(_leftPadding, 50.0f, 0.0f, 0.0f)];
         _movesLabel.text = [NSString stringWithFormat:@"Moves Left: %lu", (long)characterPiece.character.actions];
         _movesLabel.textColor = [UIColor whiteColor];
         _movesLabel.font = systemFont;

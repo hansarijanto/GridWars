@@ -16,5 +16,6 @@
 @property(nonatomic, strong, readonly)GWGridPieceCharacter *characterPiece;
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece;
+- (void)updateHealthBarUI;
 
 @end

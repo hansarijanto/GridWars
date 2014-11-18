@@ -46,6 +46,8 @@
 		B8B86A601A17020F002B85F0 /* GWAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A5F1A17020F002B85F0 /* GWAreaView.m */; };
 		B8B86A631A193AF5002B85F0 /* GWGridResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A621A193AF5002B85F0 /* GWGridResponse.m */; };
 		B8B86A661A193E28002B85F0 /* GWInfoBoxGridCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */; };
+		B8B86A691A1AF22A002B85F0 /* GWHealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */; };
+		B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,10 @@
 		B8B86A621A193AF5002B85F0 /* GWGridResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGridResponse.m; sourceTree = "<group>"; };
 		B8B86A641A193E28002B85F0 /* GWInfoBoxGridCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxGridCharacterView.h; sourceTree = "<group>"; };
 		B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxGridCharacterView.m; sourceTree = "<group>"; };
+		B8B86A671A1AF22A002B85F0 /* GWHealthBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWHealthBar.h; sourceTree = "<group>"; };
+		B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWHealthBar.m; sourceTree = "<group>"; };
+		B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVOBlocks.m"; sourceTree = "<group>"; };
+		B8B86A751A1B06C1002B85F0 /* NSObject+KVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVOBlocks.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +259,8 @@
 				B8B86A4F1A148A7F002B85F0 /* GWGridPieceView.m */,
 				B8B86A4B1A1484FA002B85F0 /* GWGridPieceCharacterView.h */,
 				B8B86A4C1A1484FA002B85F0 /* GWGridPieceCharacterView.m */,
+				B8B86A671A1AF22A002B85F0 /* GWHealthBar.h */,
+				B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */,
 				B8B86A0B1A130E76002B85F0 /* GWGridPieceCharacter.h */,
 				B8B86A0C1A130E76002B85F0 /* GWGridPieceCharacter.m */,
 			);
@@ -262,6 +270,8 @@
 		B8B86A191A143F90002B85F0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */,
+				B8B86A751A1B06C1002B85F0 /* NSObject+KVOBlocks.h */,
 				B8B86A051A100E0D002B85F0 /* UIButton+Block.h */,
 				B8B86A031A100E0D002B85F0 /* UIButton+Block.m */,
 				B8B86A061A100E0D002B85F0 /* UIScreen+Rotation.h */,
@@ -441,8 +451,10 @@
 				B8B869EF1A0FF60B002B85F0 /* GWGridView.m in Sources */,
 				B8B86A591A158AE5002B85F0 /* GWDeckCell.m in Sources */,
 				B8B86A281A145140002B85F0 /* GWInfoBoxDeckCharacterView.m in Sources */,
+				B8B86A691A1AF22A002B85F0 /* GWHealthBar.m in Sources */,
 				B8B86A111A131EE8002B85F0 /* GWGridViewController.m in Sources */,
 				B8B869C51A0FF59A002B85F0 /* main.m in Sources */,
+				B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */,
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,
 				B8B86A0E1A130E76002B85F0 /* GWGridPieceCharacter.m in Sources */,
 				B8B86A0D1A130E76002B85F0 /* GWGridPiece.m in Sources */,
