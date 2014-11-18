@@ -654,6 +654,7 @@
 				B8B869E91A0FF59B002B85F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B8B869EA1A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "gridwarsTests" */ = {
 			isa = XCConfigurationList;
@@ -662,6 +663,7 @@
 				B8B869EC1A0FF59B002B85F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
