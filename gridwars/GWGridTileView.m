@@ -54,13 +54,13 @@
                 break;
                 
             case kGWTileStateSummoning:
-                _image.image = [UIImage imageNamed:@"tile"];
+                _image.image = [UIImage imageNamed:@"blackGem"];
                 break;
                 
             case kGWTileStateIdle:
                 _overlay.layer.borderColor = [UIColor clearColor].CGColor;
                 if (_tile.walkable) {
-                    _image.image = [UIImage imageNamed:@"tile"];
+                    _image.image = [UIImage imageNamed:@"blackGem"];
                 } else {
                     _image.image = nil;
                 }
