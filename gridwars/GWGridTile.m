@@ -17,7 +17,7 @@
     if (!self) return nil;
     
     _hidden = NO;
-    _walkable = NO;
+    _walkable = YES;
     _size = size;
     _state = kGWTileStateIdle;
     [self moveTo:coordinates];

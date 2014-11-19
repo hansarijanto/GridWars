@@ -26,6 +26,12 @@
     _image = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(frame), CGRectGetHeight(frame))];
     [self addSubview:_image];
     
+    if ((_tile.row + _tile.col) % 2 == 0) {
+        _image.image = [UIImage imageNamed:@"grass1"];
+    } else {
+        _image.image = [UIImage imageNamed:@"grass2"];
+    }
+    
     _overlay = [[UIView alloc] initWithFrame:_image.frame];
     _overlay.layer.borderWidth = 2.0f;
     _overlay.layer.cornerRadius = 4.0f;
@@ -40,16 +46,17 @@
     
     if (!_tile.hidden) {
         
-        UIColor *fillColor = [UIColor colorWithRed:200.0f/255.0f green:10.0f/255.0f blue:40.0f/255.0f alpha:0.85f];
+        _overlay.layer.borderColor = [UIColor clearColor].CGColor;
+        [_overlay setBackgroundColor:[UIColor clearColor]];
         
         // Set tile image
         switch (_tile.state) {
             case kGWTileStateSelectableAsMovingDestination:
-                _overlay.layer.borderColor = [UIColor colorWithRed:2.0f/255.0f green:127.0f/255.0f blue:60.0f/255.0f alpha:1.0f].CGColor;
+                [_overlay setBackgroundColor:[UIColor colorWithRed:2.0f/255.0f green:127.0f/255.0f blue:60.0f/255.0f alpha:0.4f]];
                 break;
             
             case kGWTileStateSelectableAsAttack:
-                _overlay.layer.borderColor = [UIColor colorWithRed:163.0f/255.0f green:54.0f/255.0f blue:54.0f/255.0f alpha:1.0f].CGColor;
+                [_overlay setBackgroundColor:[UIColor colorWithRed:163.0f/255.0f green:54.0f/255.0f blue:54.0f/255.0f alpha:0.4f]];
                 break;
                 
             case kGWTileStateSelectableForCancel:
@@ -59,18 +66,11 @@
                 break;
                 
             case kGWTileStateIdle:
-                _overlay.layer.borderColor = [UIColor clearColor].CGColor;
-                if (_tile.walkable) {
-                } else {
-                    fillColor = [UIColor clearColor];
-                }
                 break;
                 
             default:
                 break;
         }
-        
-        [self drawRectangle:rect withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
     }
 }
 

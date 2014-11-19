@@ -196,11 +196,11 @@
     
     _currentSummoningTile = nil;
     
-    //  Make summoning tiles walkable
-    for (GWGridCoordinate *coordinate in summoningTileCoordinates) {
-        GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
-        tile.walkable = YES;
-    }
+//    //  Make summoning tiles walkable
+//    for (GWGridCoordinate *coordinate in summoningTileCoordinates) {
+//        GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
+//        tile.walkable = YES;
+//    }
     
     // Add characters to grid
     [self addPiece:characterPiece];
@@ -229,7 +229,7 @@
     for (GWGridCoordinate *coordinate in summoningTileCoordinates) {
         GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
         // If tile doesn't exist, has a piece or walkable then cancel summoning
-        if (!tile || tile.piece || tile.walkable) {
+        if (!tile || tile.piece) {
             [self cancelSummoning];
             return;
         }
