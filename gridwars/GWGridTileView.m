@@ -40,6 +40,8 @@
     
     if (!_tile.hidden) {
         
+        UIColor *fillColor = [UIColor colorWithRed:200.0f/255.0f green:10.0f/255.0f blue:40.0f/255.0f alpha:0.85f];
+        
         // Set tile image
         switch (_tile.state) {
             case kGWTileStateSelectableAsMovingDestination:
@@ -54,15 +56,13 @@
                 break;
                 
             case kGWTileStateSummoning:
-                _image.image = [UIImage imageNamed:@"blackGem"];
                 break;
                 
             case kGWTileStateIdle:
                 _overlay.layer.borderColor = [UIColor clearColor].CGColor;
                 if (_tile.walkable) {
-                    _image.image = [UIImage imageNamed:@"blackGem"];
                 } else {
-                    _image.image = nil;
+                    fillColor = [UIColor clearColor];
                 }
                 break;
                 
@@ -70,7 +70,7 @@
                 break;
         }
         
-        [self drawRectangle:rect withFillColor:[UIColor whiteColor] withStrokeColor:[UIColor blackColor]];
+        [self drawRectangle:rect withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
     }
 }
 

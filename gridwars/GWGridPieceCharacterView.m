@@ -56,11 +56,12 @@
 {
     // Drawing circle
     UIColor *fillColor;
+    fillColor = [UIColor colorWithRed:255.0f/255.0f green:40.0f/255.0f blue:40.0f/255.0f alpha:1.0f];
     
     if (_characterPiece.character.actions > 0) {
-        fillColor = [UIColor colorWithRed:10.0f/255.0f green:200.0f/255.0f blue:20.0f/255.0f alpha:0.7f];
+        self.alpha = 1.0f;
     } else {
-        fillColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
+        self.alpha = 0.5f;
     }
     
     [self drawCircle:CGRectMake(rect.origin.x + 1.0f, rect.origin.y + 1.0f, rect.size.width - 2.0f, rect.size.height - 2.0f) withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
