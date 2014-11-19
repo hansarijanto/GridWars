@@ -17,5 +17,6 @@
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece;
 - (void)updateHealthBarUI;
+- (void)runDyingAnimationWithCompletionBlock:(dispatch_block_t)block;
 
 @end

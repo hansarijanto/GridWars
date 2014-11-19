@@ -53,7 +53,15 @@
 
 - (void)removePieceAtCoordinate:(GWGridCoordinate *)coordinate {
     GWGridPieceView *pieceView = _pieceViews[coordinate.row][coordinate.col];
-    [pieceView removeFromSuperview];
+    
+    __weak GWGridPieceView *weak = pieceView;
+    
+    if ([pieceView isMemberOfClass:[GWGridPieceCharacterView class]]) {
+        [(GWGridPieceCharacterView *)pieceView runDyingAnimationWithCompletionBlock:^{
+            GWGridPieceView *strong = weak;            
+            [strong removeFromSuperview];
+        }];
+    }
     _pieceViews[coordinate.row][coordinate.col] = [NSNull null];
 }
 

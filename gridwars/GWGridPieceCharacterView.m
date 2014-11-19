@@ -42,6 +42,15 @@
     [_healthBar setPercentage:(float)_characterPiece.character.health / _characterPiece.character.maxHealth];
 }
 
+- (void)runDyingAnimationWithCompletionBlock:(dispatch_block_t)block {
+    [UIView animateWithDuration:1.0f animations:^{
+        self.frame = CGRectOffset(self.frame, 0.0f, 10.0f);
+        self.alpha = 0.0f;
+    } completion:^(BOOL finished){
+        if (block) block();
+    }];
+}
+
 
 - (void)drawRect:(CGRect)rect
 {
