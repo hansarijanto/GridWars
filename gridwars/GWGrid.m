@@ -11,6 +11,7 @@
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
 #import "GWCharacter.h"
+#import "GWPlayer.h"
 
 @implementation GWGrid {
 }
@@ -103,13 +104,18 @@
 
 #pragma mark - moving
 
-- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate {
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate withPlayer:(GWPlayer *)player {
     
     GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
-    GWGridPieceCharacter *characterPiece = [tile characterPiece];
+    GWGridPieceCharacter *characterPiece = tile.characterPiece;
     
     // Check if tile exist and has character
     assert(tile && characterPiece);
+    
+    // Check to see if its the character's turn
+    if (player.playerNumber != characterPiece.owner.playerNumber) {
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Its not that character's turn" withStatus:kGWGridResponseTypeNotCharacterTurn];
+    }
     
     // Check to see if character has any moves left
     if (characterPiece.character.actions <= 0) {
@@ -137,8 +143,12 @@
     for (GWGridCoordinate *coordinate in attackingTileCoordinates) {
         GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
         if (tile) {
-            // If tile is has a character
-            if ([tile hasCharacter]) tile.state = kGWTileStateSelectableAsAttack;
+            // If tile has a character
+            if ([tile hasCharacter]) {
+                // If both charaters have the same owner, don't allow attack
+                if (tile.characterPiece.owner.playerNumber == _currentActionTile.characterPiece.owner.playerNumber) continue;
+                tile.state = kGWTileStateSelectableAsAttack;
+            }
         }
     }
     

@@ -11,6 +11,7 @@
 typedef enum {
     kGWGridResponseTypeCharacterDied,
     kGWGridResponseTypeUknown,
+    kGWGridResponseTypeNotCharacterTurn,
 } kGWGridResponseType;
 
 @interface GWGridResponse : NSObject

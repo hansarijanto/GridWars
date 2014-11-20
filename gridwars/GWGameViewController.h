@@ -14,6 +14,8 @@
 
 @interface GWGameViewController : UIViewController
 
+@property(nonatomic, strong, readonly)GWPlayer *activePlayer;
+
 - (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy withGrid:(GWGrid *)grid;
 
 @end

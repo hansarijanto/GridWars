@@ -14,6 +14,7 @@
 @class GWGridPiece;
 @class GWGridPieceCharacter;
 @class GWGridCoordinate;
+@class GWPlayer;
 
 typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 
@@ -33,7 +34,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 
 // Action
 - (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate;
-- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate; // When a character wants to start moving on the grid
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate withPlayer:(GWPlayer *)player; // When a character wants to start moving on the grid
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 - (void)cancelAction; // When a character wants to stop moving on the grid
 

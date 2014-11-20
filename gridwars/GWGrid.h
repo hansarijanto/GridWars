@@ -13,6 +13,7 @@
 @class GWGridPiece;
 @class GWGridPieceCharacter;
 @class GWGridCoordinate;
+@class GWPlayer;
 
 @interface GWGrid : NSObject
 
@@ -35,7 +36,7 @@ typedef enum{
 
 // Actions
 - (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate;
-- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate;
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate withPlayer:(GWPlayer *)player;
 - (void)moveToCoordinate:(GWGridCoordinate *)coordinate;
 - (void)cancelAction;
 

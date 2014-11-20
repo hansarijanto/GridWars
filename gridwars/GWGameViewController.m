@@ -22,7 +22,6 @@
 
 @property(nonatomic, strong)GWPlayer *enemy;
 @property(nonatomic, strong)GWPlayer *player;
-@property(nonatomic, strong)GWPlayer *activePlayer;
 @property(nonatomic, strong)GWGridViewController *gridController;
 @property(nonatomic, strong)GWInfoBoxViewController *infoBoxController;
 @property(nonatomic, strong)GWDeckViewController *deckController;
@@ -79,13 +78,8 @@
                 [strong.infoBoxController setRotateButtonHidden:YES];
                 
                 if (tile.state == kGWTileStateIdle) {
-                    
-                    // If there is a character and it its owner's turn
-                    if (tile.characterPiece && tile.characterPiece.owner.playerNumber == strong.activePlayer.playerNumber) {
-                        GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
-                        if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
-                    }
-                    
+                    GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
+                    if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
                 }
             }
         }

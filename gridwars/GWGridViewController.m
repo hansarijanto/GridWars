@@ -131,8 +131,8 @@
     [_grid moveToCoordinate:coordinate];
 }
 
-- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate {
-    return [_grid initiateActionAtCoordinates:coordinate];
+- (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate withPlayer:(GWPlayer *)player {
+    return [_grid initiateActionAtCoordinates:coordinate withPlayer:(GWPlayer *)player];
 }
 
 - (void)cancelAction {
