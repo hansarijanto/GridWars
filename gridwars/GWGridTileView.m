@@ -12,6 +12,7 @@
 
 @implementation GWGridTileView {
     UIImageView *_image;
+    UIImageView *_overlayImage;
     UIView *_overlay;
 }
 
@@ -33,6 +34,9 @@
         _image.image = [UIImage imageNamed:@"grass2"];
     }
     
+    _overlayImage = [[UIImageView alloc] initWithFrame:_image.frame];
+    [self addSubview:_overlayImage];
+    
     _overlay = [[UIView alloc] initWithFrame:_image.frame];
     _overlay.layer.borderWidth = 2.0f;
     _overlay.layer.cornerRadius = 4.0f;
@@ -51,7 +55,9 @@
         [_overlay setBackgroundColor:[UIColor clearColor]];
         
         if (_tile.territory == kGWPlayer1) {
-            _image.image = [UIImage imageNamed:@"tile"];
+            _overlayImage.image = [UIImage imageNamed:@"redGem"];
+        } else if (_tile.territory == kGWPlayer2) {
+            _overlayImage.image = [UIImage imageNamed:@"blueGem"];
         }
         
         // Set tile image
