@@ -22,6 +22,7 @@
 
 @property(nonatomic, strong)GWPlayer *enemy;
 @property(nonatomic, strong)GWPlayer *player;
+@property(nonatomic, strong)GWPlayer *activePlayer;
 @property(nonatomic, strong)GWGridViewController *gridController;
 @property(nonatomic, strong)GWInfoBoxViewController *infoBoxController;
 @property(nonatomic, strong)GWDeckViewController *deckController;
@@ -36,6 +37,7 @@
     
     _player = player;
     _enemy = enemy;
+    _activePlayer = _player;
     
     // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
@@ -136,8 +138,14 @@
                 
                 GWGridTile *tile = [strong.gridController tileForLocation:point];
                 
-                // Moved out of grid
-                if (!tile) {
+                if (tile) {
+                    // Set panning cell view position to that of the tile
+                    CGPoint tileLocation = [strong.gridController locationForTile:tile];
+                    strongCellView.frame = CGRectMake(-strong.deckController.view.frame.origin.x + tileLocation.x, -strong.deckController.view.frame.origin.y + tileLocation.y, CGRectGetWidth(strongCellView.frame), CGRectGetHeight(strongCellView.frame));
+                }
+                
+                // Moved out of grid or tile not the active player's territory territory
+                if (!tile || tile.territory != strong.activePlayer.playerNumber) {
                     [strong.gridController cancelSummoning];
                     return;
                 }

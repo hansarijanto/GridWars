@@ -24,6 +24,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (void)addPiece:(GWGridPiece *)piece; // Adding a piece to the grid
 - (void)addLeaderPiece:(GWGridPieceCharacter *)characterPiece; // Adding a character piece to the grid while taking over territory
 - (GWGridTile *)tileForLocation:(CGPoint)location; // Return grid tile based on location on screen
+- (CGPoint)locationForTile:(GWGridTile *)tile; // Return grid tile based on location on screen
 
 // Summoning
 - (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; // When a character wants to start summoning

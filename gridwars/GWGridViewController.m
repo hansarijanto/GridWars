@@ -70,6 +70,10 @@
     return [_grid tileForRow:row forCol:col];
 }
 
+- (CGPoint)locationForTile:(GWGridTile *)tile {
+    return CGPointMake(self.view.frame.origin.x + tile.col * tile.size.width, self.view.frame.origin.y + tile.row * tile.size.height);
+}
+
 - (void)addPiece:(GWGridPiece *)piece {
     [_grid addPiece:piece];
     [((GWGridView *)self.view) addPiece:piece];

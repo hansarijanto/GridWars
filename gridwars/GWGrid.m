@@ -225,7 +225,7 @@
     // Set characters position on grid
     [characterPiece moveTo:coordinates];
     NSArray *summoningTileCoordinates = characterPiece.summoningTileCoordinates;
-    // Make sure all summoning tiles are empty
+    // Make sure all summoning tiles within the territory
     for (GWGridCoordinate *coordinate in summoningTileCoordinates) {
         GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
         // If tile doesn't exist, has a piece or walkable then cancel summoning
