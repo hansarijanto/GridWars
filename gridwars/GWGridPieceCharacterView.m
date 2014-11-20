@@ -9,6 +9,7 @@
 #import "GWGridPieceCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWCharacter.h"
+#import "GWPlayer.h"
 #import "GWHealthBar.h"
 #import "UIView+Shapes.h"
 #import "NSObject+KVOBlocks.h"
@@ -56,7 +57,12 @@
 {
     // Drawing circle
     UIColor *fillColor;
-    fillColor = [UIColor colorWithRed:255.0f/255.0f green:40.0f/255.0f blue:40.0f/255.0f alpha:1.0f];
+    
+    if (_characterPiece.character.owner.playerNumber == kGWPlayer1) {
+        fillColor = [UIColor colorWithRed:255.0f/255.0f green:40.0f/255.0f blue:40.0f/255.0f alpha:0.8f];
+    } else if (_characterPiece.character.owner.playerNumber == kGWPlayer2) {
+        fillColor = [UIColor colorWithRed:40.0f/255.0f green:40.0f/255.0f blue:255.0f/255.0f alpha:0.8f];
+    }
     
     if (_characterPiece.character.actions > 0) {
         self.alpha = 1.0f;
