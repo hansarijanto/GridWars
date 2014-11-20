@@ -13,8 +13,7 @@
 
 typedef enum {
     kGWGridPieceCharacterStateIdle,
-    kGWGridPieceCharacterStateColonizing,
-    kGWGridPieceCharacterStateRooted,
+    kGWGridPieceCharacterStateColonizing, // When taking over territories on the grid
 } GWGridPieceCharacterState;
 
 @interface GWGridPieceCharacter : GWGridPiece
