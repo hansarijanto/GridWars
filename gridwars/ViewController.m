@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "GWGameViewController.h"
+#import "GWGrid.h"
+#import "GWPlayer.h"
 
 @interface ViewController ()
 
@@ -19,7 +21,15 @@
 {
     [super viewDidLoad];
     
-    GWGameViewController *game = [[GWGameViewController alloc] init];
+    // Create grid
+    GWGrid *grid = [[GWGrid alloc] init];
+    grid.tileSize = CGSizeMake(37.5f, 37.5f);
+    [grid gridWithNumHorTiles:8 withNumVertTile:10];
+    
+    GWPlayer *player = [[GWPlayer alloc] init];
+    GWPlayer *enemy = [[GWPlayer alloc] init];
+    
+    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];
     [self addChildViewController:game];
     [self.view addSubview:game.view];
     

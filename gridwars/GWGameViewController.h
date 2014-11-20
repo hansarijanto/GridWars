@@ -10,10 +10,10 @@
 
 @class GWGridTile;
 @class GWPlayer;
+@class GWGrid;
 
 @interface GWGameViewController : UIViewController
 
-- (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy;
-@property(nonatomic, strong, readonly) NSDictionary *characters; // CharacterPiece with character uuid as its key
+- (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy withGrid:(GWGrid *)grid;
 
 @end

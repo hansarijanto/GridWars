@@ -30,18 +30,12 @@
 
 @implementation GWGameViewController
 
-- (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy {
+- (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy withGrid:(GWGrid *)grid {
     self = [super init];
     if (!self) return nil;
     
     _player = player;
     _enemy = enemy;
-    
-    // Create grid
-    GWGrid *grid = [[GWGrid alloc] init];
-    grid.tileSize = CGSizeMake(37.5f, 37.5f);
-    [grid gridWithNumHorTiles:8 withNumVertTile:10];
-    
     
     // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
@@ -229,12 +223,6 @@
     [self.view addSubview:_deckController.view];
     
     return self;
-}
-
-- (void) addCharacterPiece:(GWGridPieceCharacter *)characterPiece {
-    NSString *uuid = characterPiece.character.uuid.UUIDString;
-    NSMutableDictionary *characters = [_characters mutableCopy];
-    characters[uuid] = characterPiece;
 }
 
 @end
