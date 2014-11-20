@@ -9,6 +9,8 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
+#import "GWUser.h"
+#import "GWCharacter.h"
 
 @implementation GWGridTile
 
@@ -25,14 +27,22 @@
     return self;
 }
 
+#pragma mark - setter/getter
+
 - (BOOL)hasCharacter {
     if (!_piece) return NO;
     return [_piece isCharacter];
 }
 
-- (GWGridPieceCharacter *)getCharacterPiece {
+- (GWGridPieceCharacter *)characterPiece {
     if (![self hasCharacter]) return nil;
     return (GWGridPieceCharacter *)_piece;
+}
+
+- (GWUser *)owner {
+    GWGridPieceCharacter *characterPiece = [self characterPiece];
+    if (!characterPiece) return nil;
+    return characterPiece.character.owner;
 }
 
 #pragma mark - GWGridCell

@@ -48,6 +48,7 @@
 		B8B86A661A193E28002B85F0 /* GWInfoBoxGridCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */; };
 		B8B86A691A1AF22A002B85F0 /* GWHealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */; };
 		B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */; };
+		B8C5E2E01A1D510E004979F3 /* GWUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C5E2DF1A1D510E004979F3 /* GWUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,8 @@
 		B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWHealthBar.m; sourceTree = "<group>"; };
 		B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVOBlocks.m"; sourceTree = "<group>"; };
 		B8B86A751A1B06C1002B85F0 /* NSObject+KVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVOBlocks.h"; sourceTree = "<group>"; };
+		B8C5E2DE1A1D510E004979F3 /* GWUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWUser.h; sourceTree = "<group>"; };
+		B8C5E2DF1A1D510E004979F3 /* GWUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +300,8 @@
 		B8B86A211A144785002B85F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B8C5E2DE1A1D510E004979F3 /* GWUser.h */,
+				B8C5E2DF1A1D510E004979F3 /* GWUser.m */,
 				B8B86A161A143E42002B85F0 /* GWCharacter.h */,
 				B8B86A171A143E42002B85F0 /* GWCharacter.m */,
 			);
@@ -432,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8C5E2E01A1D510E004979F3 /* GWUser.m in Sources */,
 				B8B869CF1A0FF59A002B85F0 /* ViewController.m in Sources */,
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
 				B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */,

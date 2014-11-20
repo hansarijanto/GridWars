@@ -76,8 +76,8 @@
     // Make sure attacked tile exist
     assert(tile);
     
-    GWGridPieceCharacter *damagedPiece = [tile getCharacterPiece];
-    GWGridPieceCharacter *attackingPiece = [_currentActionTile getCharacterPiece];
+    GWGridPieceCharacter *damagedPiece = [tile characterPiece];
+    GWGridPieceCharacter *attackingPiece = [_currentActionTile characterPiece];
     
     // Make sure both characters in the battle exist
     assert(attackingPiece && damagedPiece);
@@ -106,7 +106,7 @@
 - (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate {
     
     GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
-    GWGridPieceCharacter *characterPiece = [tile getCharacterPiece];
+    GWGridPieceCharacter *characterPiece = [tile characterPiece];
     
     // Check if tile exist and has character
     assert(tile && characterPiece);
@@ -155,7 +155,7 @@
     // make sure destination tile exist
     assert(destTile);
     
-    GWGridPieceCharacter *characterPiece = [_currentActionTile getCharacterPiece];
+    GWGridPieceCharacter *characterPiece = [_currentActionTile characterPiece];
 
     // Break if tile has no character
     assert(characterPiece);
@@ -191,7 +191,7 @@
     // Set characters position on grid
     [characterPiece moveTo:coordinates];
     
-    NSArray *summoningTileCoordinates = characterPiece.summoningTileCoordinates;
+//    NSArray *summoningTileCoordinates = characterPiece.summoningTileCoordinates;
     
     
     _currentSummoningTile = nil;
@@ -263,7 +263,7 @@
     NSMutableArray *characterPieces = [[NSMutableArray alloc] init];
     for (NSArray *tiles in _tiles) {
         for (GWGridTile *tile in tiles) {
-            if ([tile hasCharacter]) [characterPieces addObject:[tile getCharacterPiece]];
+            if ([tile hasCharacter]) [characterPieces addObject:[tile characterPiece]];
         }
     }
     return characterPieces;

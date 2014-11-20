@@ -70,7 +70,7 @@
             [strong.infoBoxController clearView];
         } else {
             // Initiate moving if tile can do so and if tile is not busy
-            GWGridPieceCharacter *characterPiece = [tile getCharacterPiece];
+            GWGridPieceCharacter *characterPiece = tile.characterPiece;
             if (characterPiece) {
                 
                 [strong.infoBoxController setGridViewForCharacterPiece:characterPiece];
