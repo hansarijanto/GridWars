@@ -17,13 +17,24 @@
     
     NSMutableArray *characters = [[NSMutableArray alloc] init];
     
+    // Create characters
     GWCharacter *warrior = [[GWCharacter alloc] initWithType:kGWCharacterTypeWarrior];
-    GWCharacter *thief = [[GWCharacter alloc] initWithType:kGWCharacterTypeThief];
-    GWCharacter *priest = [[GWCharacter alloc] initWithType:kGWCharacterTypePriest];
-    GWCharacter *archer = [[GWCharacter alloc] initWithType:kGWCharacterTypeArcher];
-    GWCharacter *mage = [[GWCharacter alloc] initWithType:kGWCharacterTypeMage];
+    GWCharacter *thief   = [[GWCharacter alloc] initWithType:kGWCharacterTypeThief];
+    GWCharacter *priest  = [[GWCharacter alloc] initWithType:kGWCharacterTypePriest];
+    GWCharacter *archer  = [[GWCharacter alloc] initWithType:kGWCharacterTypeArcher];
+    GWCharacter *mage    = [[GWCharacter alloc] initWithType:kGWCharacterTypeMage];
     
-    [characters addObject:warrior];
+    // Set owner
+    warrior.owner = self;
+    thief.owner   = self;
+    priest.owner  = self;
+    archer.owner  = self;
+    mage.owner    = self;
+    
+    // Set leader
+    _leader = warrior;
+    
+    // Add to characters
     [characters addObject:thief];
     [characters addObject:priest];
     [characters addObject:archer];

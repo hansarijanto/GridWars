@@ -13,9 +13,12 @@ typedef enum {
     kGWUser2
 } GWUserNumber;
 
+@class GWCharacter;
+
 @interface GWPlayer : NSObject
 
 @property(nonatomic, readwrite) GWUserNumber userNumber;
+@property(nonatomic, readonly) GWCharacter *leader;
 @property(nonatomic, readonly) NSArray *characters;
 
 @end
