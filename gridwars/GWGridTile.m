@@ -9,7 +9,7 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
-#import "GWUser.h"
+#import "GWPlayer.h"
 #import "GWCharacter.h"
 
 @implementation GWGridTile
@@ -39,7 +39,7 @@
     return (GWGridPieceCharacter *)_piece;
 }
 
-- (GWUser *)owner {
+- (GWPlayer *)owner {
     GWGridPieceCharacter *characterPiece = [self characterPiece];
     if (!characterPiece) return nil;
     return characterPiece.character.owner;

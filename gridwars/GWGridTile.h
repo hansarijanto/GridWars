@@ -12,7 +12,7 @@
 @class GWTileContent;
 @class GWGridPiece;
 @class GWGridPieceCharacter;
-@class GWUser;
+@class GWPlayer;
 
 typedef enum{
     kGWTileStateIdle,
@@ -34,7 +34,7 @@ typedef enum{
 - (instancetype)initWithSize:(CGSize)size withCoordinates:(GWGridCoordinate *)coordinates;
 - (BOOL)hasCharacter;
 
-- (GWUser *)owner;
+- (GWPlayer *)owner;
 - (GWGridPieceCharacter *)characterPiece;
 
 @end

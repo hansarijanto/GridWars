@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "GWUser.h"
+#import "GWPlayer.h"
 
-@implementation GWUser
+@implementation GWPlayer
 
 @end

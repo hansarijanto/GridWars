@@ -16,9 +16,12 @@
 #import "GWGridTile.h"
 #import "GWDeckCell.h"
 #import "GWDeckCellView.h"
+#import "GWPlayer.h"
 
 @interface GWGameViewController ()
 
+@property(nonatomic, strong)GWPlayer *enemy;
+@property(nonatomic, strong)GWPlayer *player;
 @property(nonatomic, strong)GWGridViewController *gridController;
 @property(nonatomic, strong)GWInfoBoxViewController *infoBoxController;
 @property(nonatomic, strong)GWDeckViewController *deckController;
@@ -27,9 +30,12 @@
 
 @implementation GWGameViewController
 
-- (instancetype)init {
+- (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy {
     self = [super init];
     if (!self) return nil;
+    
+    _player = player;
+    _enemy = enemy;
     
     // Create grid
     GWGrid *grid = [[GWGrid alloc] init];

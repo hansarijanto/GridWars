@@ -30,7 +30,7 @@ typedef enum {
     kGWCharacterTypeThief,
 } GWCharacterType;
 
-@class GWUser;
+@class GWPlayer;
 
 @interface GWCharacter : NSObject
 
@@ -53,6 +53,6 @@ typedef enum {
 @property(nonatomic, readonly) NSString *characterClass;
 @property(nonatomic, readonly) NSString *image;
 @property(nonatomic, strong) NSUUID *uuid;
-@property(nonatomic, strong) GWUser *owner;
+@property(nonatomic, strong) GWPlayer *owner;
 
 @end

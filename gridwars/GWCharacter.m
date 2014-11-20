@@ -7,7 +7,7 @@
 //
 
 #import "GWCharacter.h"
-#import "GWUser.h"
+#import "GWPlayer.h"
 
 @implementation GWCharacter
 

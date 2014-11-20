@@ -12,7 +12,7 @@ typedef enum {
     kGWUser1
 } GWUserNumber;
 
-@interface GWUser : NSObject
+@interface GWPlayer : NSObject
 
 @property(nonatomic, readwrite) GWUserNumber userNumber;
 
