@@ -21,7 +21,7 @@
     switch (_type) {
         case kGWCharacterTypeWarrior:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaTypeLine2;
+            _summonType = kGWAreaTypePoint;
             _attackType = kGWAreaType3x3Square;
             _maxActions = 1;
             _actions    = 1;
@@ -32,7 +32,7 @@
             break;
         case kGWCharacterTypeArcher:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaTypeRightSquigly;
+            _summonType = kGWAreaTypePoint;
             _attackType = kGWAreaType3x3Square;
             _maxActions = 1;
             _actions    = 1;
@@ -43,7 +43,7 @@
             break;
         case kGWCharacterTypeMage:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaTypeT;
+            _summonType = kGWAreaTypePoint;
             _attackType = kGWAreaType3x3Square;
             _maxActions = 1;
             _actions    = 1;
@@ -54,7 +54,7 @@
             break;
         case kGWCharacterTypeThief:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaTypeLine3;
+            _summonType = kGWAreaTypePoint;
             _attackType = kGWAreaType3x3Square;
             _maxActions = 2;
             _actions    = 2;
@@ -65,7 +65,7 @@
             break;
         case kGWCharacterTypePriest:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaTypeLeftSquigly;
+            _summonType = kGWAreaTypePoint;
             _attackType = kGWAreaType3x3Square;
             _maxActions = 1;
             _actions    = 1;
@@ -76,7 +76,7 @@
             break;
         default:
             _moveType   = kGWAreaTypeCross;
-            _summonType = kGWAreaType3x3Square;
+            _summonType = kGWAreaTypePoint;
             _attackType = kGWAreaType3x3Square;
             _maxActions = 1;
             _actions    = 1;

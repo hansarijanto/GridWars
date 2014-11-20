@@ -28,11 +28,11 @@
     
     // Create main player
     GWPlayer *player = [[GWPlayer alloc] init];
-    player.userNumber = kGWUser1;
+    player.playerNumber = kGWPlayer1;
     
     // Create enemy
     GWPlayer *enemy = [[GWPlayer alloc] init];
-    enemy.userNumber = kGWUser2;
+    enemy.playerNumber = kGWPlayer2;
     
     // Create game view controller
     GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];

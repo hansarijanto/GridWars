@@ -14,6 +14,7 @@
 #import "GWGridTile.h"
 #import "GWGridPieceCharacter.h"
 #import "UIButton+Block.h"
+#import "GWPlayer.h"
 
 @interface GWGridViewController ()
 
@@ -72,6 +73,19 @@
 - (void)addPiece:(GWGridPiece *)piece {
     [_grid addPiece:piece];
     [((GWGridView *)self.view) addPiece:piece];
+}
+
+- (void)addLeaderPiece:(GWGridPieceCharacter *)characterPiece {
+    GWGridTile *tile = [_grid tileForRow:characterPiece.row forCol:characterPiece.col];
+    if (!tile) return;
+    [self addPiece:characterPiece];
+    
+    // Set current tile to territory
+    tile.territory = characterPiece.owner.playerNumber;
+    
+    // Set next tile to territory
+    tile = [_grid tileForRow:characterPiece.row - 1 forCol:characterPiece.col];
+    if (tile) tile.territory = characterPiece.owner.playerNumber;
 }
 
 #pragma mark - attacking

@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    kGWUser1,
-    kGWUser2
-} GWUserNumber;
+    kGWPlayerNone,
+    kGWPlayer1,
+    kGWPlayer2
+} GWPlayerNumber;
 
 @class GWCharacter;
 
 @interface GWPlayer : NSObject
 
-@property(nonatomic, readwrite) GWUserNumber userNumber;
+@property(nonatomic, readwrite) GWPlayerNumber playerNumber;
 @property(nonatomic, readonly) GWCharacter *leader;
 @property(nonatomic, readonly) NSArray *characters;
 

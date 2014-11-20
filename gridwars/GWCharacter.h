@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
+    kGWAreaTypePoint,
     kGWAreaTypeLine1,
     kGWAreaTypeLine2,
     kGWAreaTypeLine3,

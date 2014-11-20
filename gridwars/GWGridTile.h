@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "GWGridCoordinate.h"
+#import "GWPlayer.h"
 
 @class GWTileContent;
 @class GWGridPiece;
 @class GWGridPieceCharacter;
-@class GWPlayer;
 
 typedef enum{
     kGWTileStateIdle,
@@ -28,13 +28,13 @@ typedef enum{
 @property(nonatomic)BOOL walkable;
 @property(nonatomic, readonly)CGSize size;
 @property(nonatomic, strong)GWGridPiece *piece;
+@property(nonatomic, readwrite)GWPlayerNumber territory;
 
 @property(nonatomic, readwrite)GWTileState state;
 
 - (instancetype)initWithSize:(CGSize)size withCoordinates:(GWGridCoordinate *)coordinates;
 - (BOOL)hasCharacter;
 
-- (GWPlayer *)owner;
 - (GWGridPieceCharacter *)characterPiece;
 
 @end

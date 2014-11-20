@@ -8,6 +8,7 @@
 
 #import "GWGridTileView.h"
 #import "GWGridTile.h"
+#import "GWPlayer.h"
 
 @implementation GWGridTileView {
     UIImageView *_image;
@@ -48,6 +49,10 @@
         
         _overlay.layer.borderColor = [UIColor clearColor].CGColor;
         [_overlay setBackgroundColor:[UIColor clearColor]];
+        
+        if (_tile.territory == kGWPlayer1) {
+            _image.image = [UIImage imageNamed:@"tile"];
+        }
         
         // Set tile image
         switch (_tile.state) {

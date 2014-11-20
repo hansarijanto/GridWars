@@ -9,6 +9,7 @@
 #import "GWGridPiece.h"
 
 @class GWCharacter;
+@class GWPlayer;
 
 @interface GWGridPieceCharacter : GWGridPiece
 
@@ -21,5 +22,6 @@
 - (NSArray *)summoningTileCoordinates; // Coordinates of this characters summoning tiles given its current position
 - (NSArray *)summoningTileCoordinatesForAreaView; // Summoning coordinates for GW area view
 - (NSArray *)attackingTileCoordinates; // Coordinate of this character's attack range when it tries to attack
+- (GWPlayer *)owner;
 
 @end

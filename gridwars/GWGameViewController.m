@@ -88,7 +88,12 @@
     _gridController = [[GWGridViewController alloc] initWithGrid:grid atPos:CGPointMake(10.0f, 30.0f)];
     [_gridController setTileOnClickBlock:onTileClickblock];
     
-    // Create characters
+    // Add leader character
+    GWGridPieceCharacter *leaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_player.leader];
+    [leaderPiece moveTo:[[GWGridCoordinate alloc] initWithRow:9 withCol:4]];
+    [_gridController addLeaderPiece:leaderPiece];
+    
+    // Create character deck cells
     NSMutableArray *deckCells = [[NSMutableArray alloc] init];
     
     for (GWCharacter *character in _player.characters) {

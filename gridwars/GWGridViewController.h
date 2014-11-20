@@ -22,6 +22,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (instancetype)initWithGrid:(GWGrid *)grid atPos:(CGPoint)pos;
 - (void)setTileOnClickBlock:(GWGridTileOnClick)block;
 - (void)addPiece:(GWGridPiece *)piece; // Adding a piece to the grid
+- (void)addLeaderPiece:(GWGridPieceCharacter *)characterPiece; // Adding a character piece to the grid while taking over territory
 - (GWGridTile *)tileForLocation:(CGPoint)location; // Return grid tile based on location on screen
 
 // Summoning

@@ -9,7 +9,6 @@
 #import "GWGridTile.h"
 #import "GWGridPiece.h"
 #import "GWGridPieceCharacter.h"
-#import "GWPlayer.h"
 #import "GWCharacter.h"
 
 @implementation GWGridTile
@@ -22,6 +21,7 @@
     _walkable = YES;
     _size = size;
     _state = kGWTileStateIdle;
+    _territory = kGWPlayerNone;
     [self moveTo:coordinates];
     
     return self;
@@ -37,12 +37,6 @@
 - (GWGridPieceCharacter *)characterPiece {
     if (![self hasCharacter]) return nil;
     return (GWGridPieceCharacter *)_piece;
-}
-
-- (GWPlayer *)owner {
-    GWGridPieceCharacter *characterPiece = [self characterPiece];
-    if (!characterPiece) return nil;
-    return characterPiece.character.owner;
 }
 
 #pragma mark - GWGridCell

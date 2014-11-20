@@ -9,6 +9,7 @@
 #import "GWGridPieceCharacter.h"
 #import "GWCharacter.h"
 #import "GWGrid.h"
+#import "GWPlayer.h"
 
 @implementation GWGridPieceCharacter {
 }
@@ -34,22 +35,6 @@
     CGPoint offsetFromCenter = CGPointMake(coordinate.col - center.col, coordinate.row - center.row);
     CGPoint rotatedOffset = CGPointApplyAffineTransform(offsetFromCenter, CGAffineTransformMakeRotation(angle));
     return [[GWGridCoordinate alloc] initWithRow:(center.row + rotatedOffset.y) withCol:(center.col + rotatedOffset.x)];
-}
-
-- (NSArray *)movingTileCoordinates {
-    return [self areaTileCoordinates:_character.moveType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
-}
-
-- (NSArray *)attackingTileCoordinates {
-    return [self areaTileCoordinates:_character.attackType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
-}
-
-- (NSArray *)summoningTileCoordinates {
-    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
-}
-
-- (NSArray *)summoningTileCoordinatesForAreaView {
-    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:0 withCol:0]];
 }
 
 // Return coordinates of tiles given an area type and a character's current position
@@ -137,6 +122,9 @@
             [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col - 1]];
             [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row + 1 withCol:origin.col]];
             break;
+        case kGWAreaTypePoint:
+            [tileCoordinates addObject:[[GWGridCoordinate alloc] initWithRow:origin.row withCol:origin.col]];
+            break;
         default:
             break;
     }
@@ -155,6 +143,28 @@
     }
     
     return (NSArray *)tileCoordinates;
+}
+
+#pragma mark - setter/getter 
+
+- (NSArray *)movingTileCoordinates {
+    return [self areaTileCoordinates:_character.moveType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
+}
+
+- (NSArray *)attackingTileCoordinates {
+    return [self areaTileCoordinates:_character.attackType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
+}
+
+- (NSArray *)summoningTileCoordinates {
+    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
+}
+
+- (NSArray *)summoningTileCoordinatesForAreaView {
+    return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:0 withCol:0]];
+}
+
+- (GWPlayer *)owner {
+    return _character.owner;
 }
 
 @end
