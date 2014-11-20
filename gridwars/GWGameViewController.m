@@ -89,20 +89,12 @@
     [_gridController setTileOnClickBlock:onTileClickblock];
     
     // Create characters
-    GWCharacter *warrior = [[GWCharacter alloc] initWithType:kGWCharacterTypeWarrior];
-    GWCharacter *thief = [[GWCharacter alloc] initWithType:kGWCharacterTypeThief];
-    GWCharacter *priest = [[GWCharacter alloc] initWithType:kGWCharacterTypePriest];
-    GWCharacter *archer = [[GWCharacter alloc] initWithType:kGWCharacterTypeArcher];
-    GWCharacter *mage = [[GWCharacter alloc] initWithType:kGWCharacterTypeMage];
+    NSMutableArray *deckCells = [[NSMutableArray alloc] init];
     
-    // Create deck cells
-    NSArray *deckCells = @[
-                              [[GWDeckCell alloc] initWithCharacter:warrior],
-                              [[GWDeckCell alloc] initWithCharacter:thief],
-                              [[GWDeckCell alloc] initWithCharacter:priest],
-                              [[GWDeckCell alloc] initWithCharacter:archer],
-                              [[GWDeckCell alloc] initWithCharacter:mage],
-                          ];
+    for (GWCharacter *character in _player.characters) {
+        GWDeckCell *deckCell = [[GWDeckCell alloc] initWithCharacter:character];
+        [deckCells addObject:deckCell];
+    }
     
     // Create cell views for deck
     NSMutableArray *cellViews = [[NSMutableArray alloc] init];

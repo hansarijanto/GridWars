@@ -26,9 +26,15 @@
     grid.tileSize = CGSizeMake(37.5f, 37.5f);
     [grid gridWithNumHorTiles:8 withNumVertTile:10];
     
+    // Create main player
     GWPlayer *player = [[GWPlayer alloc] init];
-    GWPlayer *enemy = [[GWPlayer alloc] init];
+    player.userNumber = kGWUser1;
     
+    // Create enemy
+    GWPlayer *enemy = [[GWPlayer alloc] init];
+    enemy.userNumber = kGWUser2;
+    
+    // Create game view controller
     GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];
     [self addChildViewController:game];
     [self.view addSubview:game.view];
