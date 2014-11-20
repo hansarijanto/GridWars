@@ -80,16 +80,30 @@
 }
 
 - (void)addLeaderPiece:(GWGridPieceCharacter *)characterPiece {
+    
+    if (characterPiece.owner.playerNumber == kGWPlayer1) {
+        [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:9 withCol:4]];
+    } else if (characterPiece.owner.playerNumber == kGWPlayer2) {
+        [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:0 withCol:3]];
+    }
+    
     GWGridTile *tile = [_grid tileForRow:characterPiece.row forCol:characterPiece.col];
     if (!tile) return;
+    
     [self addPiece:characterPiece];
     
     // Set current tile to territory
     tile.territory = characterPiece.owner.playerNumber;
     
-    // Set next tile to territory
-    tile = [_grid tileForRow:characterPiece.row - 1 forCol:characterPiece.col];
-    if (tile) tile.territory = characterPiece.owner.playerNumber;
+    if (characterPiece.owner.playerNumber == kGWPlayer1) {
+        // Set next top tile to territory
+        tile = [_grid tileForRow:characterPiece.row - 1 forCol:characterPiece.col];
+        if (tile) tile.territory = characterPiece.owner.playerNumber;
+    } else if (characterPiece.owner.playerNumber == kGWPlayer2) {
+        // Set next bot tile to territory
+        tile = [_grid tileForRow:characterPiece.row + 1 forCol:characterPiece.col];
+        if (tile) tile.territory = characterPiece.owner.playerNumber;
+    }
 }
 
 #pragma mark - attacking

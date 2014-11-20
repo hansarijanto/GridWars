@@ -10,8 +10,8 @@
 
 typedef enum {
     kGWPlayerNone,
-    kGWPlayer1,
-    kGWPlayer2
+    kGWPlayer1, // Player playing from the bottom of the grid (red)
+    kGWPlayer2 // Player playing from the top of the grid (blue)
 } GWPlayerNumber;
 
 @class GWCharacter;

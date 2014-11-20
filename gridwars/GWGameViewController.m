@@ -79,8 +79,13 @@
                 [strong.infoBoxController setRotateButtonHidden:YES];
                 
                 if (tile.state == kGWTileStateIdle) {
-                    GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
-                    if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
+                    
+                    // If there is a character and it its owner's turn
+                    if (tile.characterPiece && tile.characterPiece.owner.playerNumber == strong.activePlayer.playerNumber) {
+                        GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+                        if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
+                    }
+                    
                 }
             }
         }
@@ -90,10 +95,13 @@
     _gridController = [[GWGridViewController alloc] initWithGrid:grid atPos:CGPointMake(10.0f, 30.0f)];
     [_gridController setTileOnClickBlock:onTileClickblock];
     
-    // Add leader character
-    GWGridPieceCharacter *leaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_player.leader];
-    [leaderPiece moveTo:[[GWGridCoordinate alloc] initWithRow:9 withCol:4]];
-    [_gridController addLeaderPiece:leaderPiece];
+    // Add player leader character
+    GWGridPieceCharacter *playerLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_player.leader];
+    [_gridController addLeaderPiece:playerLeaderPiece];
+    
+    // Add enemy leader character
+    GWGridPieceCharacter *enemyLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_enemy.leader];
+    [_gridController addLeaderPiece:enemyLeaderPiece];
     
     // Create character deck cells
     NSMutableArray *deckCells = [[NSMutableArray alloc] init];
