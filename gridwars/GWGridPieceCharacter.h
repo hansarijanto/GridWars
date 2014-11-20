@@ -11,9 +11,16 @@
 @class GWCharacter;
 @class GWPlayer;
 
+typedef enum {
+    kGWGridPieceCharacterStateIdle,
+    kGWGridPieceCharacterStateColonizing,
+    kGWGridPieceCharacterStateRooted,
+} GWGridPieceCharacterState;
+
 @interface GWGridPieceCharacter : GWGridPiece
 
 @property(nonatomic, strong, readonly)GWCharacter *character;
+@property(nonatomic, readwrite)GWGridPieceCharacterState state;
 @property(nonatomic, readwrite)int rotation; // number of 90 degree rotations on area tiles (max 3)
 - (void)rotate;
 

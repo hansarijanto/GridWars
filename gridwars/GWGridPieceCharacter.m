@@ -20,6 +20,7 @@
     
     _rotation = 0;
     _character = character;
+    _state = kGWGridPieceCharacterStateIdle;
     
     return self;
 }
