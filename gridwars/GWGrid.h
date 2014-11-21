@@ -42,7 +42,7 @@ typedef enum{
 
 // Summoning
 - (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece;
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates;
+- (GWGridResponse *)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates withPlayer:(GWPlayer *)player;
 - (void)cancelSummoning;
 
 - (NSArray *)allCharacterPieces;

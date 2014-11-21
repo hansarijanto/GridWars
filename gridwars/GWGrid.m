@@ -67,7 +67,7 @@
     _state = kGWGridStateIdle;
 }
 
-#pragma mark - attacking
+#pragma mark - actions
 
 - (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate {
     assert(_state == kGWGridStateAction && _currentActionTile);
@@ -102,8 +102,6 @@
     }
 }
 
-#pragma mark - moving
-
 - (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate withPlayer:(GWPlayer *)player {
     
     GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
@@ -114,7 +112,7 @@
     
     // Check to see if its the character's turn
     if (player.playerNumber != characterPiece.owner.playerNumber) {
-        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Its not that character's turn" withStatus:kGWGridResponseTypeNotCharacterTurn];
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Its not that character's turn" withStatus:kGWGridResponseTypeActionNotCharacterTurn];
     }
     
     // Check to see if character has any moves left
@@ -195,28 +193,34 @@
 
 #pragma mark - summoning
 
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates {
+- (GWGridResponse *)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates withPlayer:(GWPlayer *)player {
+    
     assert(_state == kGWGridStateSummoning);
+    
+    // Cancel if its not the player's turn
+    if (characterPiece.owner.playerNumber != player.playerNumber) {
+        [self cancelSummoning];
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"You can only summon on your turn" withStatus:kGWGridResponseTypeSummonNotCharacterTurn];
+    }
+    
+    GWGridTile *summoningTile = [self tileForRow:coordinates.row forCol:coordinates.col];
+    // Cancel if summoning on an opponents territory
+    if (summoningTile.territory != characterPiece.owner.playerNumber) {
+        [self cancelSummoning];
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"You must summon on your territory" withStatus:kGWGridResponseTypeSummonOutsideTerritory];
+    }
+    
     NSLog(@"Summoned at %i, %i", coordinates.row, coordinates.col);
     // Set characters position on grid
     [characterPiece moveTo:coordinates];
     
-//    NSArray *summoningTileCoordinates = characterPiece.summoningTileCoordinates;
-    
-    
-    _currentSummoningTile = nil;
-    
-//    //  Make summoning tiles walkable
-//    for (GWGridCoordinate *coordinate in summoningTileCoordinates) {
-//        GWGridTile *tile = [self tileForRow:coordinate.row forCol:coordinate.col];
-//        tile.walkable = YES;
-//    }
-    
     // Add characters to grid
     [self addPiece:characterPiece];
     
-    [self resetAllTileStates];
-    _state = kGWGridStateIdle;
+    // Clean up
+    [self cancelSummoning];
+    
+    return [[GWGridResponse alloc] initWithSuccess:YES withMessage:@"Successfully summoned character" withStatus:kGWGridResponseTypeSummonSuccessful];
 }
 
 - (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece {

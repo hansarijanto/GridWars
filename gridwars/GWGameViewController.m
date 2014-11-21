@@ -146,8 +146,8 @@
                     strongCellView.frame = CGRectMake(-strong.deckController.view.frame.origin.x + tileLocation.x, -strong.deckController.view.frame.origin.y + tileLocation.y, CGRectGetWidth(strongCellView.frame), CGRectGetHeight(strongCellView.frame));
                 }
                 
-                // Moved out of grid or tile not the active player's territory territory
-                if (!tile || tile.territory != strong.activePlayer.playerNumber) {
+                // Moved out of grid
+                if (!tile) {
                     [strong.gridController cancelSummoning];
                     return;
                 }
@@ -159,7 +159,7 @@
         
         // When panning ends
         GWDragableViewBlock onEndBlock = ^(CGPoint point) {
-            NSLog(@"Touch Ended!");
+            NSLog(@"Drag Ended!");
             GWDeckCellView *strongCellView = weakCellView;
             GWGameViewController *strong = weak;
             
@@ -174,9 +174,17 @@
                     assert(tile);
                     
                     // Successfully ended drag and summoned a character on grid
-                    [strong.gridController summonCharacter:strongCellView.cellData.characterPiece atCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
-                    [strongCellView removeFromSuperview];
-                    [strong.infoBoxController clearView];
+                    GWGridResponse *response = [strong.gridController summonCharacter:strongCellView.cellData.characterPiece atCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
+                    
+                    if (response.success) {
+                        // If succesfully summoned remove deck cell view
+                        [strongCellView removeFromSuperview];
+                        [strong.infoBoxController clearView];
+                    } else {
+                        // If not just reset postion
+                        [strongCellView resetPosition];
+                    }
+
                     return;
                 }
             }

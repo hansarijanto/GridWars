@@ -141,15 +141,20 @@
 
 #pragma mark - summoning
 
-- (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; {
+- (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     [_grid initiateSummoningAtCoordinates:coordinates forCharacterPiece:characterPiece];
     [self.view setNeedsDisplay];
 }
 
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates {
-    [_grid summonCharacter:characterPiece atCoordinates:coordinates];
-    [self addPiece:characterPiece];
+- (GWGridResponse *)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates withPlayer:(GWPlayer *)player {
+    GWGridResponse *response = [_grid summonCharacter:characterPiece atCoordinates:coordinates withPlayer:(GWPlayer *)player];
+    if (response.success) {
+        // Add piece to grid UI if successfully summoned
+        [((GWGridView *)self.view) addPiece:characterPiece];
+    }
     [self.view setNeedsDisplay];
+    
+    return response;
 }
 
 - (void)cancelSummoning {

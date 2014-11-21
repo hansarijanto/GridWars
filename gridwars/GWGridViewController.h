@@ -34,7 +34,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 // Summoning
 - (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; // When a character wants to start summoning
 - (void)cancelSummoning; // When a character wants to stop summoning
-- (void)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates; // Summon a character on a coordinate
+- (GWGridResponse *)summonCharacter:(GWGridPieceCharacter *)characterPiece atCoordinates:(GWGridCoordinate *)coordinates withPlayer:(GWPlayer *)player; // Summon a character on a coordinate
 
 // Action
 - (GWGridResponse *)attackCoordinate:(GWGridCoordinate *)coordinate;
