@@ -210,6 +210,11 @@
         return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"You must summon on your territory" withStatus:kGWGridResponseTypeSummonOutsideTerritory];
     }
     
+    if (summoningTile.piece) {
+        [self cancelSummoning];
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"You must summon on an empty tile" withStatus:kGWGridResponseTypeSummonOnFilledTile];
+    }
+    
     NSLog(@"Summoned at %i, %i", coordinates.row, coordinates.col);
     // Set characters position on grid
     [characterPiece moveTo:coordinates];

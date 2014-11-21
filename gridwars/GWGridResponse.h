@@ -15,6 +15,7 @@ typedef enum {
     kGWGridResponseTypeSummonSuccessful,
     kGWGridResponseTypeSummonNotCharacterTurn,
     kGWGridResponseTypeSummonOutsideTerritory,
+    kGWGridResponseTypeSummonOnFilledTile,
 } kGWGridResponseType;
 
 @interface GWGridResponse : NSObject
