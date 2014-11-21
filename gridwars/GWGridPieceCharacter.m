@@ -156,6 +156,10 @@
     return [self areaTileCoordinates:_character.attackType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
 }
 
+- (NSArray *)territoryTileCoordinates {
+    return [self areaTileCoordinates:_character.territoryType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
+}
+
 - (NSArray *)summoningTileCoordinates {
     return [self areaTileCoordinates:_character.summonType withOriginCoordinate:[[GWGridCoordinate alloc] initWithRow:self.row withCol:self.col]];
 }

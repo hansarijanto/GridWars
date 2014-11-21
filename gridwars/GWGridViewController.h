@@ -27,6 +27,10 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (GWGridTile *)tileForLocation:(CGPoint)location; // Return grid tile based on location on screen
 - (CGPoint)locationForTile:(GWGridTile *)tile; // Return grid tile based on location on screen
 
+// Claiming Territory
+- (void)claimTerritoriesForPlayer:(GWPlayer *)player; // Execute territory claiming of all player's active characters on the grid
+- (void)claimTerritoryForCharacterPiece:(GWGridPieceCharacter *)characterPiece; // Claims territory for a character piece
+
 // Summoning
 - (void)initiateSummoningAtCoordinates:(GWGridCoordinate *)coordinates forCharacterPiece:(GWGridPieceCharacter *)characterPiece; // When a character wants to start summoning
 - (void)cancelSummoning; // When a character wants to stop summoning
@@ -39,7 +43,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (void)cancelAction; // When a character wants to stop moving on the grid
 
 // End
-- (void)endTurn;
+- (void)endTurn:(GWPlayer *)player;
 
 @property(nonatomic, strong)NSArray *tileButtons;
 @property(nonatomic, strong, readonly)GWGrid *grid;

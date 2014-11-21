@@ -13,7 +13,7 @@
 
 typedef enum {
     kGWGridPieceCharacterStateIdle,
-    kGWGridPieceCharacterStateColonizing, // When taking over territories on the grid
+    kGWGridPieceCharacterStateClaimingTerritory, // When taking over territories on the grid
 } GWGridPieceCharacterState;
 
 @interface GWGridPieceCharacter : GWGridPiece
@@ -28,6 +28,7 @@ typedef enum {
 - (NSArray *)summoningTileCoordinates; // Coordinates of this characters summoning tiles given its current position
 - (NSArray *)summoningTileCoordinatesForAreaView; // Summoning coordinates for GW area view
 - (NSArray *)attackingTileCoordinates; // Coordinate of this character's attack range when it tries to attack
+- (NSArray *)territoryTileCoordinates; // Coordinate of this character's claimable territory
 - (GWPlayer *)owner;
 
 @end

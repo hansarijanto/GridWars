@@ -82,9 +82,9 @@
 - (void)addLeaderPiece:(GWGridPieceCharacter *)characterPiece {
     
     if (characterPiece.owner.playerNumber == kGWPlayer1) {
-        [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:_grid.numHorTiles - 1 withCol:(_grid.numVertTiles / 2) - 1]];
+        [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:(int)_grid.numHorTiles - 1 withCol:((int)_grid.numVertTiles / 2) - 1]];
     } else if (characterPiece.owner.playerNumber == kGWPlayer2) {
-        [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:0 withCol:_grid.numVertTiles / 2]];
+        [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:0 withCol:(int)_grid.numVertTiles / 2]];
     }
     
     GWGridTile *tile = [_grid tileForRow:characterPiece.row forCol:characterPiece.col];
@@ -157,11 +157,42 @@
     [self.view setNeedsDisplay];
 }
 
+# pragma mark - claiming territory
+
+- (void)claimTerritoriesForPlayer:(GWPlayer *)player {
+    for (GWGridPieceCharacter *characterPiece in _grid.allCharacterPieces) {
+        
+        // If its not the character's turn skip it
+        if (characterPiece.owner.playerNumber != player.playerNumber) continue;
+        
+        if (characterPiece.state == kGWGridPieceCharacterStateClaimingTerritory) {
+            [self claimTerritoryForCharacterPiece:characterPiece];
+        }
+    }
+}
+
+- (void)claimTerritoryForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
+    if (characterPiece.state != kGWGridPieceCharacterStateClaimingTerritory) return;
+    
+    for (GWGridCoordinate *coordinate in characterPiece.territoryTileCoordinates) {
+        GWGridTile *tile = [_grid tileForRow:coordinate.row forCol:coordinate.col];
+        // If tile exist and isn't already owned by the character's owner, claim it and exit
+        if (tile && tile.territory != characterPiece.owner.playerNumber) {
+            tile.territory = characterPiece.owner.playerNumber;
+            return;
+        }
+    }
+    
+    // If there are no tiles to claim reset characterPiece state
+    characterPiece.state = kGWGridPieceCharacterStateIdle;
+}
+
 # pragma mark - callbacks
 
-- (void)endTurn {
-    NSLog(@"End Turn");
+- (void)endTurn:(GWPlayer *)player; {
+    NSLog(@"End Turn Player %i", player.playerNumber);
     [_grid endTurn];
+    [self claimTerritoriesForPlayer:player];
     [self.view setNeedsDisplay];
 }
 
