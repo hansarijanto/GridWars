@@ -45,6 +45,7 @@ typedef enum {
 @property(nonatomic, readonly) GWCharacterType type;
 @property(nonatomic, readonly) GWAreaType moveType;
 @property(nonatomic, readonly) GWAreaType summonType;
+@property(nonatomic, readonly) GWAreaType territoryType;
 @property(nonatomic, readonly) GWAreaType attackType;
 @property(nonatomic, readonly) NSUInteger actions; // Number of moves left
 @property(nonatomic, readonly) NSUInteger maxActions; // Number of moves (for moving and attacking)
