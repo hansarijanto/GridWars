@@ -45,10 +45,11 @@
     [self addSubview:_overlay];
     
     _title = [[UILabel alloc] initWithFrame:_overlay.frame];
-    _title.font = [UIFont systemFontOfSize:10.0f];
+    _title.font = [UIFont systemFontOfSize:9.0f];
     _title.textColor = [UIColor whiteColor];
     _title.textAlignment = NSTextAlignmentCenter;
     _title.text = @"";
+    _title.numberOfLines = 2;
     [self addSubview:_title];
     
     return self;
@@ -81,16 +82,15 @@
         fillColor = [UIColor colorWithRed:40.0f/255.0f green:40.0f/255.0f blue:255.0f/255.0f alpha:0.8f];
     }
     
-    if (_characterPiece.character.actions > 0) {
-        self.alpha = 1.0f;
-    } else {
-        self.alpha = 0.5f;
+    if (_characterPiece.character.actions <= 0) {
+        [_overlay setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f]];
+        _title.text = @"No Moves";
     }
     
     switch (_characterPiece.state) {
         case kGWGridPieceCharacterStateClaimingTerritory:
             [_overlay setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f]];
-            _title.text = @"Busy";
+            _title.text = @"Claiming";
             break;
             
         default:
