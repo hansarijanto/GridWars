@@ -11,6 +11,7 @@
 
 @class GWGridPieceCharacter;
 @class GWInfoBoxView;
+@class GWPlayer;
 
 @interface GWInfoBoxViewController : UIViewController
 
@@ -23,7 +24,7 @@
 - (void)setDeckViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece; // Set view for characters in the deck
 - (void)setRotateButtonHidden:(BOOL)hidden;
 
-- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece; // Set view for characters on the grid
+- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece withClaimBlock:(UIButtonBlock)block withPlayer:(GWPlayer *)player; // Set view for characters on the grid
 - (void)setErrorMessage:(NSString *)errorMessage;
 
 @end

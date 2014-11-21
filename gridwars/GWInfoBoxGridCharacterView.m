@@ -64,6 +64,14 @@
         _errorMessage.textAlignment = NSTextAlignmentCenter;
         [_errorMessage setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_errorMessage];
+        
+        _claimButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
+        [_claimButton setBackgroundColor:[UIColor whiteColor]];
+        [_claimButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_claimButton setTitle:@"Claim" forState:UIControlStateNormal];
+        _claimButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+        _claimButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_claimButton];
     }
     return self;
 }

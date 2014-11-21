@@ -74,12 +74,24 @@
             GWGridPieceCharacter *characterPiece = tile.characterPiece;
             if (characterPiece) {
                 
-                [strong.infoBoxController setGridViewForCharacterPiece:characterPiece];
+                __weak GWGridPieceCharacter *weakCharacterPiece = characterPiece;
+                __weak GWGameViewController *weak = self;
+                
+                UIButtonBlock claimBlock = ^(id sender, UIEvent *event) {
+                    GWGridPieceCharacter *strongCharacterPiece = weakCharacterPiece;
+                    GWGameViewController *strong = weak;
+                    
+                    [strong.gridController initiateClaimTerritory:strongCharacterPiece];
+                };
+                
+                [strong.infoBoxController setGridViewForCharacterPiece:characterPiece withClaimBlock:claimBlock withPlayer:strong.activePlayer];
                 [strong.infoBoxController setRotateButtonHidden:YES];
                 
                 if (tile.state == kGWTileStateIdle) {
                     GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
-                    if (!response.success) [strong.infoBoxController setErrorMessage:response.message];
+                    if (!response.success) {
+                        [strong.infoBoxController setErrorMessage:response.message];
+                    }
                 }
             }
         }

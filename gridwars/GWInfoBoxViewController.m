@@ -11,6 +11,7 @@
 #import "GWInfoBoxGridCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWAreaView.h"
+#import "GWPlayer.h"
 
 @interface GWInfoBoxViewController ()
 
@@ -77,9 +78,18 @@
 
 #pragma mark - GWInfoGridViewForCharacterPiece
 
-- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
+- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece withClaimBlock:(UIButtonBlock)block withPlayer:(GWPlayer *)player {
     _characterPiece = characterPiece;
     GWInfoBoxGridCharacterView *characterInfoBoxView = [[GWInfoBoxGridCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacterPiece:characterPiece];
+    
+    // If the player viewing owns the character then show claim button
+    if (player.playerNumber == characterPiece.owner.playerNumber) {
+        characterInfoBoxView.claimButton.hidden = NO;
+        [characterInfoBoxView.claimButton addTarget:self withBlock:block forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        characterInfoBoxView.claimButton.hidden = YES;
+    }
+
 
     if (_infoBoxView) [_infoBoxView removeFromSuperview];
     self.infoBoxView = characterInfoBoxView;

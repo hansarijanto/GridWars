@@ -166,6 +166,13 @@
 
 # pragma mark - claiming territory
 
+- (void)initiateClaimTerritory:(GWGridPieceCharacter *)characterPiece {
+    if (characterPiece.state == kGWGridPieceCharacterStateClaimingTerritory) return;
+    characterPiece.state = kGWGridPieceCharacterStateClaimingTerritory;
+    [self cancelAction];
+    [self.view setNeedsDisplay];
+}
+
 - (void)claimTerritoriesForPlayer:(GWPlayer *)player {
     for (GWGridPieceCharacter *characterPiece in _grid.allCharacterPieces) {
         

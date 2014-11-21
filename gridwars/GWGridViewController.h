@@ -28,6 +28,7 @@ typedef void (^GWGridTileOnClick) (GWGridTile *tile);
 - (CGPoint)locationForTile:(GWGridTile *)tile; // Return grid tile based on location on screen
 
 // Claiming Territory
+- (void)initiateClaimTerritory:(GWGridPieceCharacter *)characterPiece; // Initiate claiming territory
 - (void)claimTerritoriesForPlayer:(GWPlayer *)player; // Execute territory claiming of all player's active characters on the grid
 - (void)claimTerritoryForCharacterPiece:(GWGridPieceCharacter *)characterPiece; // Claims territory for a character piece
 

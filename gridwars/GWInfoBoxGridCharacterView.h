@@ -15,6 +15,7 @@
 @interface GWInfoBoxGridCharacterView : GWInfoBoxView
 
 @property(nonatomic, strong)UITextView *errorMessage;
+@property(nonatomic, strong)UIButton *claimButton;
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece;
 

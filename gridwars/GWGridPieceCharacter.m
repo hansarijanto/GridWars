@@ -20,7 +20,7 @@
     
     _rotation = 0;
     _character = character;
-    _state = kGWGridPieceCharacterStateClaimingTerritory;
+    _state = kGWGridPieceCharacterStateIdle;
     
     return self;
 }
