@@ -49,6 +49,7 @@
 		B8B86A691A1AF22A002B85F0 /* GWHealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */; };
 		B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */; };
 		B8C5E2E01A1D510E004979F3 /* GWPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C5E2DF1A1D510E004979F3 /* GWPlayer.m */; };
+		B8F0ADC91A1EECC9005512CF /* GWGridTileOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F0ADC81A1EECC9005512CF /* GWGridTileOverlayView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,8 @@
 		B8B86A751A1B06C1002B85F0 /* NSObject+KVOBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVOBlocks.h"; sourceTree = "<group>"; };
 		B8C5E2DE1A1D510E004979F3 /* GWPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPlayer.h; sourceTree = "<group>"; };
 		B8C5E2DF1A1D510E004979F3 /* GWPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWPlayer.m; sourceTree = "<group>"; };
+		B8F0ADC71A1EECC8005512CF /* GWGridTileOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGridTileOverlayView.h; sourceTree = "<group>"; };
+		B8F0ADC81A1EECC9005512CF /* GWGridTileOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGridTileOverlayView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,8 +245,6 @@
 		B8B86A151A143D9A002B85F0 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				B8B869ED1A0FF60B002B85F0 /* GWGridView.h */,
-				B8B869EE1A0FF60B002B85F0 /* GWGridView.m */,
 				B8B86A0F1A131EE8002B85F0 /* GWGridViewController.h */,
 				B8B86A101A131EE8002B85F0 /* GWGridViewController.m */,
 				B8B869F01A0FF8AD002B85F0 /* GWGrid.h */,
@@ -254,18 +255,22 @@
 				B8B86A131A143A89002B85F0 /* GWGridCoordinate.m */,
 				B8B869F31A0FFA17002B85F0 /* GWGridTile.h */,
 				B8B869F41A0FFA17002B85F0 /* GWGridTile.m */,
-				B8B86A3F1A147FF7002B85F0 /* GWGridTileView.h */,
-				B8B86A401A147FF7002B85F0 /* GWGridTileView.m */,
 				B8B86A091A130E76002B85F0 /* GWGridPiece.h */,
 				B8B86A0A1A130E76002B85F0 /* GWGridPiece.m */,
+				B8B86A0B1A130E76002B85F0 /* GWGridPieceCharacter.h */,
+				B8B86A0C1A130E76002B85F0 /* GWGridPieceCharacter.m */,
+				B8B86A671A1AF22A002B85F0 /* GWHealthBar.h */,
+				B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */,
+				B8B869ED1A0FF60B002B85F0 /* GWGridView.h */,
+				B8B869EE1A0FF60B002B85F0 /* GWGridView.m */,
+				B8B86A3F1A147FF7002B85F0 /* GWGridTileView.h */,
+				B8B86A401A147FF7002B85F0 /* GWGridTileView.m */,
+				B8F0ADC71A1EECC8005512CF /* GWGridTileOverlayView.h */,
+				B8F0ADC81A1EECC9005512CF /* GWGridTileOverlayView.m */,
 				B8B86A4E1A148A7F002B85F0 /* GWGridPieceView.h */,
 				B8B86A4F1A148A7F002B85F0 /* GWGridPieceView.m */,
 				B8B86A4B1A1484FA002B85F0 /* GWGridPieceCharacterView.h */,
 				B8B86A4C1A1484FA002B85F0 /* GWGridPieceCharacterView.m */,
-				B8B86A671A1AF22A002B85F0 /* GWHealthBar.h */,
-				B8B86A681A1AF22A002B85F0 /* GWHealthBar.m */,
-				B8B86A0B1A130E76002B85F0 /* GWGridPieceCharacter.h */,
-				B8B86A0C1A130E76002B85F0 /* GWGridPieceCharacter.m */,
 			);
 			name = Grid;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8C5E2E01A1D510E004979F3 /* GWPlayer.m in Sources */,
+				B8F0ADC91A1EECC9005512CF /* GWGridTileOverlayView.m in Sources */,
 				B8B869CF1A0FF59A002B85F0 /* ViewController.m in Sources */,
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
 				B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */,

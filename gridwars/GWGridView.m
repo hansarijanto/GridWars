@@ -14,8 +14,11 @@
 #import "UIButton+Block.h"
 #import "GWGridTileView.h"
 #import "GWGridPieceCharacterView.h"
+#import "GWGridTileOverlayView.h"
 
 @implementation GWGridView {
+    UIView *_overlayView;
+    NSArray *_overlayTileViews;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame withGrid:(GWGrid *)grid
@@ -25,11 +28,15 @@
     
     _grid = grid;
     
+    _overlayView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+    
     NSMutableArray *tileViews = [[NSMutableArray alloc] init];
+    NSMutableArray *overlayTileViews = [[NSMutableArray alloc] init];
     NSMutableArray *pieceViews = [[NSMutableArray alloc] init];
     
     for (int row = 0; row < _grid.numHorTiles; row++) {
         NSMutableArray *tileViewsCol = [[NSMutableArray alloc] init];
+        NSMutableArray *overlayTileViewsCol = [[NSMutableArray alloc] init];
         NSMutableArray *pieceViewsCol = [[NSMutableArray alloc] init];
         for (int col = 0; col < _grid.numVertTiles; col++) {
             // Add tile ui
@@ -37,16 +44,25 @@
             CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
             
             GWGridTileView *tileView = [[GWGridTileView alloc] initWithFrame:tileRect withTile:tile];
-            [self addSubview:tileView];
+            GWGridTileOverlayView *tileOverlayView = [[GWGridTileOverlayView alloc] initWithFrame:tileRect withTile:tile];
+            
+            [self insertSubview:tileView belowSubview:_overlayView];
+            [_overlayView addSubview:tileOverlayView];
+            
             [tileViewsCol addObject:tileView];
+            [overlayTileViewsCol addObject:tileOverlayView];
             [pieceViewsCol addObject:[NSNull null]];
         }
         [pieceViews addObject:(NSArray *)pieceViewsCol];
+        [overlayTileViews addObject:overlayTileViewsCol];
         [tileViews addObject:(NSArray *)tileViewsCol];
     }
     
+    _overlayTileViews = (NSArray *)overlayTileViews;
     _pieceViews = (NSArray *)pieceViews;
     _tileViews = (NSArray *)tileViews;
+    
+    [self addSubview:_overlayView];
     
     return self;
 }
@@ -72,7 +88,7 @@
     
     if ([piece isCharacter]) {
         GWGridPieceCharacterView *pieceView = [[GWGridPieceCharacterView alloc] initWithFrame:tileRect withCharacterPiece:(GWGridPieceCharacter *)piece];
-        [self addSubview:pieceView];
+        [self insertSubview:pieceView belowSubview:_overlayView];
 
         pieces[piece.row][piece.col] = pieceView;
         
@@ -117,7 +133,13 @@
             [tileView setNeedsDisplay];
         }
     }
-    
+
+    for (NSArray *overlayTiles in _overlayTileViews) {
+        for (GWGridTileView *overlayTileView in overlayTiles) {
+            [overlayTileView setNeedsDisplay];
+        }
+    }
+
     for (NSArray *pieceViews in _pieceViews) {
         for (GWGridPieceView *pieceView in pieceViews) {
             if(![pieceView isEqual:[NSNull null]]) [pieceView setNeedsDisplay];

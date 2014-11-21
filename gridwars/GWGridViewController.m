@@ -132,7 +132,9 @@
 }
 
 - (GWGridResponse *)initiateActionAtCoordinates:(GWGridCoordinate *)coordinate withPlayer:(GWPlayer *)player {
-    return [_grid initiateActionAtCoordinates:coordinate withPlayer:(GWPlayer *)player];
+    GWGridResponse *response = [_grid initiateActionAtCoordinates:coordinate withPlayer:(GWPlayer *)player];
+    [self.view setNeedsDisplay];
+    return response;
 }
 
 - (void)cancelAction {
