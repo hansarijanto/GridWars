@@ -17,6 +17,8 @@
 @implementation GWGridPieceCharacterView {
     UIImageView *_characterImage;
     GWHealthBar *_healthBar;
+    UIView *_overlay;
+    UILabel *_title;
 }
 
 - (id)initWithFrame:(CGRect)frame withCharacterPiece:(GWGridPieceCharacter *)characterPiece
@@ -35,6 +37,19 @@
     
     _healthBar = [[GWHealthBar alloc] initWithFrame:CGRectMake(0.0f, self.frame.size.height - 8.0f, self.frame.size.width, 8.0f)];
     [self addSubview:_healthBar];
+    
+    _overlay = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+    _overlay.layer.borderWidth = 2.0f;
+    _overlay.layer.cornerRadius = 4.0f;
+    _overlay.layer.borderColor = [UIColor clearColor].CGColor;
+    [self addSubview:_overlay];
+    
+    _title = [[UILabel alloc] initWithFrame:_overlay.frame];
+    _title.font = [UIFont systemFontOfSize:10.0f];
+    _title.textColor = [UIColor whiteColor];
+    _title.textAlignment = NSTextAlignmentCenter;
+    _title.text = @"";
+    [self addSubview:_title];
     
     return self;
 }
@@ -57,6 +72,8 @@
 {
     // Drawing circle
     UIColor *fillColor;
+    [_overlay setBackgroundColor:[UIColor clearColor]];
+    _title.text = @"";
     
     if (_characterPiece.character.owner.playerNumber == kGWPlayer1) {
         fillColor = [UIColor colorWithRed:255.0f/255.0f green:40.0f/255.0f blue:40.0f/255.0f alpha:0.8f];
@@ -68,6 +85,16 @@
         self.alpha = 1.0f;
     } else {
         self.alpha = 0.5f;
+    }
+    
+    switch (_characterPiece.state) {
+        case kGWGridPieceCharacterStateClaimingTerritory:
+            [_overlay setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f]];
+            _title.text = @"Busy";
+            break;
+            
+        default:
+            break;
     }
     
     [self drawCircle:CGRectMake(rect.origin.x + 1.0f, rect.origin.y + 1.0f, rect.size.width - 2.0f, rect.size.height - 2.0f) withFillColor:fillColor withStrokeColor:[UIColor blackColor]];
