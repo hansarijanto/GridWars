@@ -179,16 +179,25 @@
 - (void)claimTerritoryForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     if (characterPiece.state != kGWGridPieceCharacterStateClaimingTerritory) return;
     
+    int territoriesToClaim = 1; // number of territories to claim this turn
+    
+    // Claiming one territory
     for (GWGridCoordinate *coordinate in characterPiece.territoryTileCoordinates) {
         GWGridTile *tile = [_grid tileForRow:coordinate.row forCol:coordinate.col];
-        // If tile exist and isn't already owned by the character's owner, claim it and exit
+        
+        // If tile exist and isn't already owned by the character's owner
         if (tile && tile.territory != characterPiece.owner.playerNumber) {
-            tile.territory = characterPiece.owner.playerNumber;
-            return;
+            // if you're still claiming territory, claim it
+            if (territoriesToClaim > 0) {
+                tile.territory = characterPiece.owner.playerNumber;
+                --territoriesToClaim;
+            // If you are no longer claiming territories and there is one open stop claiming territories
+            } else {
+                return;
+            }
         }
     }
     
-    // If there are no tiles to claim reset characterPiece state
     characterPiece.state = kGWGridPieceCharacterStateIdle;
 }
 
