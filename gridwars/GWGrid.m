@@ -117,7 +117,12 @@
     
     // Check to see if character has any moves left
     if (characterPiece.character.actions <= 0) {
-        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character has no moves left to intiate action" withStatus:kGWGridResponseTypeUknown];
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character has no moves left to intiate action" withStatus:kGWGridResponseTypeActionNoMovesLeft];
+    }
+    
+    // Check to see if character is currently claiming territory
+    if (characterPiece.state == kGWGridPieceCharacterStateClaimingTerritory) {
+        return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Character is claiming territory" withStatus:kGWGridResponseTypeActionClaimingTerritory];
     }
     
     // Set grid state

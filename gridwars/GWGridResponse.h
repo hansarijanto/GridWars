@@ -12,6 +12,8 @@ typedef enum {
     kGWGridResponseTypeCharacterDied,
     kGWGridResponseTypeUknown,
     kGWGridResponseTypeActionNotCharacterTurn,
+    kGWGridResponseTypeActionNoMovesLeft,
+    kGWGridResponseTypeActionClaimingTerritory,
     kGWGridResponseTypeSummonSuccessful,
     kGWGridResponseTypeSummonNotCharacterTurn,
     kGWGridResponseTypeSummonOutsideTerritory,
