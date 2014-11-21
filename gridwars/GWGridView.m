@@ -97,36 +97,6 @@
     _pieceViews = (NSArray *)pieces;
 }
 
-#pragma mark - GWGridPieceCharacterView
-
-- (void)updateHealthBarAtCoordinate:(GWGridCoordinate *)coordinate {
-    GWGridPieceView *pieceView = _pieceViews[coordinate.row][coordinate.col];
-    assert([pieceView isMemberOfClass:[GWGridPieceCharacterView class]]);
-    [((GWGridPieceCharacterView *)pieceView) updateHealthBarUI];
-}
-
-- (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut {
-    GWGridPieceView *pieceView = _pieceViews[piece.row][piece.col];
-    
-    void (^completion)(BOOL finished) = ^(BOOL finished) {
-        if (finished) {
-            [UIView animateWithDuration:0.5f animations:^(void){
-                pieceView.alpha = 0.5f;
-            }];
-        }
-    };
-    
-    if (!fadeOut) completion = nil;
-
-    CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
-    [UIView animateWithDuration:1.0f animations:^(void){
-        pieceView.frame = tileRect;
-    } completion:completion];
-    
-    _pieceViews[tile.row][tile.col] = pieceView;
-    _pieceViews[piece.row][piece.col] = [NSNull null];
-}
-
 - (void)setNeedsDisplay {
     for (NSArray *tiles in _tileViews) {
         for (GWGridTileView *tileView in tiles) {
@@ -146,5 +116,41 @@
         }
     }
 }
+
+#pragma mark - animations
+
+- (void)claimTerritoryForAtCoordinate:(GWGridCoordinate *)coordinate {
+    GWGridTileView *tileView = _tileViews[coordinate.row][coordinate.col];
+    [tileView claimTerritoryAnimation];
+}
+
+- (void)updateHealthBarAtCoordinate:(GWGridCoordinate *)coordinate {
+    GWGridPieceView *pieceView = _pieceViews[coordinate.row][coordinate.col];
+    assert([pieceView isMemberOfClass:[GWGridPieceCharacterView class]]);
+    [((GWGridPieceCharacterView *)pieceView) updateHealthBarUI];
+}
+
+- (void)movePice:(GWGridPiece *)piece to:(GWGridTile *)tile fadeOut:(BOOL)fadeOut {
+    GWGridPieceView *pieceView = _pieceViews[piece.row][piece.col];
+    
+    void (^completion)(BOOL finished) = ^(BOOL finished) {
+        if (finished) {
+            [UIView animateWithDuration:0.5f animations:^(void){
+                pieceView.alpha = 0.5f;
+            }];
+        }
+    };
+    
+    if (!fadeOut) completion = nil;
+    
+    CGRect tileRect = CGRectMake(tile.col * tile.size.width,tile.row * tile.size.height, tile.size.width, tile.size.height);
+    [UIView animateWithDuration:1.0f animations:^(void){
+        pieceView.frame = tileRect;
+    } completion:completion];
+    
+    _pieceViews[tile.row][tile.col] = pieceView;
+    _pieceViews[piece.row][piece.col] = [NSNull null];
+}
+
 
 @end

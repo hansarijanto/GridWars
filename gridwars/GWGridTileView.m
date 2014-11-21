@@ -20,6 +20,7 @@
     self = [super initWithFrame:frame];
     if (!self) return nil;
     
+    self.clipsToBounds = NO;
     [self setBackgroundColor:[UIColor clearColor]];
     
     _tile = tile;
@@ -37,6 +38,22 @@
     [self addSubview:_overlayImage];
                 
     return self;
+}
+
+#pragma mark - animations
+
+- (void)claimTerritoryAnimation {
+    
+    _overlayImage.alpha = 0.0f;
+    _overlayImage.frame = CGRectOffset(_overlayImage.frame, 0.0f, -20.0f);
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         _overlayImage.alpha = 1.0f;
+                         _overlayImage.frame = CGRectOffset(_overlayImage.frame, 0.0f, 20.0f);
+                     }
+                     completion:nil];
 }
 
 - (void)drawRect:(CGRect)rect {

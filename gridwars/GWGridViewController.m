@@ -199,6 +199,7 @@
             // if you're still claiming territory, claim it
             if (territoriesToClaim > 0) {
                 tile.territory = characterPiece.owner.playerNumber;
+                [(GWGridView *)self.view claimTerritoryForAtCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col  ]];
                 --territoriesToClaim;
             // If you are no longer claiming territories and there is one open stop claiming territories
             } else {

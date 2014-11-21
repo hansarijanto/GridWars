@@ -16,5 +16,6 @@
 @property(nonatomic, strong)GWGridTile *tile;
 
 - (id)initWithFrame:(CGRect)frame withTile:(GWGridTile *)tile;
+- (void)claimTerritoryAnimation; // Runs the animation of a territory being taken over
 
 @end
