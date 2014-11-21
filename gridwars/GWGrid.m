@@ -58,10 +58,12 @@
     }
 }
 
-- (void)endTurn {
+- (void)endTurn:(GWPlayer *)player {
     for (GWGridPieceCharacter *characterPiece in self.allCharacterPieces) {
-        [characterPiece.character resetMoves];
-    
+        // Reset opposing player's characters
+        if (characterPiece.owner.playerNumber != player.playerNumber) {
+            [characterPiece.character resetMoves];
+        }
     }
     [self resetAllTileStates];
     _state = kGWGridStateIdle;

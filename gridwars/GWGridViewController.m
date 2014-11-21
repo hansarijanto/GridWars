@@ -207,7 +207,7 @@
 
 - (void)endTurn:(GWPlayer *)player; {
     NSLog(@"End Turn Player %i", player.playerNumber);
-    [_grid endTurn];
+    [_grid endTurn:player];
     [self claimTerritoriesForPlayer:player];
     [self.view setNeedsDisplay];
 }

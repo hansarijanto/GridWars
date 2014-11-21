@@ -221,7 +221,6 @@
     // Set end turn block
     UIButtonBlock endTurnBlock = ^(id sender, UIEvent *event) {
         GWGameViewController *strong = weak;
-        [strong.gridController endTurn:strong.activePlayer];
         [strong.infoBoxController clearView];
         [strong endTurn];
     };
@@ -242,6 +241,7 @@
 }
 
 - (void)endTurn {
+    [_gridController endTurn:_activePlayer];
     
     // Switch active player
     if (_activePlayer.playerNumber != _player.playerNumber) _activePlayer = _player;

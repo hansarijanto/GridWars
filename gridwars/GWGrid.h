@@ -46,6 +46,6 @@ typedef enum{
 - (void)cancelSummoning;
 
 - (NSArray *)allCharacterPieces;
-- (void)endTurn;
+- (void)endTurn:(GWPlayer *)player;
 - (void)addPiece:(GWGridPiece *)piece;
 @end
