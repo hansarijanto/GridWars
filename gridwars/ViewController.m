@@ -20,19 +20,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Hiding status bar
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        // iOS 7
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    } else {
+        // iOS 6
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    }
     
     // Create grid
     GWGrid *grid = [[GWGrid alloc] init];
     grid.tileSize = CGSizeMake(37.5f, 37.5f);
-    [grid gridWithNumHorTiles:8 withNumVertTile:10];
+    [grid gridWithNumHorTiles:8 withNumVertTile:9];
     
     // Create main player
     GWPlayer *player = [[GWPlayer alloc] init];
-    player.playerNumber = kGWPlayer1;
+    player.team = kGWPlayerRed;
     
     // Create enemy
     GWPlayer *enemy = [[GWPlayer alloc] init];
-    enemy.playerNumber = kGWPlayer2;
+    enemy.team = kGWPlayerBlue;
     
     // Create game view controller
     GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];
@@ -45,6 +54,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 @end

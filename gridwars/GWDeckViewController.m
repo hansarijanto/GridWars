@@ -60,7 +60,7 @@
     }
     _cellViews = cellViews;
     
-    [scrollContainer setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.3f]];
+    [scrollContainer setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.7f]];
     self.view = scrollContainer;
     
     // Allow cells to be dragged outside of scrollContainer

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E661A202F4000358B49 /* GWBannerViewController.m */; };
 		B8B869B91A0FF59A002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
 		B8B869BB1A0FF59A002B85F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */; };
 		B8B869BD1A0FF59A002B85F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BC1A0FF59A002B85F0 /* UIKit.framework */; };
@@ -63,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B8728E651A202F4000358B49 /* GWBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBannerViewController.h; sourceTree = "<group>"; };
+		B8728E661A202F4000358B49 /* GWBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWBannerViewController.m; sourceTree = "<group>"; };
 		B8B869B51A0FF59A002B85F0 /* gridwars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gridwars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,6 +169,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8728E681A20305B00358B49 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				B8728E651A202F4000358B49 /* GWBannerViewController.h */,
+				B8728E661A202F4000358B49 /* GWBannerViewController.m */,
+			);
+			name = Banner;
+			sourceTree = "<group>";
+		};
 		B8B869AC1A0FF59A002B85F0 = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +307,7 @@
 			children = (
 				B8B86A1D1A144759002B85F0 /* GWGameViewController.h */,
 				B8B86A1E1A144759002B85F0 /* GWGameViewController.m */,
+				B8728E681A20305B00358B49 /* Banner */,
 				B8B86A5D1A158B27002B85F0 /* Deck */,
 				B8B86A221A145081002B85F0 /* InfoBox */,
 				B8B86A151A143D9A002B85F0 /* Grid */,
@@ -457,6 +470,7 @@
 				B8B86A141A143A89002B85F0 /* GWGridCoordinate.m in Sources */,
 				B8B86A501A148A7F002B85F0 /* GWGridPieceView.m in Sources */,
 				B8B86A5A1A158AE5002B85F0 /* GWDeckCellView.m in Sources */,
+				B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */,
 				B8B869C91A0FF59A002B85F0 /* AppDelegate.m in Sources */,
 				B8B86A601A17020F002B85F0 /* GWAreaView.m in Sources */,
 				B8B869F51A0FFA17002B85F0 /* GWGridTile.m in Sources */,

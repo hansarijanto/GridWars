@@ -84,7 +84,7 @@
     GWInfoBoxGridCharacterView *characterInfoBoxView = [[GWInfoBoxGridCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacterPiece:characterPiece];
     
     // If the player viewing doesnt own the character or the character has 0 actions left hide the claim button
-    if (player.playerNumber != characterPiece.owner.playerNumber || characterPiece.character.actions <= 0) {
+    if (player.team != characterPiece.owner.team || characterPiece.character.actions <= 0) {
         characterInfoBoxView.claimButton.hidden = YES;
     } else {
         characterInfoBoxView.claimButton.hidden = NO;

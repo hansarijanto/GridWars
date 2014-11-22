@@ -9,6 +9,7 @@
 #import "GWGameViewController.h"
 #import "GWGridViewController.h"
 #import "GWInfoBoxViewController.h"
+#import "GWBannerViewController.h"
 #import "GWDeckViewController.h"
 #import "GWGridPieceCharacter.h"
 #import "GWCharacter.h"
@@ -25,6 +26,7 @@
 @property(nonatomic, strong)GWGridViewController *gridController;
 @property(nonatomic, strong)GWInfoBoxViewController *infoBoxController;
 @property(nonatomic, strong)GWDeckViewController *deckController;
+@property(nonatomic, strong)GWBannerViewController *bannerController;
 
 @end
 
@@ -37,6 +39,9 @@
     _player = player;
     _enemy = enemy;
     _activePlayer = _player;
+    
+    // Create banner controller
+    _bannerController = [[GWBannerViewController alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.5f)];
     
     // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
@@ -98,7 +103,7 @@
     };
     
     // Create grid view controller
-    _gridController = [[GWGridViewController alloc] initWithGrid:grid atPos:CGPointMake(10.0f, 30.0f)];
+    _gridController = [[GWGridViewController alloc] initWithGrid:grid atPos:CGPointMake(10.0f, 67.5f)];
     [_gridController setTileOnClickBlock:onTileClickblock];
     
     // Add player leader character
@@ -243,11 +248,13 @@
     [self addChildViewController:_gridController];
     [self addChildViewController:_deckController];
     [self addChildViewController:_infoBoxController];
+    [self addChildViewController:_bannerController];
     
     // Add subviews
     [self.view addSubview:_gridController.view];
     [self.view addSubview:_infoBoxController.view];
     [self.view addSubview:_deckController.view];
+    [self.view addSubview:_bannerController.view];
     
     return self;
 }
@@ -256,8 +263,27 @@
     [_gridController endTurn:_activePlayer];
     
     // Switch active player
-    if (_activePlayer.playerNumber != _player.playerNumber) _activePlayer = _player;
-    else _activePlayer = _enemy;
+    if (_activePlayer.team != _player.team) {
+        _activePlayer = _player;
+    } else {
+        _activePlayer = _enemy;
+    }
+    
+    // Change banner title
+    NSString *title;
+    
+    switch (_activePlayer.team) {
+        case kGWPlayerRed:
+            title = @"Red Player's Turn";
+            break;
+        case kGWPlayerBlue:
+            title = @"Blue Player's Turn";
+            break;
+            
+        default:
+            break;
+    }
+    [_bannerController setTitleWithAnimation:title withColor:_activePlayer.teamColor];
 }
 
 @end

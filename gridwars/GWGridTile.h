@@ -28,7 +28,7 @@ typedef enum{
 @property(nonatomic)BOOL walkable;
 @property(nonatomic, readonly)CGSize size;
 @property(nonatomic, strong)GWGridPiece *piece;
-@property(nonatomic, readwrite)GWPlayerNumber territory;
+@property(nonatomic, readwrite)GWPlayerTeam territory;
 
 @property(nonatomic, readwrite)GWTileState state;
 

@@ -72,15 +72,9 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing circle
-    UIColor *fillColor;
+    UIColor *fillColor = _characterPiece.owner.teamColor;
     [_overlay setBackgroundColor:[UIColor clearColor]];
     _title.text = @"";
-    
-    if (_characterPiece.character.owner.playerNumber == kGWPlayer1) {
-        fillColor = [UIColor colorWithRed:255.0f/255.0f green:40.0f/255.0f blue:40.0f/255.0f alpha:0.8f];
-    } else if (_characterPiece.character.owner.playerNumber == kGWPlayer2) {
-        fillColor = [UIColor colorWithRed:40.0f/255.0f green:40.0f/255.0f blue:255.0f/255.0f alpha:0.8f];
-    }
     
     if (_characterPiece.character.actions <= 0) {
         [_overlay setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f]];

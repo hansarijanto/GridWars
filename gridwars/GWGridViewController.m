@@ -81,9 +81,9 @@
 
 - (void)addLeaderPiece:(GWGridPieceCharacter *)characterPiece {
     
-    if (characterPiece.owner.playerNumber == kGWPlayer1) {
+    if (characterPiece.owner.team == kGWPlayerRed) {
         [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:(int)_grid.numHorTiles - 1 withCol:((int)_grid.numVertTiles / 2) - 1]];
-    } else if (characterPiece.owner.playerNumber == kGWPlayer2) {
+    } else if (characterPiece.owner.team == kGWPlayerBlue) {
         [characterPiece moveTo:[[GWGridCoordinate alloc] initWithRow:0 withCol:(int)_grid.numVertTiles / 2]];
     }
     
@@ -93,18 +93,18 @@
     [self addPiece:characterPiece];
     
     // Set current tile to territory
-    tile.territory = characterPiece.owner.playerNumber;
+    tile.territory = characterPiece.owner.team;
     
-    if (characterPiece.owner.playerNumber == kGWPlayer1) {
+    if (characterPiece.owner.team == kGWPlayerRed) {
         
         // Set next top tile to territory
         tile = [_grid tileForRow:characterPiece.row - 1 forCol:characterPiece.col];
-        if (tile) tile.territory = characterPiece.owner.playerNumber;
-    } else if (characterPiece.owner.playerNumber == kGWPlayer2) {
+        if (tile) tile.territory = characterPiece.owner.team;
+    } else if (characterPiece.owner.team == kGWPlayerBlue) {
         
         // Set next bot tile to territory
         tile = [_grid tileForRow:characterPiece.row + 1 forCol:characterPiece.col];
-        if (tile) tile.territory = characterPiece.owner.playerNumber;
+        if (tile) tile.territory = characterPiece.owner.team;
     }
 }
 
@@ -177,7 +177,7 @@
     for (GWGridPieceCharacter *characterPiece in _grid.allCharacterPieces) {
         
         // If its not the character's turn skip it
-        if (characterPiece.owner.playerNumber != player.playerNumber) continue;
+        if (characterPiece.owner.team != player.team) continue;
         
         if (characterPiece.state == kGWGridPieceCharacterStateClaimingTerritory) {
             [self claimTerritoryForCharacterPiece:characterPiece];
@@ -195,10 +195,10 @@
         GWGridTile *tile = [_grid tileForRow:coordinate.row forCol:coordinate.col];
         
         // If tile exist and isn't already owned by the character's owner
-        if (tile && tile.territory != characterPiece.owner.playerNumber) {
+        if (tile && tile.territory != characterPiece.owner.team) {
             // if you're still claiming territory, claim it
             if (territoriesToClaim > 0) {
-                tile.territory = characterPiece.owner.playerNumber;
+                tile.territory = characterPiece.owner.team;
                 [(GWGridView *)self.view claimTerritoryForAtCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col  ]];
                 --territoriesToClaim;
             // If you are no longer claiming territories and there is one open stop claiming territories
@@ -214,7 +214,7 @@
 # pragma mark - callbacks
 
 - (void)endTurn:(GWPlayer *)player; {
-    NSLog(@"End Turn Player %i", player.playerNumber);
+    NSLog(@"End Turn Player %i", player.team);
     [_grid endTurn:player];
     [self claimTerritoriesForPlayer:player];
     [self.view setNeedsDisplay];

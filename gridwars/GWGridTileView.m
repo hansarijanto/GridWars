@@ -61,9 +61,9 @@
     
     if (!_tile.hidden) {
         
-        if (_tile.territory == kGWPlayer1) {
+        if (_tile.territory == kGWPlayerRed) {
             _overlayImage.image = [UIImage imageNamed:@"redGem"];
-        } else if (_tile.territory == kGWPlayer2) {
+        } else if (_tile.territory == kGWPlayerBlue) {
             _overlayImage.image = [UIImage imageNamed:@"blueGem"];
         }
         

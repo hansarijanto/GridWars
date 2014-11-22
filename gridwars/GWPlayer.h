@@ -10,16 +10,17 @@
 
 typedef enum {
     kGWPlayerNone,
-    kGWPlayer1, // Player playing from the bottom of the grid (red)
-    kGWPlayer2 // Player playing from the top of the grid (blue)
-} GWPlayerNumber;
+    kGWPlayerRed, // Player playing from the bottom of the grid (red)
+    kGWPlayerBlue // Player playing from the top of the grid (blue)
+} GWPlayerTeam;
 
 @class GWCharacter;
 
 @interface GWPlayer : NSObject
 
-@property(nonatomic, readwrite) GWPlayerNumber playerNumber;
+@property(nonatomic, readwrite) GWPlayerTeam team;
 @property(nonatomic, readonly) GWCharacter *leader;
 @property(nonatomic, readonly) NSArray *characters;
+@property(nonatomic, strong) UIColor *teamColor;
 
 @end

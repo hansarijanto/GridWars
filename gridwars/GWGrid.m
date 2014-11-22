@@ -61,7 +61,7 @@
 - (void)endTurn:(GWPlayer *)player {
     for (GWGridPieceCharacter *characterPiece in self.allCharacterPieces) {
         // Reset opposing player's characters
-        if (characterPiece.owner.playerNumber != player.playerNumber) {
+        if (characterPiece.owner.team != player.team) {
             [characterPiece.character resetMoves];
         }
     }
@@ -113,7 +113,7 @@
     assert(tile && characterPiece);
     
     // Check to see if its the character's turn
-    if (player.playerNumber != characterPiece.owner.playerNumber) {
+    if (player.team != characterPiece.owner.team) {
         return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"Its not that character's turn" withStatus:kGWGridResponseTypeActionNotCharacterTurn];
     }
     
@@ -151,7 +151,7 @@
             // If tile has a character
             if ([tile hasCharacter]) {
                 // If both charaters have the same owner, don't allow attack
-                if (tile.characterPiece.owner.playerNumber == _currentActionTile.characterPiece.owner.playerNumber) continue;
+                if (tile.characterPiece.owner.team == _currentActionTile.characterPiece.owner.team) continue;
                 tile.state = kGWTileStateSelectableAsAttack;
             }
         }
@@ -205,14 +205,14 @@
     assert(_state == kGWGridStateSummoning);
     
     // Cancel if its not the player's turn
-    if (characterPiece.owner.playerNumber != player.playerNumber) {
+    if (characterPiece.owner.team != player.team) {
         [self cancelSummoning];
         return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"You can only summon on your turn" withStatus:kGWGridResponseTypeSummonNotCharacterTurn];
     }
     
     GWGridTile *summoningTile = [self tileForRow:coordinates.row forCol:coordinates.col];
     // Cancel if summoning on an opponents territory
-    if (summoningTile.territory != characterPiece.owner.playerNumber) {
+    if (summoningTile.territory != characterPiece.owner.team) {
         [self cancelSummoning];
         return [[GWGridResponse alloc] initWithSuccess:NO withMessage:@"You must summon on your territory" withStatus:kGWGridResponseTypeSummonOutsideTerritory];
     }
