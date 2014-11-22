@@ -42,6 +42,8 @@
     
     // Create banner controller
     _bannerController = [[GWBannerViewController alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.5f)];
+    // Set turn title
+    [self setBannerPlayerTurnTitle];
     
     // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
@@ -268,8 +270,12 @@
     } else {
         _activePlayer = _enemy;
     }
-    
-    // Change banner title
+    // Set turn title
+    [self setBannerPlayerTurnTitle];
+}
+
+- (void)setBannerPlayerTurnTitle {
+    // Change banner title to reflect player turn
     NSString *title;
     
     switch (_activePlayer.team) {
