@@ -50,7 +50,7 @@
     
     // Set tile on click for grid
     __weak GWGameViewController *weak = self;
-    GWGridTileOnClick onTileClickblock = ^(GWGridTile *tile) {
+    GWGridTileOnClick onTileTouchblock = ^(GWGridTile *tile) {
         
         GWGameViewController *strong = weak;
         
@@ -59,46 +59,51 @@
         GWGrid *grid = strong.gridController.grid;
         
         if (grid.state == kGWGridStateAction) {
+            
+            [strong.infoBoxController clearView];
+            
             switch (tile.state) {
                     // Move destination
                 case kGWTileStateSelectableAsMovingDestination:
                     // Update tile ui
                     [strong.gridController moveToCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
                     break;
-                    // Cancel moving
+                    // Cancel moving (on character re-tap)
                 case kGWTileStateSelectableForCancel:
+                    // Exit function after cancelling
                     [strong.gridController cancelAction];
-                    break;
+                    return;
                 case kGWTileStateSelectableAsAttack:
                     [strong.gridController attackCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
                     break;
                 default:
+                    // Tapping on an empty tile or player character
+                    [strong.gridController cancelAction];
                     break;
             }
-            [strong.infoBoxController clearView];
-        } else {
-            // Initiate moving if tile can do so and if tile is not busy
-            GWGridPieceCharacter *characterPiece = tile.characterPiece;
-            if (characterPiece) {
+        }
+        
+        // Initiate moving if tile can do so and if tile is not busy
+        GWGridPieceCharacter *characterPiece = tile.characterPiece;
+        if (characterPiece) {
+            
+            __weak GWGridPieceCharacter *weakCharacterPiece = characterPiece;
+            __weak GWGameViewController *weak = self;
+            
+            UIButtonBlock claimBlock = ^(id sender, UIEvent *event) {
+                GWGridPieceCharacter *strongCharacterPiece = weakCharacterPiece;
+                GWGameViewController *strong = weak;
                 
-                __weak GWGridPieceCharacter *weakCharacterPiece = characterPiece;
-                __weak GWGameViewController *weak = self;
-                
-                UIButtonBlock claimBlock = ^(id sender, UIEvent *event) {
-                    GWGridPieceCharacter *strongCharacterPiece = weakCharacterPiece;
-                    GWGameViewController *strong = weak;
-                    
-                    [strong.gridController initiateClaimTerritory:strongCharacterPiece];
-                };
-                
-                [strong.infoBoxController setGridViewForCharacterPiece:characterPiece withClaimBlock:claimBlock withPlayer:strong.activePlayer];
-                [strong.infoBoxController setRotateButtonHidden:YES];
-                
-                if (tile.state == kGWTileStateIdle) {
-                    GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
-                    if (!response.success) {
-                        [strong.infoBoxController setErrorMessage:response.message];
-                    }
+                [strong.gridController initiateClaimTerritory:strongCharacterPiece];
+            };
+            
+            [strong.infoBoxController setGridViewForCharacterPiece:characterPiece withClaimBlock:claimBlock withPlayer:strong.activePlayer];
+            [strong.infoBoxController setRotateButtonHidden:YES];
+            
+            if (tile.state == kGWTileStateIdle) {
+                GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
+                if (!response.success) {
+                    [strong.infoBoxController setErrorMessage:response.message];
                 }
             }
         }
@@ -106,7 +111,7 @@
     
     // Create grid view controller
     _gridController = [[GWGridViewController alloc] initWithGrid:grid atPos:CGPointMake(10.0f, 67.5f)];
-    [_gridController setTileOnClickBlock:onTileClickblock];
+    [_gridController setTileOnClickBlock:onTileTouchblock];
     
     // Add player leader character
     GWGridPieceCharacter *playerLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_player.leader];
