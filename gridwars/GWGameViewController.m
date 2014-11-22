@@ -114,10 +114,12 @@
     [_gridController setTileOnClickBlock:onTileTouchblock];
     
     // Add player leader character
+    assert(_player.leader);
     GWGridPieceCharacter *playerLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_player.leader];
     [_gridController addLeaderPiece:playerLeaderPiece];
     
     // Add enemy leader character
+    assert(_enemy.leader);
     GWGridPieceCharacter *enemyLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_enemy.leader];
     [_gridController addLeaderPiece:enemyLeaderPiece];
     
