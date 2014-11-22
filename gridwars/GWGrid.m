@@ -60,8 +60,8 @@
 
 - (void)endTurn:(GWPlayer *)player {
     for (GWGridPieceCharacter *characterPiece in self.allCharacterPieces) {
-        // Reset opposing player's characters
-        if (characterPiece.owner.team != player.team) {
+        // Reset current player's characters
+        if (characterPiece.owner.team == player.team) {
             [characterPiece.character resetMoves];
         }
     }
