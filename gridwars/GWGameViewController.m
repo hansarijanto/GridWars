@@ -97,7 +97,7 @@
                 [strong.gridController initiateClaimTerritory:strongCharacterPiece];
             };
             
-            [strong.infoBoxController setGridViewForCharacterPiece:characterPiece withClaimBlock:claimBlock withPlayer:strong.activePlayer];
+            [strong.infoBoxController setViewForGridWithCharacterPiece:characterPiece withClaimBlock:claimBlock withPlayer:strong.activePlayer];
             [strong.infoBoxController setRotateButtonHidden:YES];
             
             if (tile.state == kGWTileStateIdle) {
@@ -124,7 +124,7 @@
     // Create character deck cells
     NSMutableArray *deckCells = [[NSMutableArray alloc] init];
     
-    for (GWCharacter *character in _player.characters) {
+    for (GWCharacter *character in _player.deck) {
         GWDeckCell *deckCell = [[GWDeckCell alloc] initWithCharacter:character];
         [deckCells addObject:deckCell];
     }
@@ -146,7 +146,7 @@
             
             // Pannig a character
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
-                [strong.infoBoxController setDeckViewForCharacterPiece:strongCellView.cellData.characterPiece];
+                [strong.infoBoxController setViewForDeckWithCharacterPiece:strongCellView.cellData.characterPiece];
                 [strong.infoBoxController setRotateButtonHidden:YES];
              }
         };
@@ -227,7 +227,7 @@
             
             // When character is tapped on the deck
             if (strongCellView.cellData.type == kGWDeckCellTypeCharacter) {
-                [strong.infoBoxController setDeckViewForCharacterPiece:strongCellView.cellData.characterPiece];
+                [strong.infoBoxController setViewForDeckWithCharacterPiece:strongCellView.cellData.characterPiece];
             }
         };
         
@@ -248,8 +248,9 @@
         [strong.infoBoxController clearView];
         [strong endTurn];
     };
-    
-    [_infoBoxController setEndTurnBlock:endTurnBlock];
+    _infoBoxController.centralButton.hidden = NO;
+    [_infoBoxController.centralButton setTitle:@"End Turn" forState:UIControlStateNormal];
+    [_infoBoxController.centralButton addTarget:self withBlock:endTurnBlock forControlEvents:UIControlEventTouchUpInside];
     
     // Add child controllers
     [self addChildViewController:_gridController];

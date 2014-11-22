@@ -9,10 +9,12 @@
 #import "GWInfoBoxViewController.h"
 #import "GWInfoBoxDeckCharacterView.h"
 #import "GWInfoBoxGridCharacterView.h"
+#import "GWInfoBoxStoreCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWAreaView.h"
 #import "GWPlayer.h"
 #import "GWCharacter.h"
+#import "GWButton.h"
 
 @interface GWInfoBoxViewController ()
 
@@ -21,8 +23,6 @@
 @implementation GWInfoBoxViewController {
     float _sidePadding;
     GWGridPieceCharacter *_characterPiece;
-    UIButtonBlock _endTurnBlock;
-    UIButton *_endTurnButton;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -32,24 +32,28 @@
     self.view = [[UIView alloc] initWithFrame:frame];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    _endTurnButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 50.0f, 70.0f, 30.0f)];
-    _endTurnButton.showsTouchWhenHighlighted = YES;
-    [_endTurnButton setBackgroundColor:[UIColor blackColor]];
-    [_endTurnButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_endTurnButton setTitle:@"End Turn" forState:UIControlStateNormal];
-    _endTurnButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-    _endTurnButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    _endTurnButton.layer.cornerRadius = 6.0f;
-    [self.view addSubview:_endTurnButton];
+    _centralButton = [[GWButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 50.0f, 70.0f, 30.0f)];
+    [_centralButton setTitle:@"Central" forState:UIControlStateNormal];
+    _centralButton.hidden = YES;
+    [self.view addSubview:_centralButton];
     
     self.infoBoxView = [[GWInfoBoxView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];
     
     return self;
 }
 
+#pragma mark - GWInfoDeckViewForStore
+
+- (void)setViewForStoreWithCharacter:(GWCharacter *)character {
+    GWInfoBoxStoreCharacterView *characterInfoBoxView = [[GWInfoBoxStoreCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacter:character];
+    if (_infoBoxView) [_infoBoxView removeFromSuperview];
+    self.infoBoxView = characterInfoBoxView;
+}
+
+
 #pragma mark - GWInfoDeckViewForCharacterPiece
 
-- (void)setDeckViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece {
+- (void)setViewForDeckWithCharacterPiece:(GWGridPieceCharacter *)characterPiece {
     _characterPiece = characterPiece;
     GWInfoBoxDeckCharacterView *characterInfoBoxView = [[GWInfoBoxDeckCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacterPiece:characterPiece];
     characterInfoBoxView.areaView.coordinates = _characterPiece.summoningTileCoordinatesForAreaView;
@@ -81,7 +85,7 @@
 
 #pragma mark - GWInfoGridViewForCharacterPiece
 
-- (void)setGridViewForCharacterPiece:(GWGridPieceCharacter *)characterPiece withClaimBlock:(UIButtonBlock)block withPlayer:(GWPlayer *)player {
+- (void)setViewForGridWithCharacterPiece:(GWGridPieceCharacter *)characterPiece withClaimBlock:(UIButtonBlock)block withPlayer:(GWPlayer *)player {
     _characterPiece = characterPiece;
     GWInfoBoxGridCharacterView *characterInfoBoxView = [[GWInfoBoxGridCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacterPiece:characterPiece];
     
@@ -111,14 +115,9 @@
 
 #pragma mark - setter/getter
 
-- (void)setEndTurnBlock:(UIButtonBlock)block {
-    _endTurnBlock = block;
-    [_endTurnButton addTarget:self withBlock:_endTurnBlock forControlEvents:UIControlEventTouchUpInside];
-}
-
 - (void)setInfoBoxView:(GWInfoBoxView *)infoBoxView {
     _infoBoxView = infoBoxView;
-    [self.view insertSubview:_infoBoxView belowSubview:_endTurnButton];
+    [self.view insertSubview:_infoBoxView belowSubview:_centralButton];
 }
 
 @end

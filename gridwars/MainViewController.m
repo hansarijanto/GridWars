@@ -6,16 +6,19 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
+#import "GWCharacterStoreViewController.h"
 #import "GWGameViewController.h"
 #import "GWGrid.h"
 #import "GWPlayer.h"
 
-@interface ViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainViewController {
+    UIViewController *_mainController;
+}
 
 - (void)viewDidLoad
 {
@@ -48,6 +51,21 @@
     [self addChildViewController:game];
     [self.view addSubview:game.view];
     
+//    GWCharacterStoreViewController *store = [[GWCharacterStoreViewController alloc] initWithPlayer:player];
+    [self changeMainController:game];
+    
+}
+
+- (void)changeMainController:(UIViewController *)controller {
+    if (_mainController) {
+        [_mainController removeFromParentViewController];
+        [_mainController.view removeFromSuperview];
+        _mainController = nil;
+    }
+    
+    _mainController = controller;
+    [self addChildViewController:_mainController];
+    [self.view addSubview:_mainController.view];
 }
 
 - (void)didReceiveMemoryWarning

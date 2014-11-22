@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E661A202F4000358B49 /* GWBannerViewController.m */; };
+		B8728E6B1A212F2800358B49 /* GWCharacterStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6A1A212F2800358B49 /* GWCharacterStoreViewController.m */; };
+		B8728E701A21303D00358B49 /* GWCharacterStoreCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCharacterStoreCellView.m */; };
+		B8728E731A21320300358B49 /* GWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E721A21320300358B49 /* GWButton.m */; };
+		B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */; };
 		B8B869B91A0FF59A002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
 		B8B869BB1A0FF59A002B85F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */; };
 		B8B869BD1A0FF59A002B85F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BC1A0FF59A002B85F0 /* UIKit.framework */; };
@@ -15,7 +19,7 @@
 		B8B869C51A0FF59A002B85F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869C41A0FF59A002B85F0 /* main.m */; };
 		B8B869C91A0FF59A002B85F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869C81A0FF59A002B85F0 /* AppDelegate.m */; };
 		B8B869CC1A0FF59A002B85F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B869CA1A0FF59A002B85F0 /* Main.storyboard */; };
-		B8B869CF1A0FF59A002B85F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869CE1A0FF59A002B85F0 /* ViewController.m */; };
+		B8B869CF1A0FF59A002B85F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869CE1A0FF59A002B85F0 /* MainViewController.m */; };
 		B8B869D11A0FF59A002B85F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B869D01A0FF59A002B85F0 /* Images.xcassets */; };
 		B8B869D81A0FF59B002B85F0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869D71A0FF59B002B85F0 /* XCTest.framework */; };
 		B8B869D91A0FF59B002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
@@ -66,6 +70,14 @@
 /* Begin PBXFileReference section */
 		B8728E651A202F4000358B49 /* GWBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBannerViewController.h; sourceTree = "<group>"; };
 		B8728E661A202F4000358B49 /* GWBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWBannerViewController.m; sourceTree = "<group>"; };
+		B8728E691A212F2800358B49 /* GWCharacterStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterStoreViewController.h; sourceTree = "<group>"; };
+		B8728E6A1A212F2800358B49 /* GWCharacterStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterStoreViewController.m; sourceTree = "<group>"; };
+		B8728E6E1A21303D00358B49 /* GWCharacterStoreCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterStoreCellView.h; sourceTree = "<group>"; };
+		B8728E6F1A21303D00358B49 /* GWCharacterStoreCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterStoreCellView.m; sourceTree = "<group>"; };
+		B8728E711A21320300358B49 /* GWButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWButton.h; sourceTree = "<group>"; };
+		B8728E721A21320300358B49 /* GWButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWButton.m; sourceTree = "<group>"; };
+		B8728E741A21428B00358B49 /* GWInfoBoxStoreCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxStoreCharacterView.h; sourceTree = "<group>"; };
+		B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxStoreCharacterView.m; sourceTree = "<group>"; };
 		B8B869B51A0FF59A002B85F0 /* gridwars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gridwars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -77,8 +89,8 @@
 		B8B869C71A0FF59A002B85F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B8B869C81A0FF59A002B85F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B8B869CB1A0FF59A002B85F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B8B869CD1A0FF59A002B85F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B8B869CE1A0FF59A002B85F0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B8B869CD1A0FF59A002B85F0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		B8B869CE1A0FF59A002B85F0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		B8B869D01A0FF59A002B85F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8B869D61A0FF59B002B85F0 /* gridwarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gridwarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869D71A0FF59B002B85F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -178,6 +190,17 @@
 			name = Banner;
 			sourceTree = "<group>";
 		};
+		B8728E6C1A212F2D00358B49 /* CharacterStore */ = {
+			isa = PBXGroup;
+			children = (
+				B8728E691A212F2800358B49 /* GWCharacterStoreViewController.h */,
+				B8728E6A1A212F2800358B49 /* GWCharacterStoreViewController.m */,
+				B8728E6E1A21303D00358B49 /* GWCharacterStoreCellView.h */,
+				B8728E6F1A21303D00358B49 /* GWCharacterStoreCellView.m */,
+			);
+			name = CharacterStore;
+			sourceTree = "<group>";
+		};
 		B8B869AC1A0FF59A002B85F0 = {
 			isa = PBXGroup;
 			children = (
@@ -213,12 +236,13 @@
 			children = (
 				B8B86A191A143F90002B85F0 /* Helper */,
 				B8B86A211A144785002B85F0 /* Model */,
+				B8728E6C1A212F2D00358B49 /* CharacterStore */,
 				B8B86A201A14476C002B85F0 /* Game */,
 				B8B869C71A0FF59A002B85F0 /* AppDelegate.h */,
 				B8B869C81A0FF59A002B85F0 /* AppDelegate.m */,
 				B8B869CA1A0FF59A002B85F0 /* Main.storyboard */,
-				B8B869CD1A0FF59A002B85F0 /* ViewController.h */,
-				B8B869CE1A0FF59A002B85F0 /* ViewController.m */,
+				B8B869CD1A0FF59A002B85F0 /* MainViewController.h */,
+				B8B869CE1A0FF59A002B85F0 /* MainViewController.m */,
 				B8B869D01A0FF59A002B85F0 /* Images.xcassets */,
 				B8B869BF1A0FF59A002B85F0 /* Supporting Files */,
 			);
@@ -290,6 +314,8 @@
 		B8B86A191A143F90002B85F0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B8728E711A21320300358B49 /* GWButton.h */,
+				B8728E721A21320300358B49 /* GWButton.m */,
 				B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */,
 				B8B86A751A1B06C1002B85F0 /* NSObject+KVOBlocks.h */,
 				B8B86A051A100E0D002B85F0 /* UIButton+Block.h */,
@@ -333,6 +359,8 @@
 				B8B86A5F1A17020F002B85F0 /* GWAreaView.m */,
 				B8B86A291A145277002B85F0 /* GWInfoBoxView.h */,
 				B8B86A2A1A145277002B85F0 /* GWInfoBoxView.m */,
+				B8728E741A21428B00358B49 /* GWInfoBoxStoreCharacterView.h */,
+				B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */,
 				B8B86A641A193E28002B85F0 /* GWInfoBoxGridCharacterView.h */,
 				B8B86A651A193E28002B85F0 /* GWInfoBoxGridCharacterView.m */,
 				B8B86A261A145140002B85F0 /* GWInfoBoxDeckCharacterView.h */,
@@ -457,7 +485,8 @@
 			files = (
 				B8C5E2E01A1D510E004979F3 /* GWPlayer.m in Sources */,
 				B8F0ADC91A1EECC9005512CF /* GWGridTileOverlayView.m in Sources */,
-				B8B869CF1A0FF59A002B85F0 /* ViewController.m in Sources */,
+				B8B869CF1A0FF59A002B85F0 /* MainViewController.m in Sources */,
+				B8728E731A21320300358B49 /* GWButton.m in Sources */,
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
 				B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */,
 				B8B869F21A0FF8AD002B85F0 /* GWGrid.m in Sources */,
@@ -481,13 +510,16 @@
 				B8B86A111A131EE8002B85F0 /* GWGridViewController.m in Sources */,
 				B8B869C51A0FF59A002B85F0 /* main.m in Sources */,
 				B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */,
+				B8728E6B1A212F2800358B49 /* GWCharacterStoreViewController.m in Sources */,
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,
 				B8B86A0E1A130E76002B85F0 /* GWGridPieceCharacter.m in Sources */,
 				B8B86A0D1A130E76002B85F0 /* GWGridPiece.m in Sources */,
+				B8728E701A21303D00358B49 /* GWCharacterStoreCellView.m in Sources */,
 				B8B86A181A143E42002B85F0 /* GWCharacter.m in Sources */,
 				B8B86A251A1450A5002B85F0 /* GWInfoBoxViewController.m in Sources */,
 				B8B86A3B1A1464EA002B85F0 /* UIView+Shapes.m in Sources */,
 				B8B86A631A193AF5002B85F0 /* GWGridResponse.m in Sources */,
+				B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

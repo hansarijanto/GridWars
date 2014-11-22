@@ -11,6 +11,7 @@
 #import "GWGrid.h"
 #import "GWGridPieceCharacter.h"
 #import "GWAreaView.h"
+#import "GWButton.h"
 
 @implementation GWInfoBoxDeckCharacterView {
     UILabel *_classLabel;
@@ -57,20 +58,15 @@
         _movesLabel.font = systemFont;
         [_movesLabel sizeToFit];
         [self addSubview:_movesLabel];
+
+        // Old rotating feature, no longer valid for now
+//        CGFloat areaWidth = self.frame.size.height - 10.0f;
+//        _areaView = [[GWAreaView alloc] initWithFrame:CGRectMake(self.frame.size.width - _leftPadding - areaWidth, 5.0f, areaWidth, areaWidth)];
+//        [self addSubview:_areaView];
         
-        CGFloat areaWidth = self.frame.size.height - 10.0f;
-        _areaView = [[GWAreaView alloc] initWithFrame:CGRectMake(self.frame.size.width - _leftPadding - areaWidth, 5.0f, areaWidth, areaWidth)];
-        [self addSubview:_areaView];
-        
-        _rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
-        _rotateButton.showsTouchWhenHighlighted = YES;
-        [_rotateButton setBackgroundColor:[UIColor blackColor]];
-        [_rotateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_rotateButton setTitle:@"Rotate" forState:UIControlStateNormal];
-        _rotateButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-        _rotateButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-        _rotateButton.layer.cornerRadius = 6.0f;
-        [self addSubview:_rotateButton];
+//        _rotateButton = [[GWButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
+//        [_rotateButton setTitle:@"Rotate" forState:UIControlStateNormal];
+//        [self addSubview:_rotateButton];
         
     }
     return self;

@@ -20,7 +20,10 @@ typedef enum {
 
 @property(nonatomic, readwrite) GWPlayerTeam team;
 @property(nonatomic, readonly) GWCharacter *leader;
+@property(nonatomic, readonly) NSArray *deck;
 @property(nonatomic, readonly) NSArray *characters;
 @property(nonatomic, strong) UIColor *teamColor;
+
+- (void)addCharacter:(GWCharacter *)character;
 
 @end

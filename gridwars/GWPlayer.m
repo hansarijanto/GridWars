@@ -15,34 +15,12 @@
     self = [super init];
     if (!self) return nil;
     
-    NSMutableArray *characters = [[NSMutableArray alloc] init];
-    
-    // Create characters
-    GWCharacter *warrior = [[GWCharacter alloc] initWithType:kGWCharacterTypeWarrior];
-    GWCharacter *thief   = [[GWCharacter alloc] initWithType:kGWCharacterTypeThief];
-    GWCharacter *priest  = [[GWCharacter alloc] initWithType:kGWCharacterTypePriest];
-    GWCharacter *archer  = [[GWCharacter alloc] initWithType:kGWCharacterTypeArcher];
-    GWCharacter *mage    = [[GWCharacter alloc] initWithType:kGWCharacterTypeMage];
-    
-    // Set owner
-    warrior.owner = self;
-    thief.owner   = self;
-    priest.owner  = self;
-    archer.owner  = self;
-    mage.owner    = self;
-    
-    // Set leader
-    _leader = warrior;
-    
-    // Add to characters
-    [characters addObject:thief];
-    [characters addObject:priest];
-    [characters addObject:archer];
-    [characters addObject:mage];
-    
-    _characters = (NSArray *)characters;
-    
     return self;
+}
+
+- (void)addCharacter:(GWCharacter *)character {
+    character.owner = self;
+    [((NSMutableArray *)_characters) addObject:character];
 }
 
 - (UIColor *)teamColor {
