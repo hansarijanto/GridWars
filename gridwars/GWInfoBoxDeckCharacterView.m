@@ -62,12 +62,14 @@
         _areaView = [[GWAreaView alloc] initWithFrame:CGRectMake(self.frame.size.width - _leftPadding - areaWidth, 5.0f, areaWidth, areaWidth)];
         [self addSubview:_areaView];
         
-        _rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 40.0f - 35.0f, 10.0f, 40.0f, 30.0f)];
-        [_rotateButton setBackgroundColor:[UIColor whiteColor]];
-        [_rotateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _rotateButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
+        _rotateButton.showsTouchWhenHighlighted = YES;
+        [_rotateButton setBackgroundColor:[UIColor blackColor]];
+        [_rotateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_rotateButton setTitle:@"Rotate" forState:UIControlStateNormal];
         _rotateButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
         _rotateButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _rotateButton.layer.cornerRadius = 6.0f;
         [self addSubview:_rotateButton];
         
     }

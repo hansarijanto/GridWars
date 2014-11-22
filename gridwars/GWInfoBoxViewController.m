@@ -32,12 +32,14 @@
     self.view = [[UIView alloc] initWithFrame:frame];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    _endTurnButton = [[UIButton alloc] initWithFrame:CGRectMake(215.0f - 50.0f - 35.0f, 50.0f, 50.0f, 30.0f)];
-    [_endTurnButton setBackgroundColor:[UIColor whiteColor]];
-    [_endTurnButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _endTurnButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 50.0f, 70.0f, 30.0f)];
+    _endTurnButton.showsTouchWhenHighlighted = YES;
+    [_endTurnButton setBackgroundColor:[UIColor blackColor]];
+    [_endTurnButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_endTurnButton setTitle:@"End Turn" forState:UIControlStateNormal];
     _endTurnButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     _endTurnButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    _endTurnButton.layer.cornerRadius = 6.0f;
     [self.view addSubview:_endTurnButton];
     
     self.infoBoxView = [[GWInfoBoxView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];

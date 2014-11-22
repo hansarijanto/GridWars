@@ -66,11 +66,13 @@
         [self addSubview:_errorMessage];
         
         _claimButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
-        [_claimButton setBackgroundColor:[UIColor whiteColor]];
-        [_claimButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _claimButton.showsTouchWhenHighlighted = YES;
+        [_claimButton setBackgroundColor:[UIColor blackColor]];
+        [_claimButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_claimButton setTitle:@"Claim" forState:UIControlStateNormal];
         _claimButton.titleLabel.font = [UIFont systemFontOfSize:12.0f];
         _claimButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+        _claimButton.layer.cornerRadius = 6.0f;
         [self addSubview:_claimButton];
     }
     return self;
