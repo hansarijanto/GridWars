@@ -10,7 +10,7 @@
 
 @class GWPlayer;
 
-@interface GWCharacterStoreViewController : UIViewController
+@interface GWCharacterManagerViewController : UIViewController
 
 - (instancetype)initWithPlayer:(GWPlayer *)player;
 

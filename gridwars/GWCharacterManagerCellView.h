@@ -10,10 +10,10 @@
 
 @class GWCharacter;
 
-@interface GWCharacterStoreCellView : UIButton
+@interface GWCharacterManagerCellView : UIButton
 
 @property(nonatomic, readonly)GWCharacter *character;
-@property(nonatomic, readonly)UIButton *buyButton;
+@property(nonatomic, readonly)UIButton *button;
 
 - (instancetype)initWithFrame:(CGRect)frame withCharacter:(GWCharacter *)character;
 

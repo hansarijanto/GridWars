@@ -7,7 +7,7 @@
 //
 
 #import "GWRootViewController.h"
-#import "GWCharacterStoreViewController.h"
+#import "GWCharacterManagerViewController.h"
 #import "GWGameViewController.h"
 #import "GWGrid.h"
 #import "GWPlayer.h"
@@ -53,8 +53,8 @@
 //    [self addChildViewController:game];
 //    [self.view addSubview:game.view];
     
-    GWCharacterStoreViewController *store = [[GWCharacterStoreViewController alloc] initWithPlayer:player];
-    [self changeMainController:store];
+    GWCharacterManagerViewController *characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:player];
+    [self changeMainController:characterManager];
     
 }
 

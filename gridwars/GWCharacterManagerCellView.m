@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "GWCharacterStoreCellView.h"
+#import "GWCharacterManagerCellView.h"
 #import "GWCharacter.h"
 #import "GWButton.h"
 
-@implementation GWCharacterStoreCellView {
+@implementation GWCharacterManagerCellView {
     UIImageView *_playerSprite;
 }
 
@@ -30,10 +30,9 @@
     _playerSprite.contentMode = UIViewContentModeCenter;
     [self addSubview:_playerSprite];
     
-    _buyButton = [[GWButton alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, frame.size.width, 30.0f)];
-    _buyButton.layer.cornerRadius = 0.0f;
-    [_buyButton setTitle:@"Buy" forState:UIControlStateNormal];
-    [self addSubview:_buyButton];
+    _button = [[GWButton alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, frame.size.width, 30.0f)];
+    _button.layer.cornerRadius = 0.0f;
+    [self addSubview:_button];
     
     return self;
 }

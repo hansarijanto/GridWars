@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "GWCharacterStoreViewController.h"
+#import "GWCharacterManagerViewController.h"
 #import "GWInfoBoxViewController.h"
 #import "GWPlayer.h"
 #import "GWCharacter.h"
-#import "GWCharacterStoreCellView.h"
+#import "GWCharacterManagerCellView.h"
 #import "GWBannerViewController.h"
 #import "UIButton+Block.h"
 
-@interface GWCharacterStoreViewController ()
+@interface GWCharacterManagerViewController ()
 
 @property(nonatomic, strong)GWBannerViewController *bannerController;
 
 @end
 
-@implementation GWCharacterStoreViewController {
+@implementation GWCharacterManagerViewController {
     CGFloat _vertOffset;
     CGFloat _horOffset;
     CGFloat _horCellSpacing;
@@ -84,7 +84,7 @@
         int row = i / 4;
         int col = i % 4;
         
-        GWCharacterStoreCellView *storeCell = [[GWCharacterStoreCellView alloc] initWithFrame:CGRectMake(_horOffset + col * (_horCellSpacing + _cellWidth), _vertOffset + row * (_cellHeight + _vertCellSpacing), _cellWidth, _cellHeight) withCharacter:character];
+        GWCharacterManagerCellView *cell = [[GWCharacterManagerCellView alloc] initWithFrame:CGRectMake(_horOffset + col * (_horCellSpacing + _cellWidth), _vertOffset + row * (_cellHeight + _vertCellSpacing), _cellWidth, _cellHeight) withCharacter:character];
         
         __weak GWCharacter *weakCharacter = character;
         __weak GWPlayer *weakPlayer = _player;
@@ -106,7 +106,8 @@
             [alert show];
         };
         
-        [storeCell.buyButton addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
+        [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
         
         // Show character info when store cell is pressed
         UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
@@ -115,9 +116,9 @@
             
             [infoBox setViewForStoreWithCharacter:strongCharacter];
         };
-        [storeCell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
         
-        [self.view addSubview:storeCell];
+        [self.view addSubview:cell];
     }
     
     return self;

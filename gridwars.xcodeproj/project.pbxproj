@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E661A202F4000358B49 /* GWBannerViewController.m */; };
-		B8728E6B1A212F2800358B49 /* GWCharacterStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6A1A212F2800358B49 /* GWCharacterStoreViewController.m */; };
-		B8728E701A21303D00358B49 /* GWCharacterStoreCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCharacterStoreCellView.m */; };
+		B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */; };
+		B8728E701A21303D00358B49 /* GWCharacterManagerCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCharacterManagerCellView.m */; };
 		B8728E731A21320300358B49 /* GWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E721A21320300358B49 /* GWButton.m */; };
 		B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */; };
 		B8B869B91A0FF59A002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
@@ -70,10 +70,10 @@
 /* Begin PBXFileReference section */
 		B8728E651A202F4000358B49 /* GWBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBannerViewController.h; sourceTree = "<group>"; };
 		B8728E661A202F4000358B49 /* GWBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWBannerViewController.m; sourceTree = "<group>"; };
-		B8728E691A212F2800358B49 /* GWCharacterStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterStoreViewController.h; sourceTree = "<group>"; };
-		B8728E6A1A212F2800358B49 /* GWCharacterStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterStoreViewController.m; sourceTree = "<group>"; };
-		B8728E6E1A21303D00358B49 /* GWCharacterStoreCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterStoreCellView.h; sourceTree = "<group>"; };
-		B8728E6F1A21303D00358B49 /* GWCharacterStoreCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterStoreCellView.m; sourceTree = "<group>"; };
+		B8728E691A212F2800358B49 /* GWCharacterManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterManagerViewController.h; sourceTree = "<group>"; };
+		B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterManagerViewController.m; sourceTree = "<group>"; };
+		B8728E6E1A21303D00358B49 /* GWCharacterManagerCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterManagerCellView.h; sourceTree = "<group>"; };
+		B8728E6F1A21303D00358B49 /* GWCharacterManagerCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterManagerCellView.m; sourceTree = "<group>"; };
 		B8728E711A21320300358B49 /* GWButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWButton.h; sourceTree = "<group>"; };
 		B8728E721A21320300358B49 /* GWButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWButton.m; sourceTree = "<group>"; };
 		B8728E741A21428B00358B49 /* GWInfoBoxStoreCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxStoreCharacterView.h; sourceTree = "<group>"; };
@@ -190,15 +190,15 @@
 			name = Banner;
 			sourceTree = "<group>";
 		};
-		B8728E6C1A212F2D00358B49 /* CharacterStore */ = {
+		B8728E6C1A212F2D00358B49 /* CharacterManager */ = {
 			isa = PBXGroup;
 			children = (
-				B8728E691A212F2800358B49 /* GWCharacterStoreViewController.h */,
-				B8728E6A1A212F2800358B49 /* GWCharacterStoreViewController.m */,
-				B8728E6E1A21303D00358B49 /* GWCharacterStoreCellView.h */,
-				B8728E6F1A21303D00358B49 /* GWCharacterStoreCellView.m */,
+				B8728E691A212F2800358B49 /* GWCharacterManagerViewController.h */,
+				B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */,
+				B8728E6E1A21303D00358B49 /* GWCharacterManagerCellView.h */,
+				B8728E6F1A21303D00358B49 /* GWCharacterManagerCellView.m */,
 			);
-			name = CharacterStore;
+			name = CharacterManager;
 			sourceTree = "<group>";
 		};
 		B8B869AC1A0FF59A002B85F0 = {
@@ -236,7 +236,7 @@
 			children = (
 				B8B86A191A143F90002B85F0 /* Helper */,
 				B8B86A211A144785002B85F0 /* Model */,
-				B8728E6C1A212F2D00358B49 /* CharacterStore */,
+				B8728E6C1A212F2D00358B49 /* CharacterManager */,
 				B8B86A201A14476C002B85F0 /* Game */,
 				B8B869C71A0FF59A002B85F0 /* GWAppDelegate.h */,
 				B8B869C81A0FF59A002B85F0 /* GWAppDelegate.m */,
@@ -510,11 +510,11 @@
 				B8B86A111A131EE8002B85F0 /* GWGridViewController.m in Sources */,
 				B8B869C51A0FF59A002B85F0 /* main.m in Sources */,
 				B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */,
-				B8728E6B1A212F2800358B49 /* GWCharacterStoreViewController.m in Sources */,
+				B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */,
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,
 				B8B86A0E1A130E76002B85F0 /* GWGridPieceCharacter.m in Sources */,
 				B8B86A0D1A130E76002B85F0 /* GWGridPiece.m in Sources */,
-				B8728E701A21303D00358B49 /* GWCharacterStoreCellView.m in Sources */,
+				B8728E701A21303D00358B49 /* GWCharacterManagerCellView.m in Sources */,
 				B8B86A181A143E42002B85F0 /* GWCharacter.m in Sources */,
 				B8B86A251A1450A5002B85F0 /* GWInfoBoxViewController.m in Sources */,
 				B8B86A3B1A1464EA002B85F0 /* UIView+Shapes.m in Sources */,
