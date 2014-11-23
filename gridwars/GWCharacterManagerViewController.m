@@ -232,15 +232,35 @@
     options.colPerRow   = 100;
     
     if (!_deckManagerView || !_inventoryView || !_deckManagerView) {
-        _inventoryView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 50.0f, 300.0f, 100.0f) withCells:self.inventoryCellViews withOptions:options];
         
         // Create store cell views for all characters in the player's deck
-        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 160.f, 300.0f, 100.0f) withCells:(NSArray *)self.deckCellViews withOptions:options];
+        UILabel *deckTitle = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 10.0f, 0.0f, 0.0f)];
+        deckTitle.text = @"Deck";
+        [deckTitle sizeToFit];
+        
+        UIView *seperator1 = [[UIView alloc] initWithFrame:CGRectMake(0.0f, deckTitle.frame.origin.y + deckTitle.frame.size.height + 2.0f, 300.0f, 1.0f)];
+        [seperator1 setBackgroundColor:[UIColor blackColor]];
+        
+        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 50.f, 300.0f, 100.0f) withCells:(NSArray *)self.deckCellViews withOptions:options];
+        
+        // Create store cell views for all characters in the player's deck
+        UILabel *inventoryTitle = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 160.0f, 0.0f, 0.0f)];
+        inventoryTitle.text = @"Inventory";
+        [inventoryTitle sizeToFit];
+        
+        UIView *seperator2 = [[UIView alloc] initWithFrame:CGRectMake(0.0f, inventoryTitle.frame.origin.y + inventoryTitle.frame.size.height + 2.0f, 300.0f, 1.0f)];
+        [seperator2 setBackgroundColor:[UIColor blackColor]];
+        
+        _inventoryView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 200.0f, 300.0f, 100.0f) withCells:self.inventoryCellViews withOptions:options];
         
         // Add both views to _deckManagerView
         _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f)];
         [_deckManagerView addSubview:_inventoryView];
         [_deckManagerView addSubview:_deckView];
+        [_deckManagerView addSubview:deckTitle];
+        [_deckManagerView addSubview:inventoryTitle];
+        [_deckManagerView addSubview:seperator1];
+        [_deckManagerView addSubview:seperator2];
     } else {
         // Reload data if ui already exist
         _inventoryView.cells = self.inventoryCellViews;
