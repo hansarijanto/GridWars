@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DictionarySerializable.h"
 
 typedef enum {
     kGWPlayerNone,
@@ -16,17 +17,20 @@ typedef enum {
 
 @class GWCharacter;
 
-@interface GWPlayer : NSObject
+@interface GWPlayer : DictionarySerializable
 
 @property(nonatomic, readwrite) GWPlayerTeam team;
 @property(nonatomic, strong) GWCharacter *leader;
-@property(nonatomic, strong, readonly) NSArray *deck;
-@property(nonatomic, strong, readonly) NSArray *inventory;
-@property(nonatomic, strong) UIColor *teamColor;
+@property(nonatomic, strong) NSArray *deck;
+@property(nonatomic, strong) NSArray *inventory;
 
 - (void)addCharacterToInventory:(GWCharacter *)character;
 - (void)moveCharacterFromInventoryToDeck:(GWCharacter *)character;
 - (void)moveCharacterFromDeckToInventory:(GWCharacter *)character;
 - (BOOL)makeLeader:(GWCharacter *)character;
+- (UIColor *)teamColor;
+
++ (GWPlayer *)load;
+- (void)save;
 
 @end

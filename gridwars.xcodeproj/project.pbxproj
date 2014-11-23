@@ -14,6 +14,10 @@
 		B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */; };
 		B8728E831A218BBF00358B49 /* GWCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E821A218BBF00358B49 /* GWCollectionView.m */; };
 		B8728E861A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E851A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m */; };
+		B8728E901A228FC500358B49 /* DictionarySerializable.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E8E1A228FC500358B49 /* DictionarySerializable.m */; };
+		B8728E971A2295C700358B49 /* NSArray+ISO8601DateString.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E921A2295C700358B49 /* NSArray+ISO8601DateString.m */; };
+		B8728E981A2295C700358B49 /* NSDictionary+ISO8601DateString.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E941A2295C700358B49 /* NSDictionary+ISO8601DateString.m */; };
+		B8728E991A2295C700358B49 /* NSDate+Timezone.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E951A2295C700358B49 /* NSDate+Timezone.m */; };
 		B8B869B91A0FF59A002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
 		B8B869BB1A0FF59A002B85F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */; };
 		B8B869BD1A0FF59A002B85F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BC1A0FF59A002B85F0 /* UIKit.framework */; };
@@ -84,6 +88,14 @@
 		B8728E821A218BBF00358B49 /* GWCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCollectionView.m; sourceTree = "<group>"; };
 		B8728E841A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxDeckManagerCharacterView.h; sourceTree = "<group>"; };
 		B8728E851A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxDeckManagerCharacterView.m; sourceTree = "<group>"; };
+		B8728E8E1A228FC500358B49 /* DictionarySerializable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionarySerializable.m; sourceTree = "<group>"; };
+		B8728E8F1A228FC500358B49 /* DictionarySerializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionarySerializable.h; sourceTree = "<group>"; };
+		B8728E911A2295C700358B49 /* NSDate+Timezone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Timezone.h"; sourceTree = "<group>"; };
+		B8728E921A2295C700358B49 /* NSArray+ISO8601DateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ISO8601DateString.m"; sourceTree = "<group>"; };
+		B8728E931A2295C700358B49 /* NSDictionary+ISO8601DateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ISO8601DateString.h"; sourceTree = "<group>"; };
+		B8728E941A2295C700358B49 /* NSDictionary+ISO8601DateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ISO8601DateString.m"; sourceTree = "<group>"; };
+		B8728E951A2295C700358B49 /* NSDate+Timezone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Timezone.m"; sourceTree = "<group>"; };
+		B8728E961A2295C700358B49 /* NSArray+ISO8601DateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ISO8601DateString.h"; sourceTree = "<group>"; };
 		B8B869B51A0FF59A002B85F0 /* gridwars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gridwars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -324,10 +336,18 @@
 		B8B86A191A143F90002B85F0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B8728E911A2295C700358B49 /* NSDate+Timezone.h */,
+				B8728E951A2295C700358B49 /* NSDate+Timezone.m */,
+				B8728E961A2295C700358B49 /* NSArray+ISO8601DateString.h */,
+				B8728E921A2295C700358B49 /* NSArray+ISO8601DateString.m */,
+				B8728E931A2295C700358B49 /* NSDictionary+ISO8601DateString.h */,
+				B8728E941A2295C700358B49 /* NSDictionary+ISO8601DateString.m */,
+				B8728E8F1A228FC500358B49 /* DictionarySerializable.h */,
+				B8728E8E1A228FC500358B49 /* DictionarySerializable.m */,
 				B8728E711A21320300358B49 /* GWButton.h */,
 				B8728E721A21320300358B49 /* GWButton.m */,
-				B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */,
 				B8B86A751A1B06C1002B85F0 /* NSObject+KVOBlocks.h */,
+				B8B86A741A1B06C1002B85F0 /* NSObject+KVOBlocks.m */,
 				B8B86A051A100E0D002B85F0 /* UIButton+Block.h */,
 				B8B86A031A100E0D002B85F0 /* UIButton+Block.m */,
 				B8B86A061A100E0D002B85F0 /* UIScreen+Rotation.h */,
@@ -501,6 +521,7 @@
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
 				B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */,
 				B8B869F21A0FF8AD002B85F0 /* GWGrid.m in Sources */,
+				B8728E901A228FC500358B49 /* DictionarySerializable.m in Sources */,
 				B8B86A661A193E28002B85F0 /* GWInfoBoxGridCharacterView.m in Sources */,
 				B8B86A4D1A1484FA002B85F0 /* GWGridPieceCharacterView.m in Sources */,
 				B8B86A071A100E0D002B85F0 /* UIButton+Block.m in Sources */,
@@ -524,11 +545,14 @@
 				B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */,
 				B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */,
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,
+				B8728E991A2295C700358B49 /* NSDate+Timezone.m in Sources */,
 				B8B86A0E1A130E76002B85F0 /* GWGridPieceCharacter.m in Sources */,
 				B8B86A0D1A130E76002B85F0 /* GWGridPiece.m in Sources */,
+				B8728E981A2295C700358B49 /* NSDictionary+ISO8601DateString.m in Sources */,
 				B8728E701A21303D00358B49 /* GWCollectionCellView.m in Sources */,
 				B8B86A181A143E42002B85F0 /* GWCharacter.m in Sources */,
 				B8B86A251A1450A5002B85F0 /* GWInfoBoxViewController.m in Sources */,
+				B8728E971A2295C700358B49 /* NSArray+ISO8601DateString.m in Sources */,
 				B8B86A3B1A1464EA002B85F0 /* UIView+Shapes.m in Sources */,
 				B8B86A631A193AF5002B85F0 /* GWGridResponse.m in Sources */,
 				B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */,

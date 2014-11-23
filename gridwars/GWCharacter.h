@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DictionarySerializable.h"
 
 typedef enum {
     kGWAreaTypePoint,
@@ -33,7 +34,7 @@ typedef enum {
 
 @class GWPlayer;
 
-@interface GWCharacter : NSObject
+@interface GWCharacter : DictionarySerializable
 
 - (instancetype)initWithType:(GWCharacterType)type;
 
@@ -43,19 +44,18 @@ typedef enum {
 - (NSString *)characterClass;
 + (NSArray *)getAllPossibleCharacters;
 
-@property(nonatomic, readonly) GWCharacterType type;
-@property(nonatomic, readonly) GWAreaType moveType;
-@property(nonatomic, readonly) GWAreaType summonType;
-@property(nonatomic, readonly) GWAreaType territoryType;
-@property(nonatomic, readonly) GWAreaType attackType;
-@property(nonatomic, readonly) NSUInteger actions; // Number of moves left
-@property(nonatomic, readonly) NSUInteger maxActions; // Number of moves (for moving and attacking)
-@property(nonatomic, readonly) NSInteger health;
-@property(nonatomic, readonly) NSInteger maxHealth;
-@property(nonatomic, readonly) NSInteger attack;
-@property(nonatomic, strong, readonly) NSString *characterClass;
-@property(nonatomic, strong, readonly) NSString *image;
-@property(nonatomic, strong, readonly) NSUUID *uuid;
+@property(nonatomic, assign) GWCharacterType type;
+@property(nonatomic, assign) GWAreaType moveType;
+@property(nonatomic, assign) GWAreaType summonType;
+@property(nonatomic, assign) GWAreaType territoryType;
+@property(nonatomic, assign) GWAreaType attackType;
+@property(nonatomic, assign) NSUInteger actions; // Number of moves left
+@property(nonatomic, assign) NSUInteger maxActions; // Number of moves (for moving and attacking)
+@property(nonatomic, assign) NSInteger health;
+@property(nonatomic, assign) NSInteger maxHealth;
+@property(nonatomic, assign) NSInteger attack;
+@property(nonatomic, strong) NSString *characterClass;
+@property(nonatomic, strong) NSString *image;
 @property(nonatomic, strong) GWPlayer *owner;
 
 @end

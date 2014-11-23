@@ -41,7 +41,8 @@
     [grid gridWithNumHorTiles:8 withNumVertTile:9];
     
     // Create main player
-    GWPlayer *player = [[GWPlayer alloc] init];
+    GWPlayer *player = [GWPlayer load];
+    if (!player) player = [[GWPlayer alloc] init];
     player.team = kGWPlayerRed;
     
     // Create enemy

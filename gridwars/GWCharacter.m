@@ -15,7 +15,6 @@
     self = [super init];
     if (!self) return nil;
     
-    _uuid = [NSUUID UUID];
     _type = type;
     
     switch (_type) {
@@ -151,6 +150,14 @@
         [characters addObject:character];
     }
     return (NSArray *)characters;
+}
+
+#pragma mark - dictionary serializable
+
+- (NSDictionary *)dictionaryValue {
+    NSMutableDictionary *dict = (NSMutableDictionary*)[super dictionaryValue];
+    [dict removeObjectForKey:@"owner"];
+    return dict;
 }
 
 @end
