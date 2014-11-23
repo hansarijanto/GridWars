@@ -15,12 +15,17 @@
     self = [super init];
     if (!self) return nil;
     
+    _deck = [[NSArray alloc] init];
+    _characters = [[NSArray alloc] init];
+    
     return self;
 }
 
 - (void)addCharacter:(GWCharacter *)character {
     character.owner = self;
-    [((NSMutableArray *)_characters) addObject:character];
+    NSMutableArray *characters = [_characters mutableCopy];
+    [characters addObject:character];
+    _characters = (NSArray *)characters;
 }
 
 - (UIColor *)teamColor {

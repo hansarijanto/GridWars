@@ -14,6 +14,7 @@
 #import "GWBannerViewController.h"
 #import "GWCollectionView.h"
 #import "UIButton+Block.h"
+#import "GWButton.h"
 
 @interface GWCharacterManagerViewController ()
 
@@ -24,8 +25,9 @@
 @implementation GWCharacterManagerViewController {
     GWPlayer *_player;
     GWInfoBoxViewController *_infoBoxController;
-    GWCollectionView *_storeView;
-    GWCollectionView *_deckView;
+    UIView *_storeView;
+    UIView *_deckView;
+    GWButton *_switchButton;
 }
 
 - (instancetype)initWithPlayer:(GWPlayer *)player {
@@ -38,10 +40,9 @@
     
     // Create banner controller
     _bannerController = [[GWBannerViewController alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.5f)];
-    [_bannerController setTitleWithAnimation:@"Character Store" withColor:[UIColor whiteColor]];
     
     // Create main view
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 400.0f)];
+    _mainView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
@@ -54,6 +55,9 @@
     [self.view addSubview:_bannerController.view];
     [self.view addSubview:_mainView];
     
+    _switchButton = [[GWButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 50.0f, 30.0f)];
+    [_bannerController.view addSubview:_switchButton];
+    
     [self setViewForCharacterStore];
     
     return self;
@@ -64,46 +68,30 @@
 - (void)setViewForDeckManager {
     
     if (!_deckView) {
-        _deckView = [[UIView alloc] initWithFrame:_mainView.frame];
         
-        CGFloat horCellSpacing  = 10.0f;
-        CGFloat vertCellSpacing = 10.0f;
-        CGFloat cellWidth  = 67.5f;
-        CGFloat cellHeight = 100.0f;
+        struct CollectionViewOptions options;
+        options.horSpacing = 10.0f;
+        options.vertSpacing = 10.0f;
+        options.cellWidth = 67.5f;
+        options.cellHeight = 100.0f;
+        options.colPerRow = 100;
+        
+        NSMutableArray *cellViews = [[NSMutableArray alloc] init];
         
         // Create store cell views for all possible characters
-        NSArray *characters = [GWCharacter getAllPossibleCharacters];
+        NSArray *characters = _player.characters;
         for (int i=0; i<[characters count]; ++i) {
             GWCharacter *character = characters[i];
             
-            // 4 cols per row
-            int row = i / 4;
-            int col = i % 4;
-            
-            GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectMake(col * (horCellSpacing + cellWidth), row * (cellHeight + vertCellSpacing), cellWidth, cellHeight) withCharacter:character];
+            GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
             
             __weak GWCharacter *weakCharacter = character;
             __weak GWPlayer *weakPlayer = _player;
             __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
             
             // Add character to player when bought
-            UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
-                GWCharacter *strongCharacter = weakCharacter;
-                GWPlayer *strongPlayer = weakPlayer;
-                GWInfoBoxViewController *infoBox = weakInfoBox;
-                
-                [strongPlayer addCharacter:strongCharacter];
-                [infoBox setViewForStoreWithCharacter:strongCharacter];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
-                                                                message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            };
-            
-            [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
-            [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
+            cell.button.userInteractionEnabled = NO;
+            [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
             
             // Show character info when store cell is pressed
             UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
@@ -114,10 +102,17 @@
             };
             [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
             
-            [_deckView addSubview:cell];
+            [cellViews addObject:cell];
         }
+        
+        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 100.0f) withCells:(NSArray *)cellViews withOptions:options];
     }
     
+    [_switchButton setTitle:@"Store" forState:UIControlStateNormal];
+    [_switchButton removeTarget:self action:@selector(setViewForDeckManager) forControlEvents:UIControlEventTouchUpInside];
+    [_switchButton addTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_bannerController setTitleWithAnimation:@"Deck Manager" withColor:[UIColor whiteColor]];
     self.mainView = _deckView;
 }
 
@@ -179,9 +174,14 @@
             [cellViews addObject:cell];
         }
         
-        _storeView = [[GWCollectionView alloc] initWithFrame:_mainView.frame withCells:(NSArray *)cellViews withOptions:options];
+        _storeView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f) withCells:(NSArray *)cellViews withOptions:options];
     }
     
+    [_switchButton setTitle:@"Deck" forState:UIControlStateNormal];
+    [_switchButton removeTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
+    [_switchButton addTarget:self action:@selector(setViewForDeckManager) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_bannerController setTitleWithAnimation:@"Character Store" withColor:[UIColor whiteColor]];
     self.mainView = _storeView;
 }
 

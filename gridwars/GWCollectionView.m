@@ -19,6 +19,9 @@
     self = [super initWithFrame:frame];
     if (!self) return nil;
     
+    int totalCol = options.colPerRow;
+    if ([cells count] < totalCol) totalCol = [cells count];
+    
     CGFloat width = options.colPerRow * options.cellWidth + (options.colPerRow - 1) * options.horSpacing;
     CGFloat height = ([cells count] / options.colPerRow) * options.cellHeight + (([cells count] / options.colPerRow) - 1) * options.vertSpacing;
     
