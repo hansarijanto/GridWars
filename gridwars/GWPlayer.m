@@ -166,6 +166,16 @@
     return dict;
 }
 
++ (GWPlayer *)dummy {
+    GWPlayer *player = [[GWPlayer alloc] init];
+    GWCharacter *warrior = [[GWCharacter alloc] initWithType:kGWCharacterTypeWarrior];
+    warrior.owner = player;
+    player.deck = @[warrior];
+    player.leader = warrior;
+    
+    return player;
+}
+
 + (GWPlayer *)load {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSDictionary *userDict = [ud objectForKey: @"User"];

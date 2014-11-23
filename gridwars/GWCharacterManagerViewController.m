@@ -8,6 +8,7 @@
 
 #import "GWCharacterManagerViewController.h"
 #import "GWInfoBoxViewController.h"
+#import "GWAppDelegate.h"
 #import "GWPlayer.h"
 #import "GWCharacter.h"
 #import "GWCollectionCellView.h"
@@ -27,6 +28,7 @@
     GWPlayer *_player;
     GWInfoBoxViewController *_infoBoxController;
     GWButton *_switchButton;
+    GWButton *_playButton;
     GWCollectionView *_storeView; // main view for character store
     UIView *_deckManagerView; // main view for deck manager
     GWCollectionView *_deckView; // subview for deck manager
@@ -60,6 +62,11 @@
     
     _switchButton = [[GWButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 50.0f, 30.0f)];
     [_bannerController.view addSubview:_switchButton];
+    
+    _playButton = [[GWButton alloc] initWithFrame:CGRectMake(300.0f - 60.0f, 10.0f, 50.0f, 30.0f)];
+    [_playButton setTitle:@"Play" forState:UIControlStateNormal];
+    [_playButton addTarget:[GWAppDelegate rootViewController] action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
+    [_bannerController.view addSubview:_playButton];
     
     [self setViewForCharacterStore];
     

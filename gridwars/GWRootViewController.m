@@ -35,26 +35,12 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     }
     
-    // Create grid
-    GWGrid *grid = [[GWGrid alloc] init];
-    grid.tileSize = CGSizeMake(37.5f, 37.5f);
-    [grid gridWithNumHorTiles:8 withNumVertTile:9];
-    
     // Create main player
     GWPlayer *player = [GWPlayer load];
     if (!player) player = [[GWPlayer alloc] init];
-    player.team = kGWPlayerRed;
+    _currentPlayer = player;
     
-    // Create enemy
-    GWPlayer *enemy = [[GWPlayer alloc] init];
-    enemy.team = kGWPlayerBlue;
-    
-    // Create game view controller
-//    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];
-//    [self addChildViewController:game];
-//    [self.view addSubview:game.view];
-    
-    GWCharacterManagerViewController *characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:player];
+    GWCharacterManagerViewController *characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:_currentPlayer];
     [self changeMainController:characterManager];
     
 }
@@ -69,6 +55,23 @@
     _mainController = controller;
     [self addChildViewController:_mainController];
     [self.view addSubview:_mainController.view];
+}
+
+- (void)play {
+    // Create grid
+    GWGrid *grid = [[GWGrid alloc] init];
+    grid.tileSize = CGSizeMake(37.5f, 37.5f);
+    [grid gridWithNumHorTiles:8 withNumVertTile:9];
+    
+    _currentPlayer.team = kGWPlayerRed;
+    
+    // Create enemy
+    GWPlayer *enemy = [GWPlayer dummy];
+    enemy.team = kGWPlayerBlue;
+    
+    // Create game view controller
+    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:_currentPlayer withEnemy:enemy withGrid:grid];
+    [self changeMainController:game];
 }
 
 - (void)didReceiveMemoryWarning

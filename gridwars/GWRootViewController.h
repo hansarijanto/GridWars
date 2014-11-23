@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class GWPlayer;
+
 @interface GWRootViewController : UIViewController
+
+@property(nonatomic, strong)GWPlayer *currentPlayer;
+
+- (void)play; // start a game
 
 @end

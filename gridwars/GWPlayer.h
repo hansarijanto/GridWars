@@ -29,6 +29,7 @@ typedef enum {
 - (void)moveCharacterFromDeckToInventory:(GWCharacter *)character;
 - (BOOL)makeLeader:(GWCharacter *)character;
 - (UIColor *)teamColor;
++ (GWPlayer *)dummy;
 
 + (GWPlayer *)load;
 - (void)save;
