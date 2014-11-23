@@ -16,7 +16,7 @@
     if (!self) return nil;
     
     _deck = [[NSArray alloc] init];
-    _characters = [[NSArray alloc] init];
+    _inventory = [[NSArray alloc] init];
     
     return self;
 }
@@ -40,17 +40,17 @@
 
 #pragma mark - moving characters from deck to from characters
 
-- (void)addCharacterToCharacters:(GWCharacter *)character {
+- (void)addCharacterToInventory:(GWCharacter *)character {
     character.owner = self;
-    NSMutableArray *characters = [_characters mutableCopy];
+    NSMutableArray *characters = [_inventory mutableCopy];
     [characters addObject:character];
-    _characters = (NSArray *)characters;
+    _inventory = (NSArray *)characters;
 }
 
-- (void)removeCharacterFromCharacters:(GWCharacter *)character {
-    NSMutableArray *characters = [_characters mutableCopy];
+- (void)removeCharacterFromInventory:(GWCharacter *)character {
+    NSMutableArray *characters = [_inventory mutableCopy];
     [characters removeObject:character];
-    _characters = (NSArray *)characters;
+    _inventory = (NSArray *)characters;
 }
 
 - (void)addCharacterToDeck:(GWCharacter *)character {
@@ -65,21 +65,21 @@
     _deck = (NSArray *)deck;
 }
 
-- (void)moveCharacterFromCharactersToDeck:(GWCharacter *)character {
-    for (GWCharacter *ownedCharacter in _characters) {
+- (void)moveCharacterFromInventoryToDeck:(GWCharacter *)character {
+    for (GWCharacter *ownedCharacter in _inventory) {
         if ([ownedCharacter.uuid.UUIDString isEqualToString:character.uuid.UUIDString]) {
-            [self removeCharacterFromCharacters:character];
+            [self removeCharacterFromInventory:character];
             [self addCharacterToDeck:character];
             return;
         }
     }
 }
 
-- (void)moveCharacterFromDeckToCharacters:(GWCharacter *)character {
+- (void)moveCharacterFromDeckToInventory:(GWCharacter *)character {
     for (GWCharacter *deckCharacter in _deck) {
         if ([deckCharacter.uuid.UUIDString isEqualToString:character.uuid.UUIDString]) {
             [self removeCharacterFromDeck:character];
-            [self addCharacterToCharacters:character];
+            [self addCharacterToInventory:character];
             return;
         }
     }

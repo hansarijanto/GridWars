@@ -29,7 +29,7 @@
     GWCollectionView *_storeView; // main view for character store
     UIView *_deckManagerView; // main view for deck manager
     GWCollectionView *_deckView; // subview for deck manager
-    GWCollectionView *_charactersView; // subview for deck manager
+    GWCollectionView *_inventoryView; // subview for deck manager
 }
 
 - (instancetype)initWithPlayer:(GWPlayer *)player {
@@ -97,11 +97,11 @@
             GWPlayer *strongPlayer = weakPlayer;
             GWInfoBoxViewController *infoBox = weakInfoBox;
             
-            [strongPlayer moveCharacterFromDeckToCharacters:strongCharacter];
+            [strongPlayer moveCharacterFromDeckToInventory:strongCharacter];
             [infoBox setViewForStoreWithCharacter:strongCharacter];
             
             // reload data/ui
-            _charactersView.cells = self.characterCellViews;
+            _inventoryView.cells = self.inventoryCellViews;
             _deckView.cells = self.deckCellViews;
         };
         
@@ -126,10 +126,10 @@
 }
 
 // an array of collection cell view for each character a player own not in his deck
-- (NSArray *)characterCellViews {
+- (NSArray *)inventoryCellViews {
     // Create store cell views for all characters the player has but is not in their deck
     NSMutableArray *characterCellViews = [[NSMutableArray alloc] init];
-    NSArray *characters = _player.characters;
+    NSArray *characters = _player.inventory;
     for (int i=0; i<[characters count]; ++i) {
         GWCharacter *character = characters[i];
         
@@ -145,11 +145,11 @@
             GWPlayer *strongPlayer = weakPlayer;
             GWInfoBoxViewController *infoBox = weakInfoBox;
             
-            [strongPlayer moveCharacterFromCharactersToDeck:strongCharacter];
+            [strongPlayer moveCharacterFromInventoryToDeck:strongCharacter];
             [infoBox setViewForStoreWithCharacter:strongCharacter];
             
             // reload data/ui
-            _charactersView.cells = self.characterCellViews;
+            _inventoryView.cells = self.inventoryCellViews;
             _deckView.cells = self.deckCellViews;
         };
         
@@ -194,7 +194,7 @@
             GWPlayer *strongPlayer = weakPlayer;
             GWInfoBoxViewController *infoBox = weakInfoBox;
             
-            [strongPlayer addCharacterToCharacters:strongCharacter];
+            [strongPlayer addCharacterToInventory:strongCharacter];
             [infoBox setViewForStoreWithCharacter:strongCharacter];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
                                                             message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
@@ -231,19 +231,19 @@
     options.cellHeight  = 100.0f;
     options.colPerRow   = 100;
     
-    if (!_deckManagerView || !_charactersView || !_deckManagerView) {
-        _charactersView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, 100.0f) withCells:self.characterCellViews withOptions:options];
+    if (!_deckManagerView || !_inventoryView || !_deckManagerView) {
+        _inventoryView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 50.0f, 300.0f, 100.0f) withCells:self.inventoryCellViews withOptions:options];
         
         // Create store cell views for all characters in the player's deck
-        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 110.f, 300.0f, 100.0f) withCells:(NSArray *)self.deckCellViews withOptions:options];
+        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 160.f, 300.0f, 100.0f) withCells:(NSArray *)self.deckCellViews withOptions:options];
         
         // Add both views to _deckManagerView
         _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f)];
-        [_deckManagerView addSubview:_charactersView];
+        [_deckManagerView addSubview:_inventoryView];
         [_deckManagerView addSubview:_deckView];
     } else {
         // Reload data if ui already exist
-        _charactersView.cells = self.characterCellViews;
+        _inventoryView.cells = self.inventoryCellViews;
         _deckView.cells = self.deckCellViews;
     }
     

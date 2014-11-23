@@ -21,11 +21,11 @@ typedef enum {
 @property(nonatomic, readwrite) GWPlayerTeam team;
 @property(nonatomic, readonly) GWCharacter *leader;
 @property(nonatomic, readonly) NSArray *deck;
-@property(nonatomic, readonly) NSArray *characters;
+@property(nonatomic, readonly) NSArray *inventory;
 @property(nonatomic, strong) UIColor *teamColor;
 
-- (void)addCharacterToCharacters:(GWCharacter *)character;
-- (void)moveCharacterFromCharactersToDeck:(GWCharacter *)character;
-- (void)moveCharacterFromDeckToCharacters:(GWCharacter *)character;
+- (void)addCharacterToInventory:(GWCharacter *)character;
+- (void)moveCharacterFromInventoryToDeck:(GWCharacter *)character;
+- (void)moveCharacterFromDeckToInventory:(GWCharacter *)character;
 
 @end
