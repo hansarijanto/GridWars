@@ -11,9 +11,12 @@
 #import "GWPlayer.h"
 #import "GWCharacter.h"
 #import "GWCharacterStoreCellView.h"
+#import "GWBannerViewController.h"
 #import "UIButton+Block.h"
 
 @interface GWCharacterStoreViewController ()
+
+@property(nonatomic, strong)GWBannerViewController *bannerController;
 
 @end
 
@@ -36,7 +39,7 @@
     
     _player = player;
     
-    _vertOffset = 10.0f;
+    _vertOffset = 67.5f;
     _horOffset  = 10.0f;
     _horCellSpacing  = 10.0f;
     _vertCellSpacing = 10.0f;
@@ -59,9 +62,19 @@
     [characters addObject:archer];
     [characters addObject:mage];
     
+    // Create banner controller
+    _bannerController = [[GWBannerViewController alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.5f)];
+    [_bannerController setTitleWithAnimation:@"Character Store" withColor:[UIColor whiteColor]];
+    
+    // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
+    
+    // Add child view controllers
     [self addChildViewController:_infoBoxController];
+    [self addChildViewController:_bannerController];
+    
     [self.view addSubview:_infoBoxController.view];
+    [self.view addSubview:_bannerController.view];
     
     // Create store cell views
     for (int i=0; i<[characters count]; ++i) {
