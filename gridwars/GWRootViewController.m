@@ -24,6 +24,8 @@
 {
     [super viewDidLoad];
 
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
     // Hiding status bar
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         // iOS 7
