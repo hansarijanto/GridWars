@@ -38,6 +38,15 @@
     return [UIColor clearColor];
 }
 
+- (void)makeLeader:(GWCharacter *)character {
+    for (GWCharacter *deckCharacter in _deck) {
+        if (deckCharacter == character) {
+            _leader = character;
+            return;
+        }
+    }
+}
+
 #pragma mark - moving characters from deck to from characters
 
 - (void)addCharacterToInventory:(GWCharacter *)character {
@@ -67,7 +76,7 @@
 
 - (void)moveCharacterFromInventoryToDeck:(GWCharacter *)character {
     for (GWCharacter *ownedCharacter in _inventory) {
-        if ([ownedCharacter.uuid.UUIDString isEqualToString:character.uuid.UUIDString]) {
+        if (ownedCharacter == character) {
             [self removeCharacterFromInventory:character];
             [self addCharacterToDeck:character];
             return;
@@ -77,7 +86,7 @@
 
 - (void)moveCharacterFromDeckToInventory:(GWCharacter *)character {
     for (GWCharacter *deckCharacter in _deck) {
-        if ([deckCharacter.uuid.UUIDString isEqualToString:character.uuid.UUIDString]) {
+        if (deckCharacter == character) {
             [self removeCharacterFromDeck:character];
             [self addCharacterToInventory:character];
             return;

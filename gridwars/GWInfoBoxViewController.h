@@ -17,7 +17,7 @@
 @interface GWInfoBoxViewController : UIViewController
 
 @property(nonatomic, strong)GWInfoBoxView *infoBoxView;
-@property(nonatomic, readonly)UIButton *centralButton; // Button at bottom center of info box, by default its hidden
+@property(nonatomic, readonly)UIButton *button; // Button at bottom center of info box, by default its hidden
 
 - (instancetype)initWithFrame:(CGRect)frame;
 - (void)clearView;

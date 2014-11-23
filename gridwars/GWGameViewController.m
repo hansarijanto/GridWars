@@ -250,9 +250,9 @@
         [strong.infoBoxController clearView];
         [strong endTurn];
     };
-    _infoBoxController.centralButton.hidden = NO;
-    [_infoBoxController.centralButton setTitle:@"End Turn" forState:UIControlStateNormal];
-    [_infoBoxController.centralButton addTarget:self withBlock:endTurnBlock forControlEvents:UIControlEventTouchUpInside];
+    _infoBoxController.button.hidden = NO;
+    [_infoBoxController.button setTitle:@"End Turn" forState:UIControlStateNormal];
+    [_infoBoxController.button addTarget:self withBlock:endTurnBlock forControlEvents:UIControlEventTouchUpInside];
     
     // Add child controllers
     [self addChildViewController:_gridController];

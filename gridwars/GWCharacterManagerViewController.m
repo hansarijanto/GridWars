@@ -86,6 +86,9 @@
         GWCharacter *character = characters[i];
         
         GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
+        if (_player.leader == character) {
+            [cell setBackgroundColor:[UIColor redColor]];
+        }
         
         __weak GWCharacter *weakCharacter = character;
         __weak GWPlayer *weakPlayer = _player;
@@ -116,6 +119,24 @@
             GWCharacter *strongCharacter = weakCharacter;
             
             [infoBox setViewForStoreWithCharacter:strongCharacter];
+            infoBox.button.hidden = NO;
+            [infoBox.button setTitle:@"Leader" forState:UIControlStateNormal];
+            UIButtonBlock leaderButtonBlock = ^(id sender, UIEvent *event) {
+                GWCharacter *strongCharacter = weakCharacter;
+                GWPlayer *strongPlayer = weakPlayer;
+                [strongPlayer makeLeader:strongCharacter];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leader!"
+                                                                message:[NSString stringWithFormat:@"%@ is now the leader of your team", strongCharacter.characterClass]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                
+                // Reload ui
+                _deckView.cells = self.deckCellViews;
+            };
+            [infoBox.button addTarget:self withBlock:leaderButtonBlock forControlEvents:UIControlEventTouchUpInside];
         };
         [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
         

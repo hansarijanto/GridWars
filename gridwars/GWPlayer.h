@@ -27,5 +27,6 @@ typedef enum {
 - (void)addCharacterToInventory:(GWCharacter *)character;
 - (void)moveCharacterFromInventoryToDeck:(GWCharacter *)character;
 - (void)moveCharacterFromDeckToInventory:(GWCharacter *)character;
+- (void)makeLeader:(GWCharacter *)character;
 
 @end
