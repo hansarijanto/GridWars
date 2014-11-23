@@ -24,6 +24,7 @@
     [self setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f]];
     self.layer.cornerRadius  = 10.0f;
     self.layer.masksToBounds = YES;
+    self.showsTouchWhenHighlighted = YES;
     
     _playerSprite = [[UIImageView alloc] initWithFrame:CGRectZero];
     _playerSprite.image = [UIImage imageNamed:character.image];
