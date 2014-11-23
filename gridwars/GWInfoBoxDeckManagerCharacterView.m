@@ -48,7 +48,8 @@
         [self addSubview:_actionsLabel];
         
         _leaderButton = [[GWButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
-        [_leaderButton setTitle:@"Leader" forState:UIControlStateNormal];
+        _leaderButton.titleLabel.font = [UIFont systemFontOfSize:10.0f];
+        [_leaderButton setTitle:@"Make Leader" forState:UIControlStateNormal];
         [self addSubview:_leaderButton];
     }
     return self;

@@ -105,7 +105,7 @@
             if (strongPlayer.leader == strongCharacter) strongPlayer.leader = nil;
             
             [strongPlayer moveCharacterFromDeckToInventory:strongCharacter];
-            [infoBox setViewForStoreWithCharacter:strongCharacter];
+            [infoBox clearView];
             
             // reload data/ui
             _inventoryView.cells = self.inventoryCellViews;
@@ -178,7 +178,7 @@
             GWInfoBoxViewController *infoBox = weakInfoBox;
             
             [strongPlayer moveCharacterFromInventoryToDeck:strongCharacter];
-            [infoBox setViewForStoreWithCharacter:strongCharacter];
+            [infoBox clearView];
             
             // reload data/ui
             _inventoryView.cells = self.inventoryCellViews;
