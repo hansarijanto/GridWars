@@ -56,34 +56,8 @@
         
         if (tile.hidden) return;
         
-        GWGrid *grid = strong.gridController.grid;
         
-        if (grid.state == kGWGridStateAction) {
-            
-            [strong.infoBoxController clearView];
-            
-            switch (tile.state) {
-                    // Move destination
-                case kGWTileStateSelectableAsMovingDestination:
-                    // Update tile ui
-                    [strong.gridController moveToCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
-                    break;
-                    // Cancel moving (on character re-tap)
-                case kGWTileStateSelectableForCancel:
-                    // Exit function after cancelling
-                    [strong.gridController cancelAction];
-                    return;
-                case kGWTileStateSelectableAsAttack:
-                    [strong.gridController attackCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
-                    break;
-                default:
-                    // Tapping on an empty tile or player character
-                    [strong.gridController cancelAction];
-                    break;
-            }
-        }
-        
-        // Initiate moving if tile can do so and if tile is not busy
+        // Update info box ui
         GWGridPieceCharacter *characterPiece = tile.characterPiece;
         if (characterPiece) {
             
@@ -99,13 +73,46 @@
             
             [strong.infoBoxController setViewForGridWithCharacterPiece:characterPiece withClaimBlock:claimBlock withPlayer:strong.activePlayer];
             [strong.infoBoxController setRotateButtonHidden:YES];
-            
-            if (tile.state == kGWTileStateIdle) {
-                GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
-                if (!response.success) {
-                    [strong.infoBoxController setErrorMessage:response.message];
+        }
+
+        // Grid logic selection
+        GWGrid *grid = strong.gridController.grid;
+        
+        switch (grid.state) {
+            case kGWGridStateAction:
+                [strong.infoBoxController clearView];
+                
+                switch (tile.state) {
+                        // Move destination
+                    case kGWTileStateSelectableAsMovingDestination:
+                        // Update tile ui
+                        [strong.gridController moveToCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+                        break;
+                        // Cancel moving (on character re-tap)
+                    case kGWTileStateSelectableForCancel:
+                        // Exit function after cancelling
+                        [strong.gridController cancelAction];
+                        return;
+                    case kGWTileStateSelectableAsAttack:
+                        [strong.gridController attackCoordinate:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col]];
+                        break;
+                    default:
+                        // Tapping on an empty tile or player character
+                        [strong.gridController cancelAction];
+                        break;
                 }
-            }
+                break;
+                
+            case kGWGridStateIdle:
+                if (characterPiece) {
+                    GWGridResponse *response = [strong.gridController initiateActionAtCoordinates:[[GWGridCoordinate alloc] initWithRow:tile.row withCol:tile.col] withPlayer:strong.activePlayer];
+                    if (!response.success) {
+                        [strong.infoBoxController setErrorMessage:response.message];
+                    }
+                }
+                
+            default:
+                break;
         }
     };
     
