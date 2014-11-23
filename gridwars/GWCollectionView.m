@@ -22,8 +22,15 @@
     int totalCol = options.colPerRow;
     if ([cells count] < totalCol) totalCol = [cells count];
     
-    CGFloat width = options.colPerRow * options.cellWidth + (options.colPerRow - 1) * options.horSpacing;
-    CGFloat height = ([cells count] / options.colPerRow) * options.cellHeight + (([cells count] / options.colPerRow) - 1) * options.vertSpacing;
+    int totalRow = (([cells count] - 1) / options.colPerRow) + 1;
+    
+    CGFloat width;
+    if (totalCol > 0) width = totalCol * options.cellWidth + (totalCol - 1) * options.horSpacing;
+    else width = 0.0f;
+
+    CGFloat height;
+    if (totalRow > 0) height = totalRow * options.cellHeight + (totalRow - 1) * options.vertSpacing;
+    else height = 0.0f;
     
     self.contentSize = CGSizeMake(width, height);
     

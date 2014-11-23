@@ -21,12 +21,7 @@
     return self;
 }
 
-- (void)addCharacter:(GWCharacter *)character {
-    character.owner = self;
-    NSMutableArray *characters = [_characters mutableCopy];
-    [characters addObject:character];
-    _characters = (NSArray *)characters;
-}
+#pragma mark - setter/getter
 
 - (UIColor *)teamColor {
     switch (_team) {
@@ -41,6 +36,53 @@
     }
     
     return [UIColor clearColor];
+}
+
+#pragma mark - moving characters from deck to from characters
+
+- (void)addCharacterToCharacters:(GWCharacter *)character {
+    character.owner = self;
+    NSMutableArray *characters = [_characters mutableCopy];
+    [characters addObject:character];
+    _characters = (NSArray *)characters;
+}
+
+- (void)removeCharacterFromCharacters:(GWCharacter *)character {
+    NSMutableArray *characters = [_characters mutableCopy];
+    [characters removeObject:character];
+    _characters = (NSArray *)characters;
+}
+
+- (void)addCharacterToDeck:(GWCharacter *)character {
+    NSMutableArray *deck = [_deck mutableCopy];
+    [deck addObject:character];
+    _deck = (NSArray *)deck;
+}
+
+- (void)removeCharacterFromDeck:(GWCharacter *)character {
+    NSMutableArray *deck = [_deck mutableCopy];
+    [deck removeObject:character];
+    _deck = (NSArray *)deck;
+}
+
+- (void)moveCharacterFromCharactersToDeck:(GWCharacter *)character {
+    for (GWCharacter *ownedCharacter in _characters) {
+        if ([ownedCharacter.uuid.UUIDString isEqualToString:character.uuid.UUIDString]) {
+            [self removeCharacterFromCharacters:character];
+            [self addCharacterToDeck:character];
+            return;
+        }
+    }
+}
+
+- (void)moveCharacterFromDeckToCharacters:(GWCharacter *)character {
+    for (GWCharacter *deckCharacter in _deck) {
+        if ([deckCharacter.uuid.UUIDString isEqualToString:character.uuid.UUIDString]) {
+            [self removeCharacterFromDeck:character];
+            [self addCharacterToCharacters:character];
+            return;
+        }
+    }
 }
 
 @end

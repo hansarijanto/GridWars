@@ -24,6 +24,8 @@ typedef enum {
 @property(nonatomic, readonly) NSArray *characters;
 @property(nonatomic, strong) UIColor *teamColor;
 
-- (void)addCharacter:(GWCharacter *)character;
+- (void)addCharacterToCharacters:(GWCharacter *)character;
+- (void)moveCharacterFromCharactersToDeck:(GWCharacter *)character;
+- (void)moveCharacterFromDeckToCharacters:(GWCharacter *)character;
 
 @end

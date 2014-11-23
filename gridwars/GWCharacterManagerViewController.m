@@ -26,7 +26,7 @@
     GWPlayer *_player;
     GWInfoBoxViewController *_infoBoxController;
     UIView *_storeView;
-    UIView *_deckView;
+    UIView *_deckManagerView;
     GWButton *_switchButton;
 }
 
@@ -74,10 +74,10 @@
     options.cellHeight = 100.0f;
     options.colPerRow = 100;
     
-    NSMutableArray *cellViews = [[NSMutableArray alloc] init];
-    
-    // Create store cell views for all possible characters
+    // Create store cell views for all characters the player has but is not in their deck
+    NSMutableArray *characterCellViews = [[NSMutableArray alloc] init];
     NSArray *characters = _player.characters;
+    UIView *charactersView;
     for (int i=0; i<[characters count]; ++i) {
         GWCharacter *character = characters[i];
         
@@ -88,9 +88,25 @@
         __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
         
         // Add character to player when bought
-        cell.button.userInteractionEnabled = NO;
+        UIButtonBlock addButtonBlock = ^(id sender, UIEvent *event) {
+            GWCharacter *strongCharacter = weakCharacter;
+            GWPlayer *strongPlayer = weakPlayer;
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            
+            [strongPlayer moveCharacterFromCharactersToDeck:strongCharacter];
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Added!"
+                                                            message:[NSString stringWithFormat:@"%@ has been added to your deck.", strongCharacter.characterClass]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        };
+        
+        // Add character to player when bought
         cell.button.titleLabel.font = [UIFont systemFontOfSize:9.0f];
         [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
+        [cell.button addTarget:self withBlock:addButtonBlock forControlEvents:UIControlEventTouchUpInside];
         
         // Show character info when store cell is pressed
         UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
@@ -101,10 +117,63 @@
         };
         [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
         
-        [cellViews addObject:cell];
+        [characterCellViews addObject:cell];
     }
     
-    _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 100.0f) withCells:(NSArray *)cellViews withOptions:options];
+    charactersView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, 100.0f) withCells:(NSArray *)characterCellViews withOptions:options];
+    
+    // Create store cell views for all characters in the player's deck
+    NSMutableArray *deckCellViews = [[NSMutableArray alloc] init];
+    characters = _player.deck;
+    UIView *deckView;
+    for (int i=0; i<[characters count]; ++i) {
+        GWCharacter *character = characters[i];
+        
+        GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
+        
+        __weak GWCharacter *weakCharacter = character;
+        __weak GWPlayer *weakPlayer = _player;
+        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
+        
+        // Add character to player when bought
+        UIButtonBlock removeButtonBlock = ^(id sender, UIEvent *event) {
+            GWCharacter *strongCharacter = weakCharacter;
+            GWPlayer *strongPlayer = weakPlayer;
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            
+            [strongPlayer moveCharacterFromDeckToCharacters:strongCharacter];
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Removed!"
+                                                            message:[NSString stringWithFormat:@"%@ has been removed from your deck.", strongCharacter.characterClass]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        };
+        
+        // Add character to player when bought
+        cell.button.titleLabel.font = [UIFont systemFontOfSize:9.0f];
+        [cell.button setTitle:@"Remove" forState:UIControlStateNormal];
+        [cell.button addTarget:self withBlock:removeButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        // Show character info when store cell is pressed
+        UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            GWCharacter *strongCharacter = weakCharacter;
+            
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+        };
+        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        [deckCellViews addObject:cell];
+    }
+    
+    deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 110.f, 300.0f, 100.0f) withCells:(NSArray *)deckCellViews withOptions:options];
+    
+    // Add both views to _deckManagerView
+    _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f)];
+    [_deckManagerView addSubview:charactersView];
+    [_deckManagerView addSubview:deckView];
     
     [_infoBoxController clearView];
     
@@ -114,7 +183,7 @@
     [_switchButton addTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
     
     [_bannerController setTitleWithAnimation:@"Deck Manager" withColor:[UIColor whiteColor]];
-    self.mainView = _deckView;
+    self.mainView = _deckManagerView;
 }
 
 
@@ -148,7 +217,7 @@
             GWPlayer *strongPlayer = weakPlayer;
             GWInfoBoxViewController *infoBox = weakInfoBox;
             
-            [strongPlayer addCharacter:strongCharacter];
+            [strongPlayer addCharacterToCharacters:strongCharacter];
             [infoBox setViewForStoreWithCharacter:strongCharacter];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
                                                             message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
