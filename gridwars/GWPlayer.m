@@ -38,13 +38,14 @@
     return [UIColor clearColor];
 }
 
-- (void)makeLeader:(GWCharacter *)character {
+- (BOOL)makeLeader:(GWCharacter *)character {
     for (GWCharacter *deckCharacter in _deck) {
         if (deckCharacter == character) {
             _leader = character;
-            return;
+            return YES;
         }
     }
+    return NO;
 }
 
 #pragma mark - moving characters from deck to from characters

@@ -10,6 +10,7 @@
 #import "GWInfoBoxDeckCharacterView.h"
 #import "GWInfoBoxGridCharacterView.h"
 #import "GWInfoBoxStoreCharacterView.h"
+#import "GWInfoBoxDeckManagerCharacterView.h"
 #import "GWGridPieceCharacter.h"
 #import "GWAreaView.h"
 #import "GWPlayer.h"
@@ -42,7 +43,16 @@
     return self;
 }
 
-#pragma mark - GWInfoDeckViewForStore
+#pragma mark - GWInfoBoxDeckManagerView
+
+- (void)setViewForDeckManagerWithCharacter:(GWCharacter *)character withLeaderButtonBlock:(id)leaderButtonBlock{
+    GWInfoBoxDeckManagerCharacterView *characterInfoBoxView = [[GWInfoBoxDeckManagerCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacter:character];
+    [characterInfoBoxView.leaderButton addTarget:self withBlock:leaderButtonBlock forControlEvents:UIControlEventTouchUpInside];
+    if (_infoBoxView) [_infoBoxView removeFromSuperview];
+    self.infoBoxView = characterInfoBoxView;
+}
+
+#pragma mark - GWInfoBoxViewForStore
 
 - (void)setViewForStoreWithCharacter:(GWCharacter *)character {
     GWInfoBoxStoreCharacterView *characterInfoBoxView = [[GWInfoBoxStoreCharacterView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height) withCharacter:character];

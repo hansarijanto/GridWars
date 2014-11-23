@@ -13,6 +13,7 @@
 		B8728E731A21320300358B49 /* GWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E721A21320300358B49 /* GWButton.m */; };
 		B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */; };
 		B8728E831A218BBF00358B49 /* GWCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E821A218BBF00358B49 /* GWCollectionView.m */; };
+		B8728E861A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E851A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m */; };
 		B8B869B91A0FF59A002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
 		B8B869BB1A0FF59A002B85F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */; };
 		B8B869BD1A0FF59A002B85F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BC1A0FF59A002B85F0 /* UIKit.framework */; };
@@ -81,6 +82,8 @@
 		B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxStoreCharacterView.m; sourceTree = "<group>"; };
 		B8728E811A218BBF00358B49 /* GWCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCollectionView.h; sourceTree = "<group>"; };
 		B8728E821A218BBF00358B49 /* GWCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCollectionView.m; sourceTree = "<group>"; };
+		B8728E841A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxDeckManagerCharacterView.h; sourceTree = "<group>"; };
+		B8728E851A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxDeckManagerCharacterView.m; sourceTree = "<group>"; };
 		B8B869B51A0FF59A002B85F0 /* gridwars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gridwars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -364,6 +367,8 @@
 				B8B86A5F1A17020F002B85F0 /* GWAreaView.m */,
 				B8B86A291A145277002B85F0 /* GWInfoBoxView.h */,
 				B8B86A2A1A145277002B85F0 /* GWInfoBoxView.m */,
+				B8728E841A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.h */,
+				B8728E851A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m */,
 				B8728E741A21428B00358B49 /* GWInfoBoxStoreCharacterView.h */,
 				B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */,
 				B8B86A641A193E28002B85F0 /* GWInfoBoxGridCharacterView.h */,
@@ -513,6 +518,7 @@
 				B8B86A591A158AE5002B85F0 /* GWDeckCell.m in Sources */,
 				B8B86A281A145140002B85F0 /* GWInfoBoxDeckCharacterView.m in Sources */,
 				B8B86A691A1AF22A002B85F0 /* GWHealthBar.m in Sources */,
+				B8728E861A2278D400358B49 /* GWInfoBoxDeckManagerCharacterView.m in Sources */,
 				B8B86A111A131EE8002B85F0 /* GWGridViewController.m in Sources */,
 				B8B869C51A0FF59A002B85F0 /* main.m in Sources */,
 				B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */,

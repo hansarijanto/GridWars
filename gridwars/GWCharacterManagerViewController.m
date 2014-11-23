@@ -15,6 +15,7 @@
 #import "GWCollectionView.h"
 #import "UIButton+Block.h"
 #import "GWButton.h"
+#import "GWInfoBoxDeckManagerCharacterView.h"
 
 @interface GWCharacterManagerViewController ()
 
@@ -94,11 +95,14 @@
         __weak GWPlayer *weakPlayer = _player;
         __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
         
-        // Add character to player when bought
+        // Remove character from deck
         UIButtonBlock removeButtonBlock = ^(id sender, UIEvent *event) {
             GWCharacter *strongCharacter = weakCharacter;
             GWPlayer *strongPlayer = weakPlayer;
             GWInfoBoxViewController *infoBox = weakInfoBox;
+            
+            // If character being removed and is a leader reset the leader
+            if (strongPlayer.leader == strongCharacter) strongPlayer.leader = nil;
             
             [strongPlayer moveCharacterFromDeckToInventory:strongCharacter];
             [infoBox setViewForStoreWithCharacter:strongCharacter];
@@ -108,7 +112,6 @@
             _deckView.cells = self.deckCellViews;
         };
         
-        // Add character to player when bought
         cell.button.titleLabel.font = [UIFont systemFontOfSize:9.0f];
         [cell.button setTitle:@"Remove" forState:UIControlStateNormal];
         [cell.button addTarget:self withBlock:removeButtonBlock forControlEvents:UIControlEventTouchUpInside];
@@ -118,16 +121,23 @@
             GWInfoBoxViewController *infoBox = weakInfoBox;
             GWCharacter *strongCharacter = weakCharacter;
             
-            [infoBox setViewForStoreWithCharacter:strongCharacter];
-            infoBox.button.hidden = NO;
-            [infoBox.button setTitle:@"Leader" forState:UIControlStateNormal];
             UIButtonBlock leaderButtonBlock = ^(id sender, UIEvent *event) {
                 GWCharacter *strongCharacter = weakCharacter;
                 GWPlayer *strongPlayer = weakPlayer;
-                [strongPlayer makeLeader:strongCharacter];
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Leader!"
-                                                                message:[NSString stringWithFormat:@"%@ is now the leader of your team", strongCharacter.characterClass]
+                NSString *title;
+                NSString *message;
+                if([strongPlayer makeLeader:strongCharacter]) {
+                    title = @"Leader";
+                    message = [NSString stringWithFormat:@"%@ is now the leader of your team", strongCharacter.characterClass];
+                } else {
+                    title = @"Error";
+                    message = @"Character must be in your deck if you want to make it your leader";
+                }
+                
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                                message:message
                                                                delegate:self
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
@@ -136,7 +146,8 @@
                 // Reload ui
                 _deckView.cells = self.deckCellViews;
             };
-            [infoBox.button addTarget:self withBlock:leaderButtonBlock forControlEvents:UIControlEventTouchUpInside];
+            
+            [infoBox setViewForDeckManagerWithCharacter:strongCharacter withLeaderButtonBlock:leaderButtonBlock];
         };
         [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
         

@@ -66,7 +66,7 @@
         [_errorMessage setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_errorMessage];
         
-        _claimButton = [[UIButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
+        _claimButton = [[GWButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 10.0f, 70.0f, 30.0f)];
         [_claimButton setTitle:@"Claim" forState:UIControlStateNormal];
         [self addSubview:_claimButton];
     }

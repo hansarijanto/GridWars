@@ -40,7 +40,7 @@
     int totalRow = (([_cells count] - 1) / _options.colPerRow) + 1;
     
     CGFloat width;
-    if (totalCol > 0) width = totalCol * _options.cellWidth + (totalCol - 1) * _options.horSpacing;
+    if (totalCol > 0) width = totalCol * (_options.cellWidth + _options.horSpacing);
     else width = 0.0f;
     
     CGFloat height;

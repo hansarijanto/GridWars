@@ -53,9 +53,9 @@ typedef enum {
 @property(nonatomic, readonly) NSInteger health;
 @property(nonatomic, readonly) NSInteger maxHealth;
 @property(nonatomic, readonly) NSInteger attack;
-@property(nonatomic, readonly) NSString *characterClass;
-@property(nonatomic, readonly) NSString *image;
-@property(nonatomic, strong) NSUUID *uuid;
+@property(nonatomic, strong, readonly) NSString *characterClass;
+@property(nonatomic, strong, readonly) NSString *image;
+@property(nonatomic, strong, readonly) NSUUID *uuid;
 @property(nonatomic, strong) GWPlayer *owner;
 
 @end

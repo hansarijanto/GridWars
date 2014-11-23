@@ -19,14 +19,14 @@ typedef enum {
 @interface GWPlayer : NSObject
 
 @property(nonatomic, readwrite) GWPlayerTeam team;
-@property(nonatomic, readonly) GWCharacter *leader;
-@property(nonatomic, readonly) NSArray *deck;
-@property(nonatomic, readonly) NSArray *inventory;
+@property(nonatomic, strong) GWCharacter *leader;
+@property(nonatomic, strong, readonly) NSArray *deck;
+@property(nonatomic, strong, readonly) NSArray *inventory;
 @property(nonatomic, strong) UIColor *teamColor;
 
 - (void)addCharacterToInventory:(GWCharacter *)character;
 - (void)moveCharacterFromInventoryToDeck:(GWCharacter *)character;
 - (void)moveCharacterFromDeckToInventory:(GWCharacter *)character;
-- (void)makeLeader:(GWCharacter *)character;
+- (BOOL)makeLeader:(GWCharacter *)character;
 
 @end

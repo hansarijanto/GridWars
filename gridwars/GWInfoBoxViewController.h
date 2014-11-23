@@ -29,5 +29,5 @@
 - (void)setErrorMessage:(NSString *)errorMessage;
 
 - (void)setViewForStoreWithCharacter:(GWCharacter *)character;
-
+- (void)setViewForDeckManagerWithCharacter:strongCharacter withLeaderButtonBlock:leaderButtonBlock;
 @end
