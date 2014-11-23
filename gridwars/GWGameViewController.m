@@ -127,6 +127,9 @@
     NSMutableArray *deckCells = [[NSMutableArray alloc] init];
     
     for (GWCharacter *character in _player.deck) {
+        
+        // Don't make a deck cell for the leader
+        if (character == _player.leader) continue;
         GWDeckCell *deckCell = [[GWDeckCell alloc] initWithCharacter:character];
         [deckCells addObject:deckCell];
     }
