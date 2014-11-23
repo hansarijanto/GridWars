@@ -75,13 +75,16 @@
         
         __weak GWCharacter *weakCharacter = character;
         __weak GWPlayer *weakPlayer = _player;
+        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
         
         // Add character to player when bought
         UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
             GWCharacter *strongCharacter = weakCharacter;
             GWPlayer *strongPlayer = weakPlayer;
+            GWInfoBoxViewController *infoBox = weakInfoBox;
     
             [strongPlayer addCharacter:strongCharacter];
+            [infoBox setViewForStoreWithCharacter:strongCharacter];            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
                                                             message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
                                                            delegate:self
@@ -93,7 +96,6 @@
         [storeCell.buyButton addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
         
         // Show character info when store cell is pressed
-        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
         UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
             GWInfoBoxViewController *infoBox = weakInfoBox;
             GWCharacter *strongCharacter = weakCharacter;
