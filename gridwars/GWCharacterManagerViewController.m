@@ -89,6 +89,7 @@
         
         // Add character to player when bought
         cell.button.userInteractionEnabled = NO;
+        cell.button.titleLabel.font = [UIFont systemFontOfSize:9.0f];
         [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
         
         // Show character info when store cell is pressed

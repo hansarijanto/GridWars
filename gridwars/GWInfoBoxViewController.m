@@ -30,7 +30,7 @@
     if (!self) return nil;
     
     self.view = [[UIView alloc] initWithFrame:frame];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f]];
     
     _centralButton = [[GWButton alloc] initWithFrame:CGRectMake(210.0f - 90.0f, 50.0f, 70.0f, 30.0f)];
     [_centralButton setTitle:@"Central" forState:UIControlStateNormal];
@@ -97,8 +97,6 @@
         [characterInfoBoxView.claimButton addTarget:self withBlock:block forControlEvents:UIControlEventTouchUpInside];
     }
 
-
-    if (_infoBoxView) [_infoBoxView removeFromSuperview];
     self.infoBoxView = characterInfoBoxView;
 }
 
@@ -109,15 +107,25 @@
 }
 
 - (void)clearView {
-    if (_infoBoxView) [_infoBoxView removeFromSuperview];
     self.infoBoxView = [[GWInfoBoxView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
 #pragma mark - setter/getter
 
 - (void)setInfoBoxView:(GWInfoBoxView *)infoBoxView {
+    
+    [_infoBoxView removeFromSuperview];
+    
     _infoBoxView = infoBoxView;
+    _infoBoxView.frame = CGRectOffset(_infoBoxView.frame, 0.0f, 30.0f);
+    _infoBoxView.alpha = 0.0f;
     [self.view insertSubview:_infoBoxView belowSubview:_centralButton];
+    
+    [UIView animateWithDuration:0.7f
+                     animations:^{
+                         _infoBoxView.frame = CGRectOffset(_infoBoxView.frame, 0.0f, -30.0f);
+                         _infoBoxView.alpha = 1.0f;
+                     }];
 }
 
 @end
