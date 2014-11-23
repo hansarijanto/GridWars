@@ -6,13 +6,28 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "GWAppDelegate.h"
+#import "GWRootViewController.h"
 
-@implementation AppDelegate
+@implementation GWAppDelegate
+
++ (GWAppDelegate*)sharedAppDelegate
+{
+    return (GWAppDelegate*) [UIApplication sharedApplication].delegate;
+}
+
++ (GWRootViewController*)rootViewController
+{
+    GWAppDelegate *delegate = [GWAppDelegate sharedAppDelegate];
+    return (GWRootViewController*)delegate.window.rootViewController;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    GWRootViewController *root = [[GWRootViewController alloc] init];
+    self.window.rootViewController = root;
+    
     return YES;
 }
 							

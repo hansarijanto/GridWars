@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "GWRootViewController.h"
 #import "GWCharacterStoreViewController.h"
 #import "GWGameViewController.h"
 #import "GWGrid.h"
 #import "GWPlayer.h"
 
-@interface MainViewController ()
+@interface GWRootViewController ()
 
 @end
 
-@implementation MainViewController {
+@implementation GWRootViewController {
     UIViewController *_mainController;
 }
 
@@ -47,12 +47,12 @@
     enemy.team = kGWPlayerBlue;
     
     // Create game view controller
-    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];
-    [self addChildViewController:game];
-    [self.view addSubview:game.view];
+//    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:player withEnemy:enemy withGrid:grid];
+//    [self addChildViewController:game];
+//    [self.view addSubview:game.view];
     
-//    GWCharacterStoreViewController *store = [[GWCharacterStoreViewController alloc] initWithPlayer:player];
-    [self changeMainController:game];
+    GWCharacterStoreViewController *store = [[GWCharacterStoreViewController alloc] initWithPlayer:player];
+    [self changeMainController:store];
     
 }
 

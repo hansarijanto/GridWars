@@ -17,9 +17,9 @@
 		B8B869BD1A0FF59A002B85F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BC1A0FF59A002B85F0 /* UIKit.framework */; };
 		B8B869C31A0FF59A002B85F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B8B869C11A0FF59A002B85F0 /* InfoPlist.strings */; };
 		B8B869C51A0FF59A002B85F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869C41A0FF59A002B85F0 /* main.m */; };
-		B8B869C91A0FF59A002B85F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869C81A0FF59A002B85F0 /* AppDelegate.m */; };
+		B8B869C91A0FF59A002B85F0 /* GWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869C81A0FF59A002B85F0 /* GWAppDelegate.m */; };
 		B8B869CC1A0FF59A002B85F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8B869CA1A0FF59A002B85F0 /* Main.storyboard */; };
-		B8B869CF1A0FF59A002B85F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869CE1A0FF59A002B85F0 /* MainViewController.m */; };
+		B8B869CF1A0FF59A002B85F0 /* GWRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8B869CE1A0FF59A002B85F0 /* GWRootViewController.m */; };
 		B8B869D11A0FF59A002B85F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B869D01A0FF59A002B85F0 /* Images.xcassets */; };
 		B8B869D81A0FF59B002B85F0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869D71A0FF59B002B85F0 /* XCTest.framework */; };
 		B8B869D91A0FF59B002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
@@ -86,11 +86,11 @@
 		B8B869C21A0FF59A002B85F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B8B869C41A0FF59A002B85F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B8B869C61A0FF59A002B85F0 /* gridwars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gridwars-Prefix.pch"; sourceTree = "<group>"; };
-		B8B869C71A0FF59A002B85F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B8B869C81A0FF59A002B85F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B8B869C71A0FF59A002B85F0 /* GWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWAppDelegate.h; sourceTree = "<group>"; };
+		B8B869C81A0FF59A002B85F0 /* GWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWAppDelegate.m; sourceTree = "<group>"; };
 		B8B869CB1A0FF59A002B85F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B8B869CD1A0FF59A002B85F0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		B8B869CE1A0FF59A002B85F0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		B8B869CD1A0FF59A002B85F0 /* GWRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWRootViewController.h; sourceTree = "<group>"; };
+		B8B869CE1A0FF59A002B85F0 /* GWRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWRootViewController.m; sourceTree = "<group>"; };
 		B8B869D01A0FF59A002B85F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B8B869D61A0FF59B002B85F0 /* gridwarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gridwarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869D71A0FF59B002B85F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -238,11 +238,11 @@
 				B8B86A211A144785002B85F0 /* Model */,
 				B8728E6C1A212F2D00358B49 /* CharacterStore */,
 				B8B86A201A14476C002B85F0 /* Game */,
-				B8B869C71A0FF59A002B85F0 /* AppDelegate.h */,
-				B8B869C81A0FF59A002B85F0 /* AppDelegate.m */,
+				B8B869C71A0FF59A002B85F0 /* GWAppDelegate.h */,
+				B8B869C81A0FF59A002B85F0 /* GWAppDelegate.m */,
 				B8B869CA1A0FF59A002B85F0 /* Main.storyboard */,
-				B8B869CD1A0FF59A002B85F0 /* MainViewController.h */,
-				B8B869CE1A0FF59A002B85F0 /* MainViewController.m */,
+				B8B869CD1A0FF59A002B85F0 /* GWRootViewController.h */,
+				B8B869CE1A0FF59A002B85F0 /* GWRootViewController.m */,
 				B8B869D01A0FF59A002B85F0 /* Images.xcassets */,
 				B8B869BF1A0FF59A002B85F0 /* Supporting Files */,
 			);
@@ -485,7 +485,7 @@
 			files = (
 				B8C5E2E01A1D510E004979F3 /* GWPlayer.m in Sources */,
 				B8F0ADC91A1EECC9005512CF /* GWGridTileOverlayView.m in Sources */,
-				B8B869CF1A0FF59A002B85F0 /* MainViewController.m in Sources */,
+				B8B869CF1A0FF59A002B85F0 /* GWRootViewController.m in Sources */,
 				B8728E731A21320300358B49 /* GWButton.m in Sources */,
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
 				B8B86A5C1A158AE5002B85F0 /* GWDragableView.m in Sources */,
@@ -500,7 +500,7 @@
 				B8B86A501A148A7F002B85F0 /* GWGridPieceView.m in Sources */,
 				B8B86A5A1A158AE5002B85F0 /* GWDeckCellView.m in Sources */,
 				B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */,
-				B8B869C91A0FF59A002B85F0 /* AppDelegate.m in Sources */,
+				B8B869C91A0FF59A002B85F0 /* GWAppDelegate.m in Sources */,
 				B8B86A601A17020F002B85F0 /* GWAreaView.m in Sources */,
 				B8B869F51A0FFA17002B85F0 /* GWGridTile.m in Sources */,
 				B8B869EF1A0FF60B002B85F0 /* GWGridView.m in Sources */,
