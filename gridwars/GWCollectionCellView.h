@@ -10,7 +10,7 @@
 
 @class GWCharacter;
 
-@interface GWCharacterManagerCellView : UIButton
+@interface GWCollectionCellView : UIButton
 
 @property(nonatomic, readonly)GWCharacter *character;
 @property(nonatomic, readonly)UIButton *button;

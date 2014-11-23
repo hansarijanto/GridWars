@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E661A202F4000358B49 /* GWBannerViewController.m */; };
 		B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */; };
-		B8728E701A21303D00358B49 /* GWCharacterManagerCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCharacterManagerCellView.m */; };
+		B8728E701A21303D00358B49 /* GWCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCollectionCellView.m */; };
 		B8728E731A21320300358B49 /* GWButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E721A21320300358B49 /* GWButton.m */; };
 		B8728E761A21428B00358B49 /* GWInfoBoxStoreCharacterView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */; };
+		B8728E831A218BBF00358B49 /* GWCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E821A218BBF00358B49 /* GWCollectionView.m */; };
 		B8B869B91A0FF59A002B85F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869B81A0FF59A002B85F0 /* Foundation.framework */; };
 		B8B869BB1A0FF59A002B85F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */; };
 		B8B869BD1A0FF59A002B85F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B869BC1A0FF59A002B85F0 /* UIKit.framework */; };
@@ -72,12 +73,14 @@
 		B8728E661A202F4000358B49 /* GWBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWBannerViewController.m; sourceTree = "<group>"; };
 		B8728E691A212F2800358B49 /* GWCharacterManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterManagerViewController.h; sourceTree = "<group>"; };
 		B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterManagerViewController.m; sourceTree = "<group>"; };
-		B8728E6E1A21303D00358B49 /* GWCharacterManagerCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterManagerCellView.h; sourceTree = "<group>"; };
-		B8728E6F1A21303D00358B49 /* GWCharacterManagerCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCharacterManagerCellView.m; sourceTree = "<group>"; };
+		B8728E6E1A21303D00358B49 /* GWCollectionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCollectionCellView.h; sourceTree = "<group>"; };
+		B8728E6F1A21303D00358B49 /* GWCollectionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCollectionCellView.m; sourceTree = "<group>"; };
 		B8728E711A21320300358B49 /* GWButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWButton.h; sourceTree = "<group>"; };
 		B8728E721A21320300358B49 /* GWButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWButton.m; sourceTree = "<group>"; };
 		B8728E741A21428B00358B49 /* GWInfoBoxStoreCharacterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWInfoBoxStoreCharacterView.h; sourceTree = "<group>"; };
 		B8728E751A21428B00358B49 /* GWInfoBoxStoreCharacterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWInfoBoxStoreCharacterView.m; sourceTree = "<group>"; };
+		B8728E811A218BBF00358B49 /* GWCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCollectionView.h; sourceTree = "<group>"; };
+		B8728E821A218BBF00358B49 /* GWCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWCollectionView.m; sourceTree = "<group>"; };
 		B8B869B51A0FF59A002B85F0 /* gridwars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gridwars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -195,8 +198,10 @@
 			children = (
 				B8728E691A212F2800358B49 /* GWCharacterManagerViewController.h */,
 				B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */,
-				B8728E6E1A21303D00358B49 /* GWCharacterManagerCellView.h */,
-				B8728E6F1A21303D00358B49 /* GWCharacterManagerCellView.m */,
+				B8728E811A218BBF00358B49 /* GWCollectionView.h */,
+				B8728E821A218BBF00358B49 /* GWCollectionView.m */,
+				B8728E6E1A21303D00358B49 /* GWCollectionCellView.h */,
+				B8728E6F1A21303D00358B49 /* GWCollectionCellView.m */,
 			);
 			name = CharacterManager;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 			files = (
 				B8C5E2E01A1D510E004979F3 /* GWPlayer.m in Sources */,
 				B8F0ADC91A1EECC9005512CF /* GWGridTileOverlayView.m in Sources */,
+				B8728E831A218BBF00358B49 /* GWCollectionView.m in Sources */,
 				B8B869CF1A0FF59A002B85F0 /* GWRootViewController.m in Sources */,
 				B8728E731A21320300358B49 /* GWButton.m in Sources */,
 				B8B86A2B1A145277002B85F0 /* GWInfoBoxView.m in Sources */,
@@ -514,7 +520,7 @@
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,
 				B8B86A0E1A130E76002B85F0 /* GWGridPieceCharacter.m in Sources */,
 				B8B86A0D1A130E76002B85F0 /* GWGridPiece.m in Sources */,
-				B8728E701A21303D00358B49 /* GWCharacterManagerCellView.m in Sources */,
+				B8728E701A21303D00358B49 /* GWCollectionCellView.m in Sources */,
 				B8B86A181A143E42002B85F0 /* GWCharacter.m in Sources */,
 				B8B86A251A1450A5002B85F0 /* GWInfoBoxViewController.m in Sources */,
 				B8B86A3B1A1464EA002B85F0 /* UIView+Shapes.m in Sources */,

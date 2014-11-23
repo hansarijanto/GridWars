@@ -10,25 +10,22 @@
 #import "GWInfoBoxViewController.h"
 #import "GWPlayer.h"
 #import "GWCharacter.h"
-#import "GWCharacterManagerCellView.h"
+#import "GWCollectionCellView.h"
 #import "GWBannerViewController.h"
+#import "GWCollectionView.h"
 #import "UIButton+Block.h"
 
 @interface GWCharacterManagerViewController ()
 
 @property(nonatomic, strong)GWBannerViewController *bannerController;
-
+@property(nonatomic, strong)UIView *mainView; // middle view;
 @end
 
 @implementation GWCharacterManagerViewController {
-    CGFloat _vertOffset;
-    CGFloat _horOffset;
-    CGFloat _horCellSpacing;
-    CGFloat _vertCellSpacing;
-    CGFloat _cellWidth;
-    CGFloat _cellHeight;
     GWPlayer *_player;
     GWInfoBoxViewController *_infoBoxController;
+    GWCollectionView *_storeView;
+    GWCollectionView *_deckView;
 }
 
 - (instancetype)initWithPlayer:(GWPlayer *)player {
@@ -39,32 +36,12 @@
     
     _player = player;
     
-    _vertOffset = 67.5f;
-    _horOffset  = 10.0f;
-    _horCellSpacing  = 10.0f;
-    _vertCellSpacing = 10.0f;
-    _cellWidth  = 67.5f;
-    _cellHeight = 100.0f;
-    
-    NSMutableArray *characters = [[NSMutableArray alloc] init];
-    
-    // Create characters
-    GWCharacter *warrior = [[GWCharacter alloc] initWithType:kGWCharacterTypeWarrior];
-    GWCharacter *thief   = [[GWCharacter alloc] initWithType:kGWCharacterTypeThief];
-    GWCharacter *priest  = [[GWCharacter alloc] initWithType:kGWCharacterTypePriest];
-    GWCharacter *archer  = [[GWCharacter alloc] initWithType:kGWCharacterTypeArcher];
-    GWCharacter *mage    = [[GWCharacter alloc] initWithType:kGWCharacterTypeMage];
-    
-    // Add to characters
-    [characters addObject:warrior];
-    [characters addObject:thief];
-    [characters addObject:priest];
-    [characters addObject:archer];
-    [characters addObject:mage];
-    
     // Create banner controller
     _bannerController = [[GWBannerViewController alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.5f)];
     [_bannerController setTitleWithAnimation:@"Character Store" withColor:[UIColor whiteColor]];
+    
+    // Create main view
+    _mainView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 400.0f)];
     
     // Create info box controller
     _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
@@ -75,53 +52,146 @@
     
     [self.view addSubview:_infoBoxController.view];
     [self.view addSubview:_bannerController.view];
+    [self.view addSubview:_mainView];
     
-    // Create store cell views
-    for (int i=0; i<[characters count]; ++i) {
-        GWCharacter *character = characters[i];
-        
-         // 4 cols per row
-        int row = i / 4;
-        int col = i % 4;
-        
-        GWCharacterManagerCellView *cell = [[GWCharacterManagerCellView alloc] initWithFrame:CGRectMake(_horOffset + col * (_horCellSpacing + _cellWidth), _vertOffset + row * (_cellHeight + _vertCellSpacing), _cellWidth, _cellHeight) withCharacter:character];
-        
-        __weak GWCharacter *weakCharacter = character;
-        __weak GWPlayer *weakPlayer = _player;
-        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
-        
-        // Add character to player when bought
-        UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
-            GWCharacter *strongCharacter = weakCharacter;
-            GWPlayer *strongPlayer = weakPlayer;
-            GWInfoBoxViewController *infoBox = weakInfoBox;
-    
-            [strongPlayer addCharacter:strongCharacter];
-            [infoBox setViewForStoreWithCharacter:strongCharacter];            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
-                                                            message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        };
-        
-        [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
-        [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
-        
-        // Show character info when store cell is pressed
-        UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
-            GWInfoBoxViewController *infoBox = weakInfoBox;
-            GWCharacter *strongCharacter = weakCharacter;
-            
-            [infoBox setViewForStoreWithCharacter:strongCharacter];
-        };
-        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:cell];
-    }
+    [self setViewForCharacterStore];
     
     return self;
+}
+
+#pragma mark - deck manager
+
+- (void)setViewForDeckManager {
+    
+    if (!_deckView) {
+        _deckView = [[UIView alloc] initWithFrame:_mainView.frame];
+        
+        CGFloat horCellSpacing  = 10.0f;
+        CGFloat vertCellSpacing = 10.0f;
+        CGFloat cellWidth  = 67.5f;
+        CGFloat cellHeight = 100.0f;
+        
+        // Create store cell views for all possible characters
+        NSArray *characters = [GWCharacter getAllPossibleCharacters];
+        for (int i=0; i<[characters count]; ++i) {
+            GWCharacter *character = characters[i];
+            
+            // 4 cols per row
+            int row = i / 4;
+            int col = i % 4;
+            
+            GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectMake(col * (horCellSpacing + cellWidth), row * (cellHeight + vertCellSpacing), cellWidth, cellHeight) withCharacter:character];
+            
+            __weak GWCharacter *weakCharacter = character;
+            __weak GWPlayer *weakPlayer = _player;
+            __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
+            
+            // Add character to player when bought
+            UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
+                GWCharacter *strongCharacter = weakCharacter;
+                GWPlayer *strongPlayer = weakPlayer;
+                GWInfoBoxViewController *infoBox = weakInfoBox;
+                
+                [strongPlayer addCharacter:strongCharacter];
+                [infoBox setViewForStoreWithCharacter:strongCharacter];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
+                                                                message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            };
+            
+            [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
+            [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
+            
+            // Show character info when store cell is pressed
+            UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
+                GWInfoBoxViewController *infoBox = weakInfoBox;
+                GWCharacter *strongCharacter = weakCharacter;
+                
+                [infoBox setViewForStoreWithCharacter:strongCharacter];
+            };
+            [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+            
+            [_deckView addSubview:cell];
+        }
+    }
+    
+    self.mainView = _deckView;
+}
+
+
+#pragma mark - character store
+
+- (void)setViewForCharacterStore {
+    
+    if (!_storeView) {
+        
+        struct CollectionViewOptions options;
+        options.horSpacing = 10.0f;
+        options.vertSpacing = 10.0f;
+        options.cellWidth = 67.5f;
+        options.cellHeight = 100.0f;
+        options.colPerRow = 4;
+        
+        NSMutableArray *cellViews = [[NSMutableArray alloc] init];
+        
+        // Create store cell views for all possible characters
+        NSArray *characters = [GWCharacter getAllPossibleCharacters];
+        for (int i=0; i<[characters count]; ++i) {
+            GWCharacter *character = characters[i];
+            
+            GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
+            
+            __weak GWCharacter *weakCharacter = character;
+            __weak GWPlayer *weakPlayer = _player;
+            __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
+            
+            // Add character to player when bought
+            UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
+                GWCharacter *strongCharacter = weakCharacter;
+                GWPlayer *strongPlayer = weakPlayer;
+                GWInfoBoxViewController *infoBox = weakInfoBox;
+                
+                [strongPlayer addCharacter:strongCharacter];
+                [infoBox setViewForStoreWithCharacter:strongCharacter];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
+                                                                message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            };
+            
+            [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
+            [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
+            
+            // Show character info when store cell is pressed
+            UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
+                GWInfoBoxViewController *infoBox = weakInfoBox;
+                GWCharacter *strongCharacter = weakCharacter;
+                
+                [infoBox setViewForStoreWithCharacter:strongCharacter];
+            };
+            [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+            
+            [cellViews addObject:cell];
+        }
+        
+        _storeView = [[GWCollectionView alloc] initWithFrame:_mainView.frame withCells:(NSArray *)cellViews withOptions:options];
+    }
+    
+    self.mainView = _storeView;
+}
+
+- (void)setMainView:(UIView *)mainView {
+    
+    if (_mainView) {
+        [_mainView removeFromSuperview];
+    }
+    _mainView = mainView;
+    [self.view addSubview:_mainView];
 }
 
 @end

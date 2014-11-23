@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 arjgames. All rights reserved.
 //
 
-#import "GWCharacterManagerCellView.h"
+#import "GWCollectionCellView.h"
 #import "GWCharacter.h"
 #import "GWButton.h"
 
-@implementation GWCharacterManagerCellView {
+@implementation GWCollectionCellView {
     UIImageView *_playerSprite;
 }
 
@@ -25,16 +25,22 @@
     self.layer.cornerRadius  = 10.0f;
     self.layer.masksToBounds = YES;
     
-    _playerSprite = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height)];
+    _playerSprite = [[UIImageView alloc] initWithFrame:CGRectZero];
     _playerSprite.image = [UIImage imageNamed:character.image];
     _playerSprite.contentMode = UIViewContentModeCenter;
     [self addSubview:_playerSprite];
     
-    _button = [[GWButton alloc] initWithFrame:CGRectMake(0.0f, frame.size.height - 30.0f, frame.size.width, 30.0f)];
+    _button = [[GWButton alloc] initWithFrame:CGRectZero];
     _button.layer.cornerRadius = 0.0f;
     [self addSubview:_button];
     
     return self;
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    _playerSprite.frame = CGRectMake(0.0f, 0.0f, frame.size.width, frame.size.height);
+    _button.frame = CGRectMake(0.0f, frame.size.height - 30.0f, frame.size.width, 30.0f);
 }
 
 /*

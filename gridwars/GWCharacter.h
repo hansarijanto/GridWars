@@ -41,6 +41,7 @@ typedef enum {
 - (void)resetMoves; // Resets number of moves to maxMoves
 - (void)damagedBy:(GWCharacter *)attacker; // When attacked by another character
 - (NSString *)characterClass;
++ (NSArray *)getAllPossibleCharacters;
 
 @property(nonatomic, readonly) GWCharacterType type;
 @property(nonatomic, readonly) GWAreaType moveType;

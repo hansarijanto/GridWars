@@ -144,4 +144,13 @@
     return characterClass;
 }
 
++ (NSArray *)getAllPossibleCharacters {
+    NSMutableArray *characters = [[NSMutableArray alloc] init];
+    for (int type=kGWCharacterTypeWarrior; type<=kGWCharacterTypeThief; type++) {
+        GWCharacter *character = [[GWCharacter alloc] initWithType:type];
+        [characters addObject:character];
+    }
+    return (NSArray *)characters;
+}
+
 @end
