@@ -25,9 +25,11 @@
 @implementation GWCharacterManagerViewController {
     GWPlayer *_player;
     GWInfoBoxViewController *_infoBoxController;
-    UIView *_storeView;
-    UIView *_deckManagerView;
     GWButton *_switchButton;
+    GWCollectionView *_storeView; // main view for character store
+    UIView *_deckManagerView; // main view for deck manager
+    GWCollectionView *_deckView; // subview for deck manager
+    GWCollectionView *_charactersView; // subview for deck manager
 }
 
 - (instancetype)initWithPlayer:(GWPlayer *)player {
@@ -63,69 +65,23 @@
     return self;
 }
 
+#pragma mark - setter/getter
+
+- (void)setMainView:(UIView *)mainView {
+    
+    if (_mainView) {
+        [_mainView removeFromSuperview];
+    }
+    _mainView = mainView;
+    [self.view addSubview:_mainView];
+}
+
 #pragma mark - deck manager
 
-- (void)setViewForDeckManager {
-    
-    struct CollectionViewOptions options;
-    options.horSpacing = 10.0f;
-    options.vertSpacing = 10.0f;
-    options.cellWidth = 67.5f;
-    options.cellHeight = 100.0f;
-    options.colPerRow = 100;
-    
-    // Create store cell views for all characters the player has but is not in their deck
-    NSMutableArray *characterCellViews = [[NSMutableArray alloc] init];
-    NSArray *characters = _player.characters;
-    UIView *charactersView;
-    for (int i=0; i<[characters count]; ++i) {
-        GWCharacter *character = characters[i];
-        
-        GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
-        
-        __weak GWCharacter *weakCharacter = character;
-        __weak GWPlayer *weakPlayer = _player;
-        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
-        
-        // Add character to player when bought
-        UIButtonBlock addButtonBlock = ^(id sender, UIEvent *event) {
-            GWCharacter *strongCharacter = weakCharacter;
-            GWPlayer *strongPlayer = weakPlayer;
-            GWInfoBoxViewController *infoBox = weakInfoBox;
-            
-            [strongPlayer moveCharacterFromCharactersToDeck:strongCharacter];
-            [infoBox setViewForStoreWithCharacter:strongCharacter];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Added!"
-                                                            message:[NSString stringWithFormat:@"%@ has been added to your deck.", strongCharacter.characterClass]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        };
-        
-        // Add character to player when bought
-        cell.button.titleLabel.font = [UIFont systemFontOfSize:9.0f];
-        [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
-        [cell.button addTarget:self withBlock:addButtonBlock forControlEvents:UIControlEventTouchUpInside];
-        
-        // Show character info when store cell is pressed
-        UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
-            GWInfoBoxViewController *infoBox = weakInfoBox;
-            GWCharacter *strongCharacter = weakCharacter;
-            
-            [infoBox setViewForStoreWithCharacter:strongCharacter];
-        };
-        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
-        
-        [characterCellViews addObject:cell];
-    }
-    
-    charactersView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, 100.0f) withCells:(NSArray *)characterCellViews withOptions:options];
-    
-    // Create store cell views for all characters in the player's deck
+// an array of collection cell views for each character in a player's deck
+- (NSArray *)deckCellViews {
     NSMutableArray *deckCellViews = [[NSMutableArray alloc] init];
-    characters = _player.deck;
-    UIView *deckView;
+    NSArray *characters = _player.deck;
     for (int i=0; i<[characters count]; ++i) {
         GWCharacter *character = characters[i];
         
@@ -143,12 +99,10 @@
             
             [strongPlayer moveCharacterFromDeckToCharacters:strongCharacter];
             [infoBox setViewForStoreWithCharacter:strongCharacter];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Removed!"
-                                                            message:[NSString stringWithFormat:@"%@ has been removed from your deck.", strongCharacter.characterClass]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
+            
+            // reload data/ui
+            _charactersView.cells = self.characterCellViews;
+            _deckView.cells = self.deckCellViews;
         };
         
         // Add character to player when bought
@@ -168,36 +122,59 @@
         [deckCellViews addObject:cell];
     }
     
-    deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 110.f, 300.0f, 100.0f) withCells:(NSArray *)deckCellViews withOptions:options];
-    
-    // Add both views to _deckManagerView
-    _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f)];
-    [_deckManagerView addSubview:charactersView];
-    [_deckManagerView addSubview:deckView];
-    
-    [_infoBoxController clearView];
-    
-    // Change switch button to store
-    [_switchButton setTitle:@"Store" forState:UIControlStateNormal];
-    [_switchButton removeTarget:self action:@selector(setViewForDeckManager) forControlEvents:UIControlEventTouchUpInside];
-    [_switchButton addTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_bannerController setTitleWithAnimation:@"Deck Manager" withColor:[UIColor whiteColor]];
-    self.mainView = _deckManagerView;
+    return (NSArray *)deckCellViews;
 }
 
-
-#pragma mark - character store
-
-- (void)setViewForCharacterStore {
+// an array of collection cell view for each character a player own not in his deck
+- (NSArray *)characterCellViews {
+    // Create store cell views for all characters the player has but is not in their deck
+    NSMutableArray *characterCellViews = [[NSMutableArray alloc] init];
+    NSArray *characters = _player.characters;
+    for (int i=0; i<[characters count]; ++i) {
+        GWCharacter *character = characters[i];
+        
+        GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
+        
+        __weak GWCharacter *weakCharacter = character;
+        __weak GWPlayer *weakPlayer = _player;
+        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
+        
+        // Add character to player when bought
+        UIButtonBlock addButtonBlock = ^(id sender, UIEvent *event) {
+            GWCharacter *strongCharacter = weakCharacter;
+            GWPlayer *strongPlayer = weakPlayer;
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            
+            [strongPlayer moveCharacterFromCharactersToDeck:strongCharacter];
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+            
+            // reload data/ui
+            _charactersView.cells = self.characterCellViews;
+            _deckView.cells = self.deckCellViews;
+        };
+        
+        // Add character to player when bought
+        cell.button.titleLabel.font = [UIFont systemFontOfSize:9.0f];
+        [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
+        [cell.button addTarget:self withBlock:addButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        // Show character info when store cell is pressed
+        UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            GWCharacter *strongCharacter = weakCharacter;
+            
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+        };
+        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        [characterCellViews addObject:cell];
+    }
     
-    struct CollectionViewOptions options;
-    options.horSpacing = 10.0f;
-    options.vertSpacing = 10.0f;
-    options.cellWidth = 67.5f;
-    options.cellHeight = 100.0f;
-    options.colPerRow = 4;
-    
+    return (NSArray *)characterCellViews;
+}
+
+// an array of collection cell views of every available character
+- (NSArray *)storeCellViews {
     NSMutableArray *cellViews = [[NSMutableArray alloc] init];
     
     // Create store cell views for all possible characters
@@ -242,7 +219,62 @@
         [cellViews addObject:cell];
     }
     
-    _storeView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f) withCells:(NSArray *)cellViews withOptions:options];
+    return (NSArray *)cellViews;
+}
+
+- (void)setViewForDeckManager {
+    
+    struct CollectionViewOptions options;
+    options.horSpacing  = 10.0f;
+    options.vertSpacing = 10.0f;
+    options.cellWidth   = 67.5f;
+    options.cellHeight  = 100.0f;
+    options.colPerRow   = 100;
+    
+    if (!_deckManagerView || !_charactersView || !_deckManagerView) {
+        _charactersView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, 100.0f) withCells:self.characterCellViews withOptions:options];
+        
+        // Create store cell views for all characters in the player's deck
+        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 110.f, 300.0f, 100.0f) withCells:(NSArray *)self.deckCellViews withOptions:options];
+        
+        // Add both views to _deckManagerView
+        _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f)];
+        [_deckManagerView addSubview:_charactersView];
+        [_deckManagerView addSubview:_deckView];
+    } else {
+        // Reload data if ui already exist
+        _charactersView.cells = self.characterCellViews;
+        _deckView.cells = self.deckCellViews;
+    }
+    
+    [_infoBoxController clearView];
+    
+    // Change switch button to store
+    [_switchButton setTitle:@"Store" forState:UIControlStateNormal];
+    [_switchButton removeTarget:self action:@selector(setViewForDeckManager) forControlEvents:UIControlEventTouchUpInside];
+    [_switchButton addTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_bannerController setTitleWithAnimation:@"Deck Manager" withColor:[UIColor whiteColor]];
+    self.mainView = _deckManagerView;
+}
+
+
+#pragma mark - character store
+
+- (void)setViewForCharacterStore {
+    
+    struct CollectionViewOptions options;
+    options.horSpacing  = 10.0f;
+    options.vertSpacing = 10.0f;
+    options.cellWidth   = 67.5f;
+    options.cellHeight  = 100.0f;
+    options.colPerRow   = 4;
+    
+    if (!_storeView) {
+        _storeView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f) withCells:self.storeCellViews withOptions:options];
+    } else {
+        _storeView.cells = self.storeCellViews;
+    }
     
     [_infoBoxController clearView];
     
@@ -253,15 +285,6 @@
     
     [_bannerController setTitleWithAnimation:@"Character Store" withColor:[UIColor whiteColor]];
     self.mainView = _storeView;
-}
-
-- (void)setMainView:(UIView *)mainView {
-    
-    if (_mainView) {
-        [_mainView removeFromSuperview];
-    }
-    _mainView = mainView;
-    [self.view addSubview:_mainView];
 }
 
 @end

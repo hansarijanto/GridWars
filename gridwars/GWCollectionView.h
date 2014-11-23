@@ -18,6 +18,8 @@ struct CollectionViewOptions {
 
 @interface GWCollectionView : UIScrollView
 
+@property(nonatomic, strong)NSArray *cells;
+
 - (instancetype)initWithFrame:(CGRect)frame withCells:(NSArray *)cells withOptions:(struct CollectionViewOptions)options;
 
 @end
