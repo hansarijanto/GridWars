@@ -67,47 +67,47 @@
 
 - (void)setViewForDeckManager {
     
-    if (!_deckView) {
+    struct CollectionViewOptions options;
+    options.horSpacing = 10.0f;
+    options.vertSpacing = 10.0f;
+    options.cellWidth = 67.5f;
+    options.cellHeight = 100.0f;
+    options.colPerRow = 100;
+    
+    NSMutableArray *cellViews = [[NSMutableArray alloc] init];
+    
+    // Create store cell views for all possible characters
+    NSArray *characters = _player.characters;
+    for (int i=0; i<[characters count]; ++i) {
+        GWCharacter *character = characters[i];
         
-        struct CollectionViewOptions options;
-        options.horSpacing = 10.0f;
-        options.vertSpacing = 10.0f;
-        options.cellWidth = 67.5f;
-        options.cellHeight = 100.0f;
-        options.colPerRow = 100;
+        GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
         
-        NSMutableArray *cellViews = [[NSMutableArray alloc] init];
+        __weak GWCharacter *weakCharacter = character;
+        __weak GWPlayer *weakPlayer = _player;
+        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
         
-        // Create store cell views for all possible characters
-        NSArray *characters = _player.characters;
-        for (int i=0; i<[characters count]; ++i) {
-            GWCharacter *character = characters[i];
-            
-            GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
-            
-            __weak GWCharacter *weakCharacter = character;
-            __weak GWPlayer *weakPlayer = _player;
-            __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
-            
-            // Add character to player when bought
-            cell.button.userInteractionEnabled = NO;
-            [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
-            
-            // Show character info when store cell is pressed
-            UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
-                GWInfoBoxViewController *infoBox = weakInfoBox;
-                GWCharacter *strongCharacter = weakCharacter;
-                
-                [infoBox setViewForStoreWithCharacter:strongCharacter];
-            };
-            [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
-            
-            [cellViews addObject:cell];
-        }
+        // Add character to player when bought
+        cell.button.userInteractionEnabled = NO;
+        [cell.button setTitle:@"Add to Deck" forState:UIControlStateNormal];
         
-        _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 100.0f) withCells:(NSArray *)cellViews withOptions:options];
+        // Show character info when store cell is pressed
+        UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            GWCharacter *strongCharacter = weakCharacter;
+            
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+        };
+        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        [cellViews addObject:cell];
     }
     
+    _deckView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 100.0f) withCells:(NSArray *)cellViews withOptions:options];
+    
+    [_infoBoxController clearView];
+    
+    // Change switch button to store
     [_switchButton setTitle:@"Store" forState:UIControlStateNormal];
     [_switchButton removeTarget:self action:@selector(setViewForDeckManager) forControlEvents:UIControlEventTouchUpInside];
     [_switchButton addTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
@@ -121,62 +121,62 @@
 
 - (void)setViewForCharacterStore {
     
-    if (!_storeView) {
+    struct CollectionViewOptions options;
+    options.horSpacing = 10.0f;
+    options.vertSpacing = 10.0f;
+    options.cellWidth = 67.5f;
+    options.cellHeight = 100.0f;
+    options.colPerRow = 4;
+    
+    NSMutableArray *cellViews = [[NSMutableArray alloc] init];
+    
+    // Create store cell views for all possible characters
+    NSArray *characters = [GWCharacter getAllPossibleCharacters];
+    for (int i=0; i<[characters count]; ++i) {
+        GWCharacter *character = characters[i];
         
-        struct CollectionViewOptions options;
-        options.horSpacing = 10.0f;
-        options.vertSpacing = 10.0f;
-        options.cellWidth = 67.5f;
-        options.cellHeight = 100.0f;
-        options.colPerRow = 4;
+        GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
         
-        NSMutableArray *cellViews = [[NSMutableArray alloc] init];
+        __weak GWCharacter *weakCharacter = character;
+        __weak GWPlayer *weakPlayer = _player;
+        __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
         
-        // Create store cell views for all possible characters
-        NSArray *characters = [GWCharacter getAllPossibleCharacters];
-        for (int i=0; i<[characters count]; ++i) {
-            GWCharacter *character = characters[i];
+        // Add character to player when bought
+        UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
+            GWCharacter *strongCharacter = weakCharacter;
+            GWPlayer *strongPlayer = weakPlayer;
+            GWInfoBoxViewController *infoBox = weakInfoBox;
             
-            GWCollectionCellView *cell = [[GWCollectionCellView alloc] initWithFrame:CGRectZero withCharacter:character];
-            
-            __weak GWCharacter *weakCharacter = character;
-            __weak GWPlayer *weakPlayer = _player;
-            __weak GWInfoBoxViewController *weakInfoBox = _infoBoxController;
-            
-            // Add character to player when bought
-            UIButtonBlock buyButtonBlock = ^(id sender, UIEvent *event) {
-                GWCharacter *strongCharacter = weakCharacter;
-                GWPlayer *strongPlayer = weakPlayer;
-                GWInfoBoxViewController *infoBox = weakInfoBox;
-                
-                [strongPlayer addCharacter:strongCharacter];
-                [infoBox setViewForStoreWithCharacter:strongCharacter];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
-                                                                message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            };
-            
-            [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
-            [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
-            
-            // Show character info when store cell is pressed
-            UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
-                GWInfoBoxViewController *infoBox = weakInfoBox;
-                GWCharacter *strongCharacter = weakCharacter;
-                
-                [infoBox setViewForStoreWithCharacter:strongCharacter];
-            };
-            [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
-            
-            [cellViews addObject:cell];
-        }
+            [strongPlayer addCharacter:strongCharacter];
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Purchased!"
+                                                            message:[NSString stringWithFormat:@"You got a %@", strongCharacter.characterClass]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        };
         
-        _storeView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f) withCells:(NSArray *)cellViews withOptions:options];
+        [cell.button setTitle:@"Buy" forState:UIControlStateNormal];
+        [cell.button addTarget:self withBlock:buyButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        // Show character info when store cell is pressed
+        UIButtonBlock cellButtonBlock = ^(id sender, UIEvent *event) {
+            GWInfoBoxViewController *infoBox = weakInfoBox;
+            GWCharacter *strongCharacter = weakCharacter;
+            
+            [infoBox setViewForStoreWithCharacter:strongCharacter];
+        };
+        [cell addTarget:self withBlock:cellButtonBlock forControlEvents:UIControlEventTouchUpInside];
+        
+        [cellViews addObject:cell];
     }
     
+    _storeView = [[GWCollectionView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f) withCells:(NSArray *)cellViews withOptions:options];
+    
+    [_infoBoxController clearView];
+    
+    // Change switch button to deck
     [_switchButton setTitle:@"Deck" forState:UIControlStateNormal];
     [_switchButton removeTarget:self action:@selector(setViewForCharacterStore) forControlEvents:UIControlEventTouchUpInside];
     [_switchButton addTarget:self action:@selector(setViewForDeckManager) forControlEvents:UIControlEventTouchUpInside];
