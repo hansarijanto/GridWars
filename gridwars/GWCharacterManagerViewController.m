@@ -69,7 +69,7 @@
     [_playButton addTarget:[GWAppDelegate rootViewController] action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
     [_bannerController.view addSubview:_playButton];
     
-    [self setViewForCharacterStore];
+    [self setViewForDeckManager];
     
     return self;
 }
@@ -83,6 +83,13 @@
     }
     _mainView = mainView;
     [self.view addSubview:_mainView];
+    _mainView.alpha = 0.0f;
+    _mainView.frame = CGRectOffset(_mainView.frame, 0.0f, 500.0f);
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         _mainView.alpha = 1.0f;
+                         _mainView.frame = CGRectOffset(_mainView.frame, 0.0f, -500.0f);
+                     }];
 }
 
 #pragma mark - deck manager
@@ -139,7 +146,7 @@
                     title = @"Leader";
                     message = [NSString stringWithFormat:@"%@ is now the leader of your team", strongCharacter.characterClass];
                 } else {
-                    title = @"Error";
+                    title = @"Oops";
                     message = @"Character must be in your deck if you want to make it your leader";
                 }
                 

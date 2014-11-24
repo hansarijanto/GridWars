@@ -56,6 +56,14 @@
     _mainController = controller;
     [self addChildViewController:_mainController];
     [self.view addSubview:_mainController.view];
+    
+    _mainController.view.alpha = 0.0f;
+    _mainController.view.frame = CGRectOffset(_mainController.view.frame, 0.0f, 500.0f);
+    [UIView animateWithDuration:0.5f
+                     animations:^{
+                         _mainController.view.alpha = 1.0f;
+                         _mainController.view.frame = CGRectOffset(_mainController.view.frame, 0.0f, -500.0f);
+                     }];
 }
 
 - (void)showCharacterManager {
@@ -63,6 +71,17 @@
 }
 
 - (void)play {
+    
+    if (!_currentPlayer.leader) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
+                                                        message:@"You must have a leader to start a game"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     // Create grid
     GWGrid *grid = [[GWGrid alloc] init];
     grid.tileSize = CGSizeMake(37.5f, 37.5f);
