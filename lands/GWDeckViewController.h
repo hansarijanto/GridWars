@@ -11,7 +11,7 @@
 @interface GWDeckViewController : UIViewController
 
 @property(nonatomic, strong)NSArray *cellViews;
-- (instancetype)initWithCellViews:(NSArray *)cellViews;
+- (instancetype)initWithFrame:(CGRect)frame withCellViews:(NSArray *)cellViews;
 - (CGPoint)convertToOnScreenLocation:(CGPoint)location;
 
 @end

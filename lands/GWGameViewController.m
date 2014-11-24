@@ -21,6 +21,7 @@
 #import "GWButton.h"
 #import "GWAppDelegate.h"
 #import "GWRootViewController.h"
+#import "UIScreen+Rotation.h"
 
 @interface GWGameViewController () {
     GWButton *_exitButton;
@@ -57,7 +58,7 @@
     [self setBannerPlayerTurnTitle];
     
     // Create info box controller
-    _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
+    _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, UIScreen.mainScreen.orientationRelativeBounds.size.height - 100.0f, 300.0f, 90.0f)];
     
     // Set tile on click for grid
     __weak GWGameViewController *weak = self;
@@ -263,7 +264,7 @@
     }
     
     // Create deck controller
-    _deckController = [[GWDeckViewController alloc] initWithCellViews:cellViews];
+    _deckController = [[GWDeckViewController alloc] initWithFrame:CGRectMake(10.0f, UIScreen.mainScreen.orientationRelativeBounds.size.height - 100.0f - 57.5f, 300.0f, 47.5f) withCellViews:cellViews];
     
     // Set end turn block
     UIButtonBlock endTurnBlock = ^(id sender, UIEvent *event) {

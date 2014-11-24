@@ -16,11 +16,6 @@
 @end
 
 @implementation GWDeckViewController {
-    CGFloat _leftPadding;
-    CGFloat _topPadding;
-    CGFloat _width;
-    CGFloat _height;
-    
     CGFloat _cellSidePadding;
     CGFloat _cellSpacing;
     CGFloat _cellTopPadding;
@@ -28,14 +23,9 @@
     CGFloat _cellHeight;
 }
 
-- (instancetype)initWithCellViews:(NSArray *)cellViews {
+- (instancetype)initWithFrame:(CGRect)frame withCellViews:(NSArray *)cellViews {
     self = [super init];
     if (!self) return nil;
-
-    _leftPadding = 10.0f;
-    _topPadding = 413.0f;
-    _width = 300.0f;
-    _height = 47.5f;
 
     _cellSidePadding = 5.0f;
     _cellSpacing = 5.0f;
@@ -47,9 +37,9 @@
     _cellViews = cellViews;
 
     // Create scrool view
-    UIScrollView *scrollContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(_leftPadding, _topPadding, _width, _height)];
+    UIScrollView *scrollContainer = [[UIScrollView alloc] initWithFrame:frame];
     NSUInteger numCells = [cellViews count];
-    scrollContainer.contentSize = CGSizeMake(_cellSidePadding * 2 + numCells * _cellWidth + (numCells - 1) * _cellSpacing, _height);
+    scrollContainer.contentSize = CGSizeMake(_cellSidePadding * 2 + numCells * _cellWidth + (numCells - 1) * _cellSpacing, frame.size.height);
 
     // Create and add cell views to container
     NSUInteger cellNum = 0;

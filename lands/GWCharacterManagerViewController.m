@@ -18,6 +18,7 @@
 #import "GWButton.h"
 #import "GWInfoBoxDeckManagerCharacterView.h"
 #import "GWRootViewController.h"
+#import "UIScreen+Rotation.h"
 
 @interface GWCharacterManagerViewController ()
 
@@ -51,7 +52,7 @@
     _mainView = [[UIView alloc] initWithFrame:CGRectZero];
     
     // Create info box controller
-    _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, 470.0f, 300.0f, 90.0f)];
+    _infoBoxController = [[GWInfoBoxViewController alloc] initWithFrame:CGRectMake(10.0f, UIScreen.mainScreen.orientationRelativeBounds.size.height - 100.0f, 300.0f, 90.0f)];
     
     // Add child view controllers
     [self addChildViewController:_infoBoxController];
@@ -301,7 +302,7 @@
         _inventoryView = [[GWCollectionView alloc] initWithFrame:CGRectMake(0.0f, 200.0f, 300.0f, 100.0f) withCells:self.inventoryCellViews withOptions:options];
         
         // Add both views to _deckManagerView
-        _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 395.0f)];
+        _deckManagerView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 67.5f, 300.0f, 300.0f)];
         [_deckManagerView addSubview:_inventoryView];
         [_deckManagerView addSubview:_deckView];
         [_deckManagerView addSubview:deckTitle];

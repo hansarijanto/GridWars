@@ -11,6 +11,7 @@
 #import "GWGameViewController.h"
 #import "GWGrid.h"
 #import "GWPlayer.h"
+#import "UIScreen+Rotation.h"
 
 @interface GWRootViewController ()
 
@@ -83,7 +84,13 @@
     
     // Create grid
     GWGrid *grid = [[GWGrid alloc] init];
-    grid.tileSize = CGSizeMake(37.5f, 37.5f);
+    
+    if (UIScreen.mainScreen.orientationRelativeBounds.size.height <= 480.0f) {
+        grid.tileSize = CGSizeMake(27.5f, 27.5f);
+    } else {
+        grid.tileSize = CGSizeMake(37.5f, 37.5f);
+    }
+
     [grid gridWithNumHorTiles:8 withNumVertTile:9];
     
     _currentPlayer.team = kGWPlayerRed;
