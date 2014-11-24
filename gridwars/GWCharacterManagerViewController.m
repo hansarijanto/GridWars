@@ -17,6 +17,7 @@
 #import "UIButton+Block.h"
 #import "GWButton.h"
 #import "GWInfoBoxDeckManagerCharacterView.h"
+#import "GWRootViewController.h"
 
 @interface GWCharacterManagerViewController ()
 

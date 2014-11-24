@@ -15,5 +15,7 @@
 @property(nonatomic, strong)GWPlayer *currentPlayer;
 
 - (void)play; // start a game
+- (void)changeMainController:(UIViewController *)controller;
+- (void)showCharacterManager;
 
 @end

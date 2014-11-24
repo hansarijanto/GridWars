@@ -18,6 +18,7 @@
 
 @implementation GWRootViewController {
     UIViewController *_mainController;
+    GWCharacterManagerViewController *_characterManager;
 }
 
 - (void)viewDidLoad
@@ -40,8 +41,8 @@
     if (!player) player = [[GWPlayer alloc] init];
     _currentPlayer = player;
     
-    GWCharacterManagerViewController *characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:_currentPlayer];
-    [self changeMainController:characterManager];
+    _characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:_currentPlayer];
+    [self changeMainController:_characterManager];
     
 }
 
@@ -55,6 +56,10 @@
     _mainController = controller;
     [self addChildViewController:_mainController];
     [self.view addSubview:_mainController.view];
+}
+
+- (void)showCharacterManager {
+    [self changeMainController:_characterManager];
 }
 
 - (void)play {

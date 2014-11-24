@@ -18,8 +18,13 @@
 #import "GWDeckCell.h"
 #import "GWDeckCellView.h"
 #import "GWPlayer.h"
+#import "GWButton.h"
+#import "GWAppDelegate.h"
+#import "GWRootViewController.h"
 
-@interface GWGameViewController ()
+@interface GWGameViewController () {
+    GWButton *_exitButton;
+}
 
 @property(nonatomic, strong)GWPlayer *enemy;
 @property(nonatomic, strong)GWPlayer *player;
@@ -42,6 +47,12 @@
     
     // Create banner controller
     _bannerController = [[GWBannerViewController alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.5f)];
+    
+    _exitButton = [[GWButton alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 50.0f, 30.0f)];
+    [_exitButton setTitle:@"Exit" forState:UIControlStateNormal];
+    [_exitButton addTarget:[GWAppDelegate rootViewController] action:@selector(showCharacterManager) forControlEvents:UIControlEventTouchUpInside];
+    [_bannerController.view addSubview:_exitButton];
+    
     // Set turn title
     [self setBannerPlayerTurnTitle];
     
