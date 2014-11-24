@@ -35,9 +35,9 @@
     _cells = cells;
     
     int totalCol = _options.colPerRow;
-    if ([_cells count] < totalCol) totalCol = [_cells count];
+    if ([_cells count] < totalCol) totalCol = (int)[_cells count];
     
-    int totalRow = (([_cells count] - 1) / _options.colPerRow) + 1;
+    int totalRow = (((int)[_cells count] - 1) / _options.colPerRow) + 1;
     
     CGFloat width;
     if (totalCol > 0) width = totalCol * _options.cellWidth + (totalCol - 1) * _options.horSpacing;

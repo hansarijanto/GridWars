@@ -96,23 +96,23 @@
 		B8728E941A2295C700358B49 /* NSDictionary+ISO8601DateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ISO8601DateString.m"; sourceTree = "<group>"; };
 		B8728E951A2295C700358B49 /* NSDate+Timezone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Timezone.m"; sourceTree = "<group>"; };
 		B8728E961A2295C700358B49 /* NSArray+ISO8601DateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ISO8601DateString.h"; sourceTree = "<group>"; };
-		B8B869B51A0FF59A002B85F0 /* gridwars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gridwars.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8B869B51A0FF59A002B85F0 /* lands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B8B869BA1A0FF59A002B85F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B8B869BC1A0FF59A002B85F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		B8B869C01A0FF59A002B85F0 /* gridwars-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gridwars-Info.plist"; sourceTree = "<group>"; };
+		B8B869C01A0FF59A002B85F0 /* lands-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "lands-Info.plist"; sourceTree = "<group>"; };
 		B8B869C21A0FF59A002B85F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B8B869C41A0FF59A002B85F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B8B869C61A0FF59A002B85F0 /* gridwars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "gridwars-Prefix.pch"; sourceTree = "<group>"; };
+		B8B869C61A0FF59A002B85F0 /* lands-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lands-Prefix.pch"; sourceTree = "<group>"; };
 		B8B869C71A0FF59A002B85F0 /* GWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWAppDelegate.h; sourceTree = "<group>"; };
 		B8B869C81A0FF59A002B85F0 /* GWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWAppDelegate.m; sourceTree = "<group>"; };
 		B8B869CB1A0FF59A002B85F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B8B869CD1A0FF59A002B85F0 /* GWRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWRootViewController.h; sourceTree = "<group>"; };
 		B8B869CE1A0FF59A002B85F0 /* GWRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GWRootViewController.m; sourceTree = "<group>"; };
 		B8B869D01A0FF59A002B85F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B8B869D61A0FF59B002B85F0 /* gridwarsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gridwarsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8B869D61A0FF59B002B85F0 /* landsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = landsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869D71A0FF59B002B85F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		B8B869DF1A0FF59B002B85F0 /* gridwarsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "gridwarsTests-Info.plist"; sourceTree = "<group>"; };
+		B8B869DF1A0FF59B002B85F0 /* landsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "landsTests-Info.plist"; sourceTree = "<group>"; };
 		B8B869E11A0FF59B002B85F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B8B869E31A0FF59B002B85F0 /* gridwarsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gridwarsTests.m; sourceTree = "<group>"; };
 		B8B869ED1A0FF60B002B85F0 /* GWGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGridView.h; sourceTree = "<group>"; };
@@ -224,8 +224,8 @@
 		B8B869AC1A0FF59A002B85F0 = {
 			isa = PBXGroup;
 			children = (
-				B8B869BE1A0FF59A002B85F0 /* gridwars */,
-				B8B869DD1A0FF59B002B85F0 /* gridwarsTests */,
+				B8B869BE1A0FF59A002B85F0 /* lands */,
+				B8B869DD1A0FF59B002B85F0 /* landsTests */,
 				B8B869B71A0FF59A002B85F0 /* Frameworks */,
 				B8B869B61A0FF59A002B85F0 /* Products */,
 			);
@@ -234,8 +234,8 @@
 		B8B869B61A0FF59A002B85F0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B8B869B51A0FF59A002B85F0 /* gridwars.app */,
-				B8B869D61A0FF59B002B85F0 /* gridwarsTests.xctest */,
+				B8B869B51A0FF59A002B85F0 /* lands.app */,
+				B8B869D61A0FF59B002B85F0 /* landsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B8B869BE1A0FF59A002B85F0 /* gridwars */ = {
+		B8B869BE1A0FF59A002B85F0 /* lands */ = {
 			isa = PBXGroup;
 			children = (
 				B8B86A191A143F90002B85F0 /* Helper */,
@@ -268,33 +268,34 @@
 				B8B869D01A0FF59A002B85F0 /* Images.xcassets */,
 				B8B869BF1A0FF59A002B85F0 /* Supporting Files */,
 			);
-			path = gridwars;
+			path = lands;
 			sourceTree = "<group>";
 		};
 		B8B869BF1A0FF59A002B85F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B8B869C01A0FF59A002B85F0 /* gridwars-Info.plist */,
+				B8B869C01A0FF59A002B85F0 /* lands-Info.plist */,
 				B8B869C11A0FF59A002B85F0 /* InfoPlist.strings */,
 				B8B869C41A0FF59A002B85F0 /* main.m */,
-				B8B869C61A0FF59A002B85F0 /* gridwars-Prefix.pch */,
+				B8B869C61A0FF59A002B85F0 /* lands-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B8B869DD1A0FF59B002B85F0 /* gridwarsTests */ = {
+		B8B869DD1A0FF59B002B85F0 /* landsTests */ = {
 			isa = PBXGroup;
 			children = (
 				B8B869E31A0FF59B002B85F0 /* gridwarsTests.m */,
 				B8B869DE1A0FF59B002B85F0 /* Supporting Files */,
 			);
+			name = landsTests;
 			path = gridwarsTests;
 			sourceTree = "<group>";
 		};
 		B8B869DE1A0FF59B002B85F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B8B869DF1A0FF59B002B85F0 /* gridwarsTests-Info.plist */,
+				B8B869DF1A0FF59B002B85F0 /* landsTests-Info.plist */,
 				B8B869E01A0FF59B002B85F0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -419,9 +420,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B8B869B41A0FF59A002B85F0 /* gridwars */ = {
+		B8B869B41A0FF59A002B85F0 /* lands */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8B869E71A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "gridwars" */;
+			buildConfigurationList = B8B869E71A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "lands" */;
 			buildPhases = (
 				B8B869B11A0FF59A002B85F0 /* Sources */,
 				B8B869B21A0FF59A002B85F0 /* Frameworks */,
@@ -431,14 +432,14 @@
 			);
 			dependencies = (
 			);
-			name = gridwars;
+			name = lands;
 			productName = gridwars;
-			productReference = B8B869B51A0FF59A002B85F0 /* gridwars.app */;
+			productReference = B8B869B51A0FF59A002B85F0 /* lands.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B8B869D51A0FF59B002B85F0 /* gridwarsTests */ = {
+		B8B869D51A0FF59B002B85F0 /* landsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8B869EA1A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "gridwarsTests" */;
+			buildConfigurationList = B8B869EA1A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "landsTests" */;
 			buildPhases = (
 				B8B869D21A0FF59B002B85F0 /* Sources */,
 				B8B869D31A0FF59B002B85F0 /* Frameworks */,
@@ -449,9 +450,9 @@
 			dependencies = (
 				B8B869DC1A0FF59B002B85F0 /* PBXTargetDependency */,
 			);
-			name = gridwarsTests;
+			name = landsTests;
 			productName = gridwarsTests;
-			productReference = B8B869D61A0FF59B002B85F0 /* gridwarsTests.xctest */;
+			productReference = B8B869D61A0FF59B002B85F0 /* landsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -468,7 +469,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B8B869B01A0FF59A002B85F0 /* Build configuration list for PBXProject "gridwars" */;
+			buildConfigurationList = B8B869B01A0FF59A002B85F0 /* Build configuration list for PBXProject "lands" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -481,8 +482,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B8B869B41A0FF59A002B85F0 /* gridwars */,
-				B8B869D51A0FF59B002B85F0 /* gridwarsTests */,
+				B8B869B41A0FF59A002B85F0 /* lands */,
+				B8B869D51A0FF59B002B85F0 /* landsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -572,7 +573,7 @@
 /* Begin PBXTargetDependency section */
 		B8B869DC1A0FF59B002B85F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B8B869B41A0FF59A002B85F0 /* gridwars */;
+			target = B8B869B41A0FF59A002B85F0 /* lands */;
 			targetProxy = B8B869DB1A0FF59B002B85F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -681,9 +682,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "gridwars/gridwars-Prefix.pch";
-				INFOPLIST_FILE = "gridwars/gridwars-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "lands/lands-Prefix.pch";
+				INFOPLIST_FILE = "lands/lands-Info.plist";
+				PRODUCT_NAME = lands;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -694,9 +695,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "gridwars/gridwars-Prefix.pch";
-				INFOPLIST_FILE = "gridwars/gridwars-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "lands/lands-Prefix.pch";
+				INFOPLIST_FILE = "lands/lands-Info.plist";
+				PRODUCT_NAME = lands;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -716,8 +717,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "gridwarsTests/gridwarsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "gridwarsTests/landsTests-Info.plist";
+				PRODUCT_NAME = landsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -734,8 +735,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gridwars/gridwars-Prefix.pch";
-				INFOPLIST_FILE = "gridwarsTests/gridwarsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "gridwarsTests/landsTests-Info.plist";
+				PRODUCT_NAME = landsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -744,7 +745,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B8B869B01A0FF59A002B85F0 /* Build configuration list for PBXProject "gridwars" */ = {
+		B8B869B01A0FF59A002B85F0 /* Build configuration list for PBXProject "lands" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8B869E51A0FF59B002B85F0 /* Debug */,
@@ -753,7 +754,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8B869E71A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "gridwars" */ = {
+		B8B869E71A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "lands" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8B869E81A0FF59B002B85F0 /* Debug */,
@@ -762,7 +763,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8B869EA1A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "gridwarsTests" */ = {
+		B8B869EA1A0FF59B002B85F0 /* Build configuration list for PBXNativeTarget "landsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8B869EB1A0FF59B002B85F0 /* Debug */,

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8B869B41A0FF59A002B85F0"
-               BuildableName = "gridwars.app"
-               BlueprintName = "gridwars"
-               ReferencedContainer = "container:gridwars.xcodeproj">
+               BuildableName = "lands.app"
+               BlueprintName = "lands"
+               ReferencedContainer = "container:lands.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8B869D51A0FF59B002B85F0"
-               BuildableName = "gridwarsTests.xctest"
-               BlueprintName = "gridwarsTests"
-               ReferencedContainer = "container:gridwars.xcodeproj">
+               BuildableName = "landsTests.xctest"
+               BlueprintName = "landsTests"
+               ReferencedContainer = "container:lands.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8B869B41A0FF59A002B85F0"
-            BuildableName = "gridwars.app"
-            BlueprintName = "gridwars"
-            ReferencedContainer = "container:gridwars.xcodeproj">
+            BuildableName = "lands.app"
+            BlueprintName = "lands"
+            ReferencedContainer = "container:lands.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8B869B41A0FF59A002B85F0"
-            BuildableName = "gridwars.app"
-            BlueprintName = "gridwars"
-            ReferencedContainer = "container:gridwars.xcodeproj">
+            BuildableName = "lands.app"
+            BlueprintName = "lands"
+            ReferencedContainer = "container:lands.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8B869B41A0FF59A002B85F0"
-            BuildableName = "gridwars.app"
-            BlueprintName = "gridwars"
-            ReferencedContainer = "container:gridwars.xcodeproj">
+            BuildableName = "lands.app"
+            BlueprintName = "lands"
+            ReferencedContainer = "container:lands.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
