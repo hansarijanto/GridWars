@@ -127,13 +127,11 @@
     [_infoBoxView removeFromSuperview];
     
     _infoBoxView = infoBoxView;
-    _infoBoxView.frame = CGRectOffset(_infoBoxView.frame, 0.0f, 30.0f);
     _infoBoxView.alpha = 0.0f;
     [self.view insertSubview:_infoBoxView belowSubview:_button];
     
-    [UIView animateWithDuration:0.7f
+    [UIView animateWithDuration:0.3f
                      animations:^{
-                         _infoBoxView.frame = CGRectOffset(_infoBoxView.frame, 0.0f, -30.0f);
                          _infoBoxView.alpha = 1.0f;
                      }];
 }
