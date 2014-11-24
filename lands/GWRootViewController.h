@@ -13,6 +13,7 @@
 @interface GWRootViewController : UIViewController
 
 @property(nonatomic, strong)GWPlayer *currentPlayer;
+@property(nonatomic, strong, readonly)UIViewController *mainController;
 
 - (void)play; // start a game
 - (void)changeMainController:(UIViewController *)controller;

@@ -8,6 +8,7 @@
 
 #import "GWAppDelegate.h"
 #import "GWRootViewController.h"
+#import "GCTurnBasedMatchHelper.h"
 
 @implementation GWAppDelegate
 
@@ -28,6 +29,8 @@
     GWRootViewController *root = [[GWRootViewController alloc] init];
     self.window.rootViewController = root;
     
+    // Authenticate user for game center
+    [[GCTurnBasedMatchHelper sharedInstance] authenticateLocalUser];
     return YES;
 }
 							

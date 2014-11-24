@@ -17,7 +17,6 @@
 @end
 
 @implementation GWRootViewController {
-    UIViewController *_mainController;
     GWCharacterManagerViewController *_characterManager;
 }
 
