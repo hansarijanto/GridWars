@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GCTurnBasedMatchHelper.h"
 
 @class GWPlayer;
 
-@interface GWRootViewController : UIViewController
+@interface GWRootViewController : UIViewController <GCTurnBasedMatchHelperDelegate>
 
 @property(nonatomic, strong)GWPlayer *currentPlayer;
 @property(nonatomic, strong, readonly)UIViewController *mainController;
 
-- (void)play; // start a game
+- (void)startGame; // start a game
 - (void)changeMainController:(UIViewController *)controller;
 - (void)showCharacterManager;
+- (void)showMatchFinder;
 
 @end

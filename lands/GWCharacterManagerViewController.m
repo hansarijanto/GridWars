@@ -67,7 +67,7 @@
     
     _playButton = [[GWButton alloc] initWithFrame:CGRectMake(300.0f - 60.0f, 10.0f, 50.0f, 30.0f)];
     [_playButton setTitle:@"Play" forState:UIControlStateNormal];
-    [_playButton addTarget:[GWAppDelegate rootViewController] action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
+    [_playButton addTarget:[GWAppDelegate rootViewController] action:@selector(showMatchFinder) forControlEvents:UIControlEventTouchUpInside];
     [_bannerController.view addSubview:_playButton];
     
     [self setViewForDeckManager];

@@ -22,6 +22,7 @@
 #import "GWAppDelegate.h"
 #import "GWRootViewController.h"
 #import "UIScreen+Rotation.h"
+#import "GCTurnBasedMatchHelper.h"
 
 @interface GWGameViewController () {
     GWButton *_exitButton;
@@ -302,6 +303,9 @@
     }
     // Set turn title
     [self setBannerPlayerTurnTitle];
+    
+    // Send turn to Game Center
+    [self sendTurn];
 }
 
 - (void)setBannerPlayerTurnTitle {
@@ -320,6 +324,53 @@
             break;
     }
     [_bannerController setTitleWithAnimation:title withColor:_activePlayer.teamColor];
+}
+
+#pragma mark - Game Center
+
+// Ending the game command to GC
+- (void)endGame {
+    GKTurnBasedMatch *currentMatch = [[GCTurnBasedMatchHelper sharedInstance] currentMatch];
+    [currentMatch endMatchInTurnWithMatchData:nil
+                            completionHandler:^(NSError *error) {
+                            if (error) {
+                                NSLog(@"%@", error);
+                            }
+    }];
+}
+
+// Ending a turn command to GC
+- (void)sendTurn {
+    GKTurnBasedMatch *currentMatch = [[GCTurnBasedMatchHelper sharedInstance] currentMatch];
+    NSString *newStoryString = @"STORY";
+    NSString *sendString = newStoryString;
+    NSData *data =
+    [sendString dataUsingEncoding:NSUTF8StringEncoding ];
+    
+    // Choosing the next participant
+    NSUInteger currentIndex = [currentMatch.participants
+                               indexOfObject:currentMatch.currentParticipant];
+    GKTurnBasedParticipant *nextParticipant;
+    
+    NSUInteger nextIndex = (currentIndex + 1) %
+    [currentMatch.participants count];
+    nextParticipant =
+    [currentMatch.participants objectAtIndex:nextIndex];
+    
+    for (int i = 0; i < [currentMatch.participants count]; i++) {
+        nextParticipant = [currentMatch.participants objectAtIndex:((currentIndex + 1 + i) % [currentMatch.participants count ])];
+        if (nextParticipant.matchOutcome != GKTurnBasedMatchOutcomeQuit) {
+            break;
+        } 
+    }
+    
+    [currentMatch endTurnWithNextParticipants:@[nextParticipant] turnTimeout:60.0f matchData:data completionHandler:^(NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+    }];
+    
+    NSLog(@"Send Turn, %@, %@", data, nextParticipant);
 }
 
 @end
