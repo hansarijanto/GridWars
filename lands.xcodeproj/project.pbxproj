@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80D45791A254D68002B278E /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D45781A254D68002B278E /* GameKitHelper.m */; };
 		B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E661A202F4000358B49 /* GWBannerViewController.m */; };
 		B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */; };
 		B8728E701A21303D00358B49 /* GWCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCollectionCellView.m */; };
@@ -76,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B80D45771A254D68002B278E /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
+		B80D45781A254D68002B278E /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		B8728E651A202F4000358B49 /* GWBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBannerViewController.h; sourceTree = "<group>"; };
 		B8728E661A202F4000358B49 /* GWBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWBannerViewController.m; sourceTree = "<group>"; };
 		B8728E691A212F2800358B49 /* GWCharacterManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterManagerViewController.h; sourceTree = "<group>"; };
@@ -98,8 +101,8 @@
 		B8728E941A2295C700358B49 /* NSDictionary+ISO8601DateString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ISO8601DateString.m"; sourceTree = "<group>"; };
 		B8728E951A2295C700358B49 /* NSDate+Timezone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Timezone.m"; sourceTree = "<group>"; };
 		B8728E961A2295C700358B49 /* NSArray+ISO8601DateString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ISO8601DateString.h"; sourceTree = "<group>"; };
-		B8728E9A1A232A5200358B49 /* GCTurnBasedMatchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCTurnBasedMatchHelper.h; path = lands/GCTurnBasedMatchHelper.h; sourceTree = "<group>"; };
-		B8728E9B1A232A5200358B49 /* GCTurnBasedMatchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCTurnBasedMatchHelper.m; path = lands/GCTurnBasedMatchHelper.m; sourceTree = "<group>"; };
+		B8728E9A1A232A5200358B49 /* GCTurnBasedMatchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCTurnBasedMatchHelper.h; sourceTree = "<group>"; };
+		B8728E9B1A232A5200358B49 /* GCTurnBasedMatchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCTurnBasedMatchHelper.m; sourceTree = "<group>"; };
 		B8728EA41A232F9A00358B49 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		B8B869B51A0FF59A002B85F0 /* lands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8B869B81A0FF59A002B85F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -230,8 +233,6 @@
 		B8B869AC1A0FF59A002B85F0 = {
 			isa = PBXGroup;
 			children = (
-				B8728E9A1A232A5200358B49 /* GCTurnBasedMatchHelper.h */,
-				B8728E9B1A232A5200358B49 /* GCTurnBasedMatchHelper.m */,
 				B8B869BE1A0FF59A002B85F0 /* lands */,
 				B8B869DD1A0FF59B002B85F0 /* landsTests */,
 				B8B869B71A0FF59A002B85F0 /* Frameworks */,
@@ -346,6 +347,10 @@
 		B8B86A191A143F90002B85F0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B80D45771A254D68002B278E /* GameKitHelper.h */,
+				B80D45781A254D68002B278E /* GameKitHelper.m */,
+				B8728E9A1A232A5200358B49 /* GCTurnBasedMatchHelper.h */,
+				B8728E9B1A232A5200358B49 /* GCTurnBasedMatchHelper.m */,
 				B8728E911A2295C700358B49 /* NSDate+Timezone.h */,
 				B8728E951A2295C700358B49 /* NSDate+Timezone.m */,
 				B8728E961A2295C700358B49 /* NSArray+ISO8601DateString.h */,
@@ -564,6 +569,7 @@
 				B8B86A761A1B06C1002B85F0 /* NSObject+KVOBlocks.m in Sources */,
 				B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */,
 				B8B86A081A100E0D002B85F0 /* UIScreen+Rotation.m in Sources */,
+				B80D45791A254D68002B278E /* GameKitHelper.m in Sources */,
 				B8728E991A2295C700358B49 /* NSDate+Timezone.m in Sources */,
 				B8B86A0E1A130E76002B85F0 /* GWGridPieceCharacter.m in Sources */,
 				B8B86A0D1A130E76002B85F0 /* GWGridPiece.m in Sources */,

@@ -12,6 +12,7 @@
 #import "GWGrid.h"
 #import "GWPlayer.h"
 #import "UIScreen+Rotation.h"
+#import "GameKitHelper.h"
 
 @interface GWRootViewController ()
 
@@ -43,6 +44,24 @@
     
     _characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:_currentPlayer];
     [self changeMainController:_characterManager];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // Add observer to handle showing authentication view
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showAuthenticationViewController)
+                                                 name:PresentAuthenticationViewController
+                                               object:nil];
+    
+    // Authenticate for GC
+    [[GameKitHelper sharedGameKitHelper] authenticateLocalPlayer];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)changeMainController:(UIViewController *)controller {
@@ -92,14 +111,18 @@
     [self changeMainController:game];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)showAuthenticationViewController
+{
+    GameKitHelper *gameKitHelper =
+    [GameKitHelper sharedGameKitHelper];
+    
+    [self presentViewController:gameKitHelper.authenticationViewController
+                       animated:YES
+                     completion:nil];
 }
 
 @end

@@ -18,6 +18,5 @@
 - (void)startGame; // start a game
 - (void)changeMainController:(UIViewController *)controller;
 - (void)showCharacterManager;
-- (void)showMatchFinder;
 
 @end
