@@ -14,7 +14,7 @@
 #import "UIScreen+Rotation.h"
 #import "GameKitHelper.h"
 
-@interface GWRootViewController ()
+@interface GWRootViewController ()<GameKitHelperDelegate>
 
 @end
 
@@ -48,6 +48,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    // Add observer to detect when a player is authenticated
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerAuthenticated)
+                                                 name:LocalPlayerIsAuthenticated object:nil];
     
     // Add observer to handle showing authentication view
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -115,14 +119,59 @@
     return YES;
 }
 
+#pragma mark - GameCenterNotificationCallbacks
+
+// Called when local player needs to be authenticated by GC
 - (void)showAuthenticationViewController
 {
-    GameKitHelper *gameKitHelper =
-    [GameKitHelper sharedGameKitHelper];
+    GameKitHelper *gameKitHelper = [GameKitHelper sharedGameKitHelper];
     
     [self presentViewController:gameKitHelper.authenticationViewController
                        animated:YES
                      completion:nil];
+}
+
+- (void)showMatchMaker {
+    // Don't start game if no leader
+    if (!_currentPlayer.leader) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
+                                                        message:@"You must have a leader to start a game"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    // Don't start game if not authenticated by GC
+    } else if (![GameKitHelper isAuthenticated]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
+                                                        message:@"Please log into Game Center"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    [[GameKitHelper sharedGameKitHelper] findMatchWithMinPlayers:2 maxPlayers:2 viewController:self delegate:self];
+}
+
+// Called when local player is authenticated by GC
+- (void)playerAuthenticated {
+    NSLog(@"Local player Authenticated for GC");
+}
+
+#pragma mark GameKitHelperDelegate
+
+- (void)matchStarted {
+    NSLog(@"Match started");
+}
+
+- (void)matchEnded {
+    NSLog(@"Match ended");
+}
+
+- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
+    NSLog(@"Received data");
 }
 
 @end

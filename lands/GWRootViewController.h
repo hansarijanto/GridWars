@@ -18,5 +18,6 @@
 - (void)startGame; // start a game
 - (void)changeMainController:(UIViewController *)controller;
 - (void)showCharacterManager;
+- (void)showMatchMaker; // presents match maker view controller view
 
 @end
