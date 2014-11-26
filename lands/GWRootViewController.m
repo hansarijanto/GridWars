@@ -43,9 +43,6 @@
     
     _characterManager = [[GWCharacterManagerViewController alloc] initWithPlayer:_currentPlayer];
     [self changeMainController:_characterManager];
-    
-    // Set GCTurnMatchDelegate
-    [GCTurnBasedMatchHelper sharedInstance].delegate = self;
 }
 
 - (void)changeMainController:(UIViewController *)controller {
@@ -70,21 +67,6 @@
 
 - (void)showCharacterManager {
     [self changeMainController:_characterManager];
-}
-
-- (void)showMatchFinder {
-    if (!_currentPlayer.leader) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
-                                                        message:@"You must have a leader to start a game"
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    [[GCTurnBasedMatchHelper sharedInstance]
-     findMatchWithMinPlayers:2 maxPlayers:2 viewController:self];
 }
 
 - (void)startGame {
@@ -118,78 +100,6 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
-}
-
-#pragma mark - GCTurnBasedMatchHelperDelegate
-
-// Newly created match
-- (void)startNewMatch:(GKTurnBasedMatch *)match {
-    NSLog(@"Entering new game....");
-    
-    // Send player info to the other player, this will intiate the invite
-    GKTurnBasedMatch *currentMatch = [[GCTurnBasedMatchHelper sharedInstance] currentMatch];
-    NSString *dataString = @"DATA";
-    NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding ];
-    
-    // Choosing the next participant
-    NSUInteger currentIndex = [currentMatch.participants
-                               indexOfObject:currentMatch.currentParticipant];
-    GKTurnBasedParticipant *nextParticipant;
-    
-    NSUInteger nextIndex = (currentIndex + 1) % [currentMatch.participants count];
-    nextParticipant = [currentMatch.participants objectAtIndex:nextIndex];
-    
-    for (int i = 0; i < [currentMatch.participants count]; i++) {
-        nextParticipant = [currentMatch.participants objectAtIndex:((currentIndex + 1 + i) % [currentMatch.participants count ])];
-        if (nextParticipant.matchOutcome != GKTurnBasedMatchOutcomeQuit) {
-            break;
-        }
-    }
-    
-    [currentMatch endTurnWithNextParticipants:@[nextParticipant] turnTimeout:60.0f matchData:data completionHandler:^(NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-    }];
-    
-    NSLog(@"Send invite, %@, %@", data, nextParticipant);
-}
-
-// When you select game thats "your turn" form the list of games
-// When a player from ther current match ends their turn and it is now your turn
-- (void)myTurnCurrentMatch:(GKTurnBasedMatch *)match {
-    NSLog(@"Taking turn in existing game");
-    [self startGame];    
-    if ([match.matchData bytes]) {
-    }
-}
-
-// When a player in the current match ends their turn
-- (void)updateCurrentMatch:(GKTurnBasedMatch *)match {
-    NSLog(@"Viewing match where it's not our turn...");
-    NSString *statusString;
-    
-    if (match.status == GKTurnBasedMatchStatusEnded) {
-        statusString = @"Match Ended";
-    }
-    
-    NSString *stringData = [NSString stringWithUTF8String:
-                            [match.matchData bytes]];
-    NSLog(@"Send data when its not my turn %@", stringData);
-}
-
-// Notice send from other non current matches
-- (void)receivedNotice:(NSString *)notice forOtherMatch:(GKTurnBasedMatch *)match {
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:
-                       @"Another game needs your attention!" message:notice
-                                                delegate:self cancelButtonTitle:@"Sweet!"
-                                       otherButtonTitles:nil];
-    [av show];
-}
-
-// When the current match ends
-- (void)receivedEndCurrentMatch:(GKTurnBasedMatch *)match {
-    NSLog(@"endGame");
 }
 
 @end

@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GCTurnBasedMatchHelper.h"
 
 @class GWPlayer;
 
-@interface GWRootViewController : UIViewController <GCTurnBasedMatchHelperDelegate>
+@interface GWRootViewController : UIViewController
 
 @property(nonatomic, strong)GWPlayer *currentPlayer;
 @property(nonatomic, strong, readonly)UIViewController *mainController;
