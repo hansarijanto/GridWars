@@ -14,6 +14,7 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
 @implementation GameKitHelper {
      BOOL _enableGameCenter;
      BOOL _matchStarted;
+    GKMatchmakerViewController *_mmvc;
 }
 
 + (instancetype)sharedGameKitHelper
@@ -64,6 +65,29 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
     };
 }
 
+- (void)lookupPlayers {
+    
+    NSLog(@"Looking up %lu players...", (unsigned long)_match.playerIDs.count);
+    
+    [GKPlayer loadPlayersForIdentifiers:_match.playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
+        
+        if (error != nil) {
+            NSLog(@"Error retrieving player info: %@", error.localizedDescription);
+            _matchStarted = NO;
+            [_delegate matchEnded];
+        } else {
+            
+            // Populate players dict
+            _playersDict = [NSMutableDictionary dictionaryWithCapacity:players.count];
+            for (GKPlayer *player in players) {
+                NSLog(@"Found player: %@", player.alias);
+                [_playersDict setObject:player forKey:player.playerID];
+            }
+            [_playersDict setObject:[GKLocalPlayer localPlayer] forKey:[GKLocalPlayer localPlayer].playerID];
+        }
+    }];
+}
+
 - (void)setAuthenticationViewController:(UIViewController *)authenticationViewController
 {
     if (authenticationViewController != nil) {
@@ -98,11 +122,15 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
     request.minPlayers = minPlayers;
     request.maxPlayers = maxPlayers;
     
-    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-    mmvc.matchmakerDelegate = self;
+    _mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+    _mmvc.matchmakerDelegate = self;
     
     // Show matchmaker view controller
-    [viewController presentViewController:mmvc animated:YES completion:nil];
+    [viewController presentViewController:_mmvc animated:YES completion:nil];
+}
+
+- (void)dismissMatchMaker {
+    [_mmvc dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - GKMatchmakerViewControllerDelegate
@@ -121,11 +149,17 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
 
 // A peer-to-peer match has been found, creates a match and sets its delegate
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)match {
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+    //Dismiss after successfully sending first sendData to each other
     self.match = match;
     match.delegate = self;
-    // expectedPlayerCount is how many players still needs to connect
+    
+    // When you search for a match and find one with all players already connected
+    // ExpectedPlayerCount is how many players still needs to connect
     if (!_matchStarted && match.expectedPlayerCount == 0) {
+        [self lookupPlayers];
+        // Notify delegate match can begin
+        _matchStarted = YES;
+        [_delegate matchStarted];
         NSLog(@"Ready to start match!");
     }
 }
@@ -145,10 +179,14 @@ NSString *const LocalPlayerIsAuthenticated = @"local_player_authenticated";
     
     switch (state) {
         case GKPlayerStateConnected:
-            // handle a new player connection.
+            // Handle a new player connection.
             NSLog(@"Player connected!");
-            
+            // When a player connects to your match and now has enough active players
             if (!_matchStarted && match.expectedPlayerCount == 0) {
+                [self lookupPlayers];
+                // Notify delegate match can begin
+                _matchStarted = YES;
+                [_delegate matchStarted];
                 NSLog(@"Ready to start match!");
             }
             

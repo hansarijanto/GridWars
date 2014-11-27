@@ -8,14 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "DictionarySerializable.h"
+#import "GWCharacter.h"
 
 typedef enum {
     kGWPlayerNone,
     kGWPlayerRed, // Player playing from the bottom of the grid (red)
     kGWPlayerBlue // Player playing from the top of the grid (blue)
 } GWPlayerTeam;
-
-@class GWCharacter;
 
 @interface GWPlayer : DictionarySerializable
 

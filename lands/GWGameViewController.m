@@ -23,6 +23,7 @@
 #import "GWRootViewController.h"
 #import "UIScreen+Rotation.h"
 #import "GCTurnBasedMatchHelper.h"
+#import "GameKitHelper.h"
 
 @interface GWGameViewController () {
     GWButton *_exitButton;
@@ -139,9 +140,9 @@
     [_gridController addLeaderPiece:playerLeaderPiece];
     
     // Add enemy leader character
-    assert(_enemy.leader);
-    GWGridPieceCharacter *enemyLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_enemy.leader];
-    [_gridController addLeaderPiece:enemyLeaderPiece];
+//    assert(_enemy.leader);
+//    GWGridPieceCharacter *enemyLeaderPiece = [[GWGridPieceCharacter alloc] initWithCharacter:_enemy.leader];
+//    [_gridController addLeaderPiece:enemyLeaderPiece];
     
     // Create character deck cells
     NSMutableArray *deckCells = [[NSMutableArray alloc] init];
@@ -289,6 +290,11 @@
     [self.view addSubview:_deckController.view];
     [self.view addSubview:_bannerController.view];
     
+    
+    // Create multiplayer manager
+    _multiplayerManager = [[MultiplayerNetworking alloc] initWithPlayerData:nil];
+    _multiplayerManager.delegate = self;
+    
     return self;
 }
 
@@ -303,9 +309,6 @@
     }
     // Set turn title
     [self setBannerPlayerTurnTitle];
-    
-    // Send turn to Game Center
-    [self sendTurn];
 }
 
 - (void)setBannerPlayerTurnTitle {
@@ -326,51 +329,23 @@
     [_bannerController setTitleWithAnimation:title withColor:_activePlayer.teamColor];
 }
 
-#pragma mark - Game Center
+#pragma mark - MultiplayerNetworkingProtocol
 
-// Ending the game command to GC
-- (void)endGame {
-    GKTurnBasedMatch *currentMatch = [[GCTurnBasedMatchHelper sharedInstance] currentMatch];
-    [currentMatch endMatchInTurnWithMatchData:nil
-                            completionHandler:^(NSError *error) {
-                            if (error) {
-                                NSLog(@"%@", error);
-                            }
-    }];
+- (void)beginGameWithPlayerIndex:(NSUInteger)index {
+    NSLog(@"beginning game for player %i", index);
+    
+    // Dismiss match maker view
+    [[GameKitHelper sharedGameKitHelper] dismissMatchMaker];
+    
+    // Display game view
+    [[GWAppDelegate rootViewController] changeMainController:self];
 }
 
-// Ending a turn command to GC
-- (void)sendTurn {
-    GKTurnBasedMatch *currentMatch = [[GCTurnBasedMatchHelper sharedInstance] currentMatch];
-    NSString *newStoryString = @"STORY";
-    NSString *sendString = newStoryString;
-    NSData *data =
-    [sendString dataUsingEncoding:NSUTF8StringEncoding ];
-    
-    // Choosing the next participant
-    NSUInteger currentIndex = [currentMatch.participants
-                               indexOfObject:currentMatch.currentParticipant];
-    GKTurnBasedParticipant *nextParticipant;
-    
-    NSUInteger nextIndex = (currentIndex + 1) %
-    [currentMatch.participants count];
-    nextParticipant =
-    [currentMatch.participants objectAtIndex:nextIndex];
-    
-    for (int i = 0; i < [currentMatch.participants count]; i++) {
-        nextParticipant = [currentMatch.participants objectAtIndex:((currentIndex + 1 + i) % [currentMatch.participants count ])];
-        if (nextParticipant.matchOutcome != GKTurnBasedMatchOutcomeQuit) {
-            break;
-        } 
-    }
-    
-    [currentMatch endTurnWithNextParticipants:@[nextParticipant] turnTimeout:60.0f matchData:data completionHandler:^(NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-    }];
-    
-    NSLog(@"Send Turn, %@, %@", data, nextParticipant);
+- (void)gameOver:(BOOL)serverWon {
+    NSLog(@"game over");
+}
+
+- (void)movePlayerAtIndex:(NSUInteger)index {
 }
 
 @end

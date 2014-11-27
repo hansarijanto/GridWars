@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B80D45791A254D68002B278E /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D45781A254D68002B278E /* GameKitHelper.m */; };
+		B80D457C1A258120002B278E /* MultiplayerNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B80D457B1A258120002B278E /* MultiplayerNetworking.m */; };
 		B8728E671A202F4000358B49 /* GWBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E661A202F4000358B49 /* GWBannerViewController.m */; };
 		B8728E6B1A212F2800358B49 /* GWCharacterManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6A1A212F2800358B49 /* GWCharacterManagerViewController.m */; };
 		B8728E701A21303D00358B49 /* GWCollectionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8728E6F1A21303D00358B49 /* GWCollectionCellView.m */; };
@@ -79,6 +80,8 @@
 /* Begin PBXFileReference section */
 		B80D45771A254D68002B278E /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
 		B80D45781A254D68002B278E /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
+		B80D457A1A258120002B278E /* MultiplayerNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerNetworking.h; sourceTree = "<group>"; };
+		B80D457B1A258120002B278E /* MultiplayerNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplayerNetworking.m; sourceTree = "<group>"; };
 		B8728E651A202F4000358B49 /* GWBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBannerViewController.h; sourceTree = "<group>"; };
 		B8728E661A202F4000358B49 /* GWBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWBannerViewController.m; sourceTree = "<group>"; };
 		B8728E691A212F2800358B49 /* GWCharacterManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacterManagerViewController.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 		B8B86A191A143F90002B85F0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				B80D457A1A258120002B278E /* MultiplayerNetworking.h */,
+				B80D457B1A258120002B278E /* MultiplayerNetworking.m */,
 				B80D45771A254D68002B278E /* GameKitHelper.h */,
 				B80D45781A254D68002B278E /* GameKitHelper.m */,
 				B8728E9A1A232A5200358B49 /* GCTurnBasedMatchHelper.h */,
@@ -536,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80D457C1A258120002B278E /* MultiplayerNetworking.m in Sources */,
 				B8C5E2E01A1D510E004979F3 /* GWPlayer.m in Sources */,
 				B8F0ADC91A1EECC9005512CF /* GWGridTileOverlayView.m in Sources */,
 				B8728E831A218BBF00358B49 /* GWCollectionView.m in Sources */,

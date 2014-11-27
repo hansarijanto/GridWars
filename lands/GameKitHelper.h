@@ -26,6 +26,7 @@ extern NSString *const LocalPlayerIsAuthenticated;
 // GKMatchDelegate sends events regarding sending/recieving data, connection status changes
 @interface GameKitHelper : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate>
 
+@property (nonatomic, strong) NSMutableDictionary *playersDict;
 @property (nonatomic, readonly) UIViewController *authenticationViewController; // The built in GC authentication view controller (for login)
 @property (nonatomic, readonly) NSError *lastError; // Last GC error
 @property (nonatomic, strong) GKMatch *match; // Current GC match
@@ -40,5 +41,6 @@ extern NSString *const LocalPlayerIsAuthenticated;
 + (instancetype)sharedGameKitHelper;
 + (BOOL)isAuthenticated;
 - (void)authenticateLocalPlayer;
+- (void)dismissMatchMaker;
 
 @end

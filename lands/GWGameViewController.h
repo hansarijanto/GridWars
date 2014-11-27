@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MultiplayerNetworking.h"
 
 @class GWGridTile;
 @class GWPlayer;
 @class GWGrid;
 
-@interface GWGameViewController : UIViewController
+@interface GWGameViewController : UIViewController <MultiplayerNetworkingProtocol>
 
 @property(nonatomic, strong, readonly)GWPlayer *activePlayer;
+@property(nonatomic, strong, readonly)MultiplayerNetworking *multiplayerManager;
 
 - (instancetype)initWithPlayer:(GWPlayer *)player withEnemy:(GWPlayer *)enemy withGrid:(GWGrid *)grid;
 

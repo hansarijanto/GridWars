@@ -12,14 +12,16 @@
 #import "GWGrid.h"
 #import "GWPlayer.h"
 #import "UIScreen+Rotation.h"
+#import "MultiplayerNetworking.h"
 #import "GameKitHelper.h"
 
-@interface GWRootViewController ()<GameKitHelperDelegate>
+@interface GWRootViewController ()
 
 @end
 
 @implementation GWRootViewController {
     GWCharacterManagerViewController *_characterManager;
+    MultiplayerNetworking *_networkingEngine;
 }
 
 - (void)viewDidLoad
@@ -92,29 +94,6 @@
     [self changeMainController:_characterManager];
 }
 
-- (void)startGame {
-    // Create grid
-    GWGrid *grid = [[GWGrid alloc] init];
-    
-    if (UIScreen.mainScreen.orientationRelativeBounds.size.height <= 480.0f) {
-        grid.tileSize = CGSizeMake(27.5f, 27.5f);
-    } else {
-        grid.tileSize = CGSizeMake(37.5f, 37.5f);
-    }
-
-    [grid gridWithNumHorTiles:8 withNumVertTile:9];
-    
-    _currentPlayer.team = kGWPlayerRed;
-    
-    // Create enemy
-    GWPlayer *enemy = [GWPlayer dummy];
-    enemy.team = kGWPlayerBlue;
-    
-    // Create game view controller
-    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:_currentPlayer withEnemy:enemy withGrid:grid];
-    [self changeMainController:game];
-}
-
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -131,7 +110,7 @@
                      completion:nil];
 }
 
-- (void)showMatchMaker {
+- (void)startMatchMaking {
     // Don't start game if no leader
     if (!_currentPlayer.leader) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops"
@@ -152,26 +131,28 @@
         return;
     }
     
-    [[GameKitHelper sharedGameKitHelper] findMatchWithMinPlayers:2 maxPlayers:2 viewController:self delegate:self];
+    // Create grid
+    GWGrid *grid = [[GWGrid alloc] init];
+    
+    if (UIScreen.mainScreen.orientationRelativeBounds.size.height <= 480.0f) {
+        grid.tileSize = CGSizeMake(27.5f, 27.5f);
+    } else {
+        grid.tileSize = CGSizeMake(37.5f, 37.5f);
+    }
+    
+    [grid gridWithNumHorTiles:8 withNumVertTile:9];
+    
+    _currentPlayer.team = kGWPlayerRed;
+    
+    // Create game view controller (this shows the match maker view)
+    GWGameViewController *game = [[GWGameViewController alloc] initWithPlayer:_currentPlayer withEnemy:nil withGrid:grid];
+    
+    [[GameKitHelper sharedGameKitHelper] findMatchWithMinPlayers:2 maxPlayers:2 viewController:self delegate:game.multiplayerManager];
 }
 
 // Called when local player is authenticated by GC
 - (void)playerAuthenticated {
     NSLog(@"Local player Authenticated for GC");
-}
-
-#pragma mark GameKitHelperDelegate
-
-- (void)matchStarted {
-    NSLog(@"Match started");
-}
-
-- (void)matchEnded {
-    NSLog(@"Match ended");
-}
-
-- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    NSLog(@"Received data");
 }
 
 @end
